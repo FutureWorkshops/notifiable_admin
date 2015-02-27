@@ -1,0 +1,29 @@
+<h1>Schedule</h1>
+
+<div class="col-md-12">
+  <div class="row">
+    <table class="table">
+      <tr>
+        <th>Run At</th>
+        <% Notifiable.locales.each do |l| %>
+          <th>Message(<%= l %>)</th>        
+        <% end %>
+        <th>Sent</th>
+        <th>Actions</th>
+      </tr>
+      <% @jobs.each do |j| %>
+        <% n = Notifiable::Notification.find(j.notification_id) %>
+        <tr class="job-row">
+          <td><%= j.run_at %></td>
+          <% Notifiable.locales.each do |l| %>
+            <td><%= truncate(n.localized_notification(l).message, :length => 50) if n.localized_notification(l) %></td>
+          <% end %>
+          <td><%= n.sent_count %></td>
+          <td><%= delete_button(admin_account_app_job_path(@account, @app, j)) %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<%= paginate @jobs, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm" %>

@@ -1,0 +1,17 @@
+<div class="row"><div class="col-md-4">
+
+<h3>New Admin User</h3>
+
+<%= simple_form_for [notifiable_admin, :admin, @account, @admin]  do |f| %>
+    
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.input :role, collection: {"Content Admin" => "content_admin", "Account Owner" => "account_owner"}, include_blank: false %>
+    
+  <%= f.association :apps, as: :check_boxes, collection: @apps %>
+
+  <%= f.submit "Create", :class => "btn btn-default" %>    
+
+<% end %>
+
+</div></div>

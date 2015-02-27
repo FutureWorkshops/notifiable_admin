@@ -1,0 +1,26 @@
+<h1>API Keys <%= add_button new_admin_account_notifications_api_user_path(@account) %></h1>
+
+<div class="col-md-12">
+  <div class="row">
+    <table class="table">
+      <tr>
+        <th>Service Name</th>
+        <th>Apps</th>
+        <th>Access ID</th>
+        <th>Secret Key</th>
+        <th>Action</th>
+      </tr>
+      <% @notifications_api_users.each do |u| %>
+        <tr>
+          <td><%= u.service_name %></td>
+          <td><%= u.apps.pluck(:name).join(", ") %></td>
+          <td><%= u.access_id %></td>
+          <td><%= u.secret_key %></td>
+          <td><%= delete_button admin_account_notifications_api_user_path(@account, u) %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<%= paginate @notifications_api_users, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm" %>

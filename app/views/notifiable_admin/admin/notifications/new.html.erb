@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+</script>
+
+<div class="row"><div class="col-md-4">
+
+<h3>
+  <% if @user %>
+    <span class="glyphicon glyphicon-envelope"></span>
+    Send Private Notification  
+  <% else %>
+    <span class="glyphicon glyphicon-bullhorn"></span>
+    Send Public Notification    
+  <% end %>
+</h3>
+
+<%= simple_form_for [:admin, @account, @app, @notification] do |f| %>
+  
+  <h4>Schedule</h4>
+  <div class='input-group date' id='datetimepicker1'>
+      <input type='text' class="form-control" name="schedule_at" />
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+      </span>
+  </div>
+  
+  <%= f.input :user_id, :as => :hidden, :input_html => { :value => @user.id } if @user %>
+
+
+  <%= f.simple_fields_for :localized_notifications do |n| %>
+    <h4><%= n.object.locale %></h4>
+    <%= n.input :locale, :as => :hidden %>
+    <%= n.input :message %>
+  <% end %>
+
+  <%= f.submit "Send", :class => "btn btn-default" %>    
+  
+<% end %>
+
+
+</div></div>

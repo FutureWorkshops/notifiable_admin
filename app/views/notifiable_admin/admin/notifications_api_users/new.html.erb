@@ -1,0 +1,21 @@
+<div class="row"><div class="col-md-4">
+  
+<h3>New Notifications API Key</h3>
+
+<%= simple_form_for @notifications_api_user, :url => admin_account_notifications_api_users_path(@account) do |f| %>
+    
+  <%= f.input :service_name %>
+  
+  <h4>Apps</h4>
+  <div class='form-group'>
+    <% @apps.each do |app| %>
+      <%= check_box_tag "notifications_api_user[app_ids][]", app.id, @notifications_api_user.apps.include?(app), {:id => "notifications_api_user_app_ids_#{app.id}"} %>
+      <%= app.name %>
+    <% end %>
+  </div>
+
+  <%= f.submit "Create", :class => "btn btn-default" %>    
+
+<% end %>
+
+</div></div>

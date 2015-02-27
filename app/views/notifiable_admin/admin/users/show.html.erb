@@ -1,0 +1,4 @@
+<h1><%= @user.alias %></h1>
+
+<% @device_tokens = @user.device_tokens %>
+<%= render "notifiable_admin/admin/device_tokens/table" %>

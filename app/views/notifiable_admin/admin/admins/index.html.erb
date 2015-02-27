@@ -1,0 +1,24 @@
+<h1>Account Users <%= add_button new_admin_account_admin_path(@account) %></h1>
+
+<div class="col-md-12">
+  <div class="row">
+    <table class="table">
+      <tr>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Apps</th>
+        <th>Action</th>
+      </tr>
+      <% @admins.each do |admin| %>
+        <tr class="admin-row">
+          <td><%= admin.email %></td>
+          <td><%= admin.role %></td>
+          <td><%= admin.account_owner? ? "All" : admin.apps.pluck(:name).join(", ") %></td>
+          <td><%= delete_button(admin_account_admin_path(@account, admin)) unless admin == current_admin %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<%= paginate @admins, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm" %>

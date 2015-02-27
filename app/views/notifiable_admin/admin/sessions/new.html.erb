@@ -1,0 +1,25 @@
+<div class="col-md-5">
+  <h1>Notifiable</h1>
+  <%= render "layouts/messages" %>
+
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
+    <div class="form-group">
+      <%= f.email_field :email, :autofocus => true, :class => "input-lg form-control", :placeholder => "Email" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.password_field :password, :class => "input-lg form-control", :placeholder => "Password" %>
+    </div>
+
+    <div class="form-group">
+      <% if devise_mapping.rememberable? -%>
+        <div class="checkbox">
+          <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+    </div>
+
+    <%= f.submit "Sign in", :class => "btn btn-default btn-lg" %>    
+  <% end %>
+</div>
