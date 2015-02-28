@@ -34,7 +34,5 @@ NotifiableAdmin::Engine.routes.draw do
       devise_for :notifications_api_user, class_name: "NotifiableAdmin::NotificationsApiUser"
       resources :notifications, :only => [:create]   
     end
-  end
-    
-  root 'admin/sessions#new'
+  end    
 end
