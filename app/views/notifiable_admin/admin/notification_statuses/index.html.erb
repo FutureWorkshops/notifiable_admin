@@ -1,0 +1,25 @@
+<h1>Notification Statuses</h1>
+
+<div class="col-md-12">
+  <div class="row">
+    <table class="table">
+      <tr>
+        <th>User</th>
+        <th>Provider</th>
+        <th>Device Token</th>
+        <th>Status</th>
+      </tr>
+      <% @notification_statuses.each do |ns| %>
+        <tr class="notification-status-row">
+          <td><%= ns.device_token.user %></td>
+          <td><%= ns.device_token.provider %></td>
+          <td><%= truncate(ns.device_token.token, :length => 50) %></td>
+          <td><%= ns.status %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<%= paginate @notification_statuses, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm" %>
+

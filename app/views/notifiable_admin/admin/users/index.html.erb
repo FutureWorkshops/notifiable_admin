@@ -1,0 +1,22 @@
+<h1>Users</h1>
+
+<div class="col-md-12">
+  <div class="row">
+    <table class="table">
+      <tr>
+        <th>User Alias</th>
+        <th>Device Tokens</th>
+        <th>Actions</th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr class="user-row">
+          <td><%= link_to user.alias, admin_account_app_user_path(@account, @app, user) %></td>
+          <td><%= user.device_tokens.count %></td>
+          <td><%= user_notification_button(@app, user) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<%= paginate @users, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm" %>

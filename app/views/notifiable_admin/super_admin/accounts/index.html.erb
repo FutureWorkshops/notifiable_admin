@@ -1,0 +1,22 @@
+<h1>Accounts <%= add_button new_super_admin_account_path %></h1>
+
+<div class="col-md-12">
+  <div class="row">
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Admins</th>
+        <th>Apps</th>
+      </tr>
+      <% @accounts.each do |account| %>
+        <tr class="account-row">
+          <td><%= account.name %></td>
+          <td><%= account.admins.count %></td>
+          <td><%= account.apps.count %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<%= paginate @accounts, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm" %>
