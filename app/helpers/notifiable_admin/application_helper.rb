@@ -67,7 +67,7 @@ module NotifiableAdmin::ApplicationHelper
   end
   
   def new_app_navbar_item
-    navbar_item("Create New App", new_admin_account_app_path(@account), params[:controller] == "admin/apps" && params[:action] == "new")
+    navbar_item("Add App", new_admin_account_app_path(@account), params[:controller] == "admin/apps" && params[:action] == "new")
   end
   
   def edit_app_navbar_item
