@@ -1,9 +1,7 @@
 ## Installation
-Add gems
-Add model decorators
-mount engine in routes
-add seeds
-modify assets
-notifiable initializer
-
-
+* Add gems
+* Add model decorators
+* mount engine in routes
+* add seeds
+* modify assets.rb
+* notifiable initializer
