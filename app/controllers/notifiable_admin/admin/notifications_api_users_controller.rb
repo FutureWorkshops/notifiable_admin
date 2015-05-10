@@ -7,6 +7,7 @@ class NotifiableAdmin::Admin::NotificationsApiUsersController < NotifiableAdmin:
   end
 
   def create
+    @notifications_api_user.account = @account
     if @notifications_api_user.save
       redirect_to admin_account_notifications_api_users_path(@account), notice: "Notifications API Key created."
     else

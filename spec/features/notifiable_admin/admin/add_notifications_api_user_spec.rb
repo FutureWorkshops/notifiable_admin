@@ -17,6 +17,7 @@ feature 'Add a notifications api user' do
     expect(NotifiableAdmin::NotificationsApiUser.count).to eq 1
     expect(NotifiableAdmin::NotificationsApiUser.first.service_name).to eq 'CRM'
     expect(NotifiableAdmin::NotificationsApiUser.first.apps.count).to eq 1
+    expect(NotifiableAdmin::NotificationsApiUser.first.account).to eq account
   end
   
   scenario "Fail to add a user without Apps" do 
