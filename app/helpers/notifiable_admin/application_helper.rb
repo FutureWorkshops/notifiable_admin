@@ -58,6 +58,10 @@ module NotifiableAdmin::ApplicationHelper
     navbar_item("App Users", admin_account_app_users_path(@account, current_app), params[:controller] == "admin/users" && params[:action] == "index")
   end
   
+  def app_device_tokens_navbar_item
+    navbar_item("App Devices", admin_account_app_device_tokens_path(@account, current_app), params[:controller] == "admin/device_tokens" && params[:action] == "index")    
+  end
+  
   def app_jobs_navbar_item
     navbar_item("Schedule", admin_account_app_jobs_path(@account, current_app), params[:controller] == "admin/jobs" && params[:action] == "index")    
   end
