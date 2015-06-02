@@ -21,7 +21,6 @@
           <% Notifiable.locales.each do |l| %>
             <td><%= truncate(n.localized_notification(l).message, :length => 50) if n.localized_notification(l) %></td>
           <% end %>
-          <td><%= truncate(n.localized_notifications.first.params.to_s, :length => 50) %></td>
           <td><%= n.sent_count %></td>
           <td><%= n.sent_count - n.gateway_accepted_count %></td>
           <td><%= n.opened_count %></td>      
