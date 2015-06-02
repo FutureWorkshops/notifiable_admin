@@ -17,7 +17,4 @@
 //= require moment
 //= require eonasdan-bootstrap-datetimepicker
 //= require zeroclipboard
-//= require highcharts
-//= require chartkick
-//= require jquery.appear.js
 //= require_tree .

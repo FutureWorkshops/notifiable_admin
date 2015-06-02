@@ -14,13 +14,13 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
-  s.required_ruby_version = '~> 2.1.5'
+  s.required_ruby_version = '~> 2.1.6'
   
   # Core
-  s.add_dependency 'rails', '4.1.8'
-  s.add_dependency 'sass-rails', '~> 4.0.3'
+  s.add_dependency 'rails', '>= 4.1.0'
+  s.add_dependency 'sass-rails', '>= 4.0.3'
   s.add_dependency 'uglifier', '>= 1.3.0'
-  s.add_dependency 'coffee-rails', '~> 4.0.0'
+  s.add_dependency 'coffee-rails', '>= 4.0.0'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'turbolinks'
   s.add_dependency 'jbuilder', '~> 2.0'
@@ -31,12 +31,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails-assets-eonasdan-bootstrap-datetimepicker', '~> 4.0.0'
   s.add_dependency 'simple_form', '~> 3.1.0'
   s.add_dependency "zeroclipboard-rails", '~> 0.0.12'
-
-  # Dashboard
-  s.add_dependency 'chartkick', '~> 1.3.2'
-  s.add_dependency 'rails-assets-highcharts', '4.1.1'
-  s.add_dependency 'rails-assets-jquery.appear.js'
-  s.add_dependency 'dateslices', '~> 0.0.3'
 
   # Authentication
   s.add_dependency 'devise', '~> 3.4.1'
@@ -53,9 +47,6 @@ Gem::Specification.new do |s|
   # Pagination
   s.add_dependency "kaminari", "~> 0.15.1"
   s.add_dependency "bootstrap-kaminari-views", "~> 0.0.3"
-
-  # Seeding
-  s.add_dependency 'faker'
   
   # Testing dependencies
   s.add_development_dependency 'sqlite3'
