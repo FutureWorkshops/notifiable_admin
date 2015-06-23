@@ -6,7 +6,7 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
   before_filter :find_device_token, :ensure_authorized!, :except => :create
   
   def create
-    @device_token = Notifiable::DeviceToken.find_or_initialize_by(:token => params[:token])
+    @device_token = Notifiable::DeviceToken.find_or_initialize_by(:token => params[:token], :app_id => @app.id)
     @device_token.is_valid = true
     perform_update(device_token_params)
   end
@@ -49,6 +49,6 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
     end
   
     def find_device_token
-      @device_token = Notifiable::DeviceToken.find(params[:id])
+      @device_token = Notifiable::DeviceToken.find_by_id_and_app_id(params[:id], @app.id)
     end
 end

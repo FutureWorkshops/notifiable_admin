@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150221010358) do
+ActiveRecord::Schema.define(version: 20150622164049) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(version: 20150221010358) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "account_id"
+    t.string   "access_id"
+    t.string   "secret_key"
   end
 
   create_table "notifiable_apps_notifications_api_users", force: true do |t|

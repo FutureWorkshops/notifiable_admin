@@ -1,4 +1,6 @@
 Notifiable::App.class_eval do
+  include ApiAuthenticatable
+  
   serialize :configuration
   
   has_and_belongs_to_many :admins, :class_name => "NotifiableAdmin::Admin"

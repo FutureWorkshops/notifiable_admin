@@ -6,6 +6,8 @@ resource "DeviceToken" do
   
   let(:notifiable_app) { FactoryGirl.create(:app) }
   
+  before(:each){ ApiAuthHelpers.set_credentials(notifiable_app.access_id, notifiable_app.secret_key) }
+  
   post "/user_api/v1/device_tokens" do
     parameter :alias, "Username/Alias", :required => true, :scope => :user
     parameter :provider, "Provider", :required => true
