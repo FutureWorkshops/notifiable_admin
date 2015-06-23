@@ -11,7 +11,9 @@ resource "NotificationStatus" do
   let(:device_token) { create(:apns_token, :app => notifiable_app, :user_id => user.id, :locale => :en)}
   let(:notification) { create(:notification, :app => notifiable_app)}
   let(:localized_notification) { create(:localized_notification)}
-  let(:status) {  }  
+  let(:status) {  }
+  
+  before(:each){ ApiAuthHelpers.set_credentials(notifiable_app.access_id, notifiable_app.secret_key) }
   
   put "/user_api/v1/notification_statuses/opened" do
     parameter :alias, "App Username", :required => true, :scope => :user

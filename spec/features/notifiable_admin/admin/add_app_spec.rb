@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'add app' do
-  
+
   let(:account_owner) { FactoryGirl.create(:account_owner) }
   
   it "as account owner" do  
