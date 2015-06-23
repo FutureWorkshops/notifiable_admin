@@ -7,6 +7,8 @@ feature 'register a device token' do
   let(:user_with_token) { create(:user_with_gcm_token) }
   let(:device_token) { user_with_token.device_tokens.first }
   
+  before(:each){ ApiAuthHelpers.set_credentials(notifiable_app.access_id, notifiable_app.secret_key) }
+  
   it "for new token" do 
     post notifiable_admin.user_api_v1_device_tokens_path, :provider => 'apns', :token => 'ABC12345678910', :device_id => "DEF567", :app_id => notifiable_app.id
 
