@@ -19,7 +19,7 @@
           </ul>
         </li>
       <% else %>
-        <%= app_navbar_item(@app) if @app %>
+        <%= app_navbar_item(@app) if @app && !@app.new_record? %>
       <% end %>
       <%= edit_app_navbar_item if @app && !@app.new_record? %>
       <%= notifications_navbar_item %>
