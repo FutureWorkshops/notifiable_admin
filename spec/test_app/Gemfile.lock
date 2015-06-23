@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    notifiable_admin (0.1.2)
+    notifiable_admin (0.1.3)
       api-auth (~> 1.1.0)
       bootstrap-kaminari-views (~> 0.0.3)
       cancancan (~> 1.9.2)
