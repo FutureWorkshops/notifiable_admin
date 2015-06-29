@@ -25,7 +25,7 @@ class NotifiableAdmin::Admin::AppsController < NotifiableAdmin::Admin::BaseContr
   
   private 
     def app_params
-      params.require(:app).permit(:name, :apns_certificate, :apns_passphrase, :apns_sandbox)
+      params.require(:app).permit(:name, :apns_certificate, :apns_passphrase, :apns_sandbox, :gcm_api_key)
     end
   
 end
