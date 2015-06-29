@@ -4,6 +4,7 @@
       <tr>
         <th>Provider</th>
         <th>Token</th>
+        <th>Locale</th>
         <th>Active</th>
       </tr>
       <% @device_tokens.each do |dt| %>
@@ -14,6 +15,7 @@
               <b>Copy</b>
             </button>
           </td>
+          <td><%= dt.locale %></td>
           <td><%= dt.is_valid %></td>
         </tr>
       <% end %>
