@@ -2,7 +2,7 @@ class Notifiable::App
   
   def configuration
     unless read_attribute(:configuration)
-      write_attribute(:configuration, {:apns => {:passphrase => nil, :certificate => nil, :sandbox => "1"}})
+      write_attribute(:configuration, {:apns => {:passphrase => nil, :certificate => nil, :sandbox => "1"}, :gcm => {:api_key => nil}})
     end
     read_attribute(:configuration)
   end
@@ -29,5 +29,13 @@ class Notifiable::App
   
   def apns_sandbox=(apns_sandbox)
     self.configuration[:apns][:sandbox] = apns_sandbox
+  end
+  
+  def gcm_api_key=(gcm_api_key)
+    self.configuration[:gcm][:api_key] = gcm_api_key
+  end
+  
+  def gcm_api_key
+    self.configuration[:gcm][:api_key]
   end
 end
