@@ -6,12 +6,16 @@
 
   <h4>APNS</h4>
 
-  <%= f.input :apns_certificate, :as => :text, :label => "Certificate" %>
+  <%= f.input :apns_certificate, :as => :text, :label => "APNS Certificate" %>
   
-  <%= f.input :apns_passphrase, :label => "Passphrase" %>
+  <%= f.input :apns_passphrase, :label => "APNS Passphrase" %>
   
-  <%= f.input :apns_sandbox, :as => :boolean, :label => "Sandbox" %>
+  <%= f.input :apns_sandbox, :as => :boolean, :label => "APNS Sandbox" %>
   
+  <hr/>
+  
+  <%= f.input :gcm_api_key, :label => "GCM API Key" %>
+
   <hr/>
   
   <%= f.submit :class => "btn btn-default" %>    
