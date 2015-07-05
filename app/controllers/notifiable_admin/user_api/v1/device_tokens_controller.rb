@@ -26,7 +26,7 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
   private
     def perform_update(params)
       if @device_token.update_attributes(params)
-        render :json => @device_token.to_json(:only => Notifiable.api_device_token_params.push(:id)), :status => :ok
+        render :json => @device_token.to_json(:only => [ :id ] ), :status => :ok
       else
         render :json => { :errors => @device_token.errors.full_messages }, :status => :unprocessable_entity
       end
