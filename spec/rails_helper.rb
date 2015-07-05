@@ -18,7 +18,10 @@ RSpec.configure do |config|
   config.include RSpec::Rails::RequestExampleGroup, type: :feature
   
   # path helpers for the engine
-  config.include PathHelpers 
+  config.include PathHelpers
+  
+  # request helpers
+  config.include Requests::JsonHelpers 
 
   # ApiAuth helpers
   config.include ApiAuthHelpers 
