@@ -3,7 +3,7 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
     render :json => {:error => error.message}, :status => :not_found
   end
   
-  before_filter :find_device_token, :ensure_authorized!, :except => :create
+  before_filter :find_device_token!, :ensure_authorized!, :except => :create
   
   def create
     @device_token = Notifiable::DeviceToken.find_or_initialize_by(:token => params[:token], :app_id => @app.id)
@@ -48,7 +48,7 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
       head :status => :unauthorized unless !@device_token.user || @device_token.user.eql?(current_notifiable_user)
     end
   
-    def find_device_token
-      @device_token = Notifiable::DeviceToken.find_by_id_and_app_id(params[:id], @app.id)
+    def find_device_token!
+      @device_token = Notifiable::DeviceToken.find_by_id_and_app_id!(params[:id], @app.id)
     end
 end
