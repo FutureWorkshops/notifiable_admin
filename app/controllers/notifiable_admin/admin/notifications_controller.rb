@@ -4,6 +4,7 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
   load_and_authorize_resource :class => "Notifiable::Notification", :through => :app
     
   prepend_before_filter :find_user, :only => [:new, :create]
+  prepend_before_filter :parse_params, :only => :create
 
   def find_user
     @user = NotifiableAdmin::User.find(params[:notification].delete(:user_id)) if params[:notification] && params[:notification][:user_id]
@@ -38,7 +39,18 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
     end
     
     def create_params
-      params.require(:notification).permit(localized_notifications_attributes: [:message, :locale])
+      params.require(:notification).permit(localized_notifications_attributes: [:message, :locale, :params]).tap do |whitelisted|
+      
+        # whitelist any params
+        whitelisted[:localized_notifications_attributes].each_pair do |index, item|
+          item[:params] = params[:notification][:localized_notifications_attributes][index][:params]
+        end
+      end
     end
-
+    
+    def parse_params
+      params[:notification][:localized_notifications_attributes].each_pair do |index, localized_notification_attributes|
+        localized_notification_attributes[:params] = Rack::Utils.parse_nested_query(localized_notification_attributes[:params])
+      end
+    end
 end
