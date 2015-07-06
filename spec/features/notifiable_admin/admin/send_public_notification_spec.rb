@@ -15,7 +15,7 @@ feature 'Send public notifications' do
     
     before(:each) { login_as account_owner, :scope => :admin }
     
-    scenario "to The Open App" do 
+    scenario "localized" do 
       visit notifiable_admin.new_admin_account_app_notification_path(account, app)
       fill_in 'notification_localized_notifications_attributes_0_message', :with => "Hello"
       fill_in 'notification_localized_notifications_attributes_1_message', :with => "مرحبا"
@@ -26,6 +26,20 @@ feature 'Send public notifications' do
       expect(Notifiable::NotificationStatus.count).to eq 2
       expect(en_token.notification_statuses.first.localized_notification.message).to eql "Hello"
       expect(ar_token.notification_statuses.first.localized_notification.message).to eql "مرحبا"
+    end
+    
+    scenario "with params" do 
+      visit notifiable_admin.new_admin_account_app_notification_path(account, app)
+      fill_in 'notification_localized_notifications_attributes_0_message', :with => "Hello"
+      fill_in 'notification_localized_notifications_attributes_0_params', :with => "video_id=10&image_id=20"
+      click_button 'Send'
+  
+      expect(page).to have_content 'Notification(s) sent successfully'
+      expect(Notifiable::Notification.first.app).to eq app
+      expect(Notifiable::NotificationStatus.count).to eq 1
+      expect(en_token.notification_statuses.first.localized_notification.message).to eql "Hello"
+      expect(en_token.notification_statuses.first.localized_notification.params["video_id"]).to eql "10"
+      expect(en_token.notification_statuses.first.localized_notification.params["image_id"]).to eql "20"
     end
     
     context "scheduled for the future" do
