@@ -32,6 +32,7 @@
     <h4><%= n.object.locale %></h4>
     <%= n.input :locale, :as => :hidden %>
     <%= n.input :message %>
+    <%= n.input :params, :as => :string %>
   <% end %>
 
   <%= f.submit "Send", :class => "btn btn-default" %>    
