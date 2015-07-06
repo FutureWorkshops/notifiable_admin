@@ -43,7 +43,7 @@
       "response_headers": {
       },
       "response_content_type": "text/html",
-      "curl": "curl \"localhost:3000/user_api/v1/notification_statuses/opened\" -d 'user[alias]=10002&localized_notification_id=1&device_token_id=1' -X PUT \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
+      "curl": "curl \"localhost:3000/user_api/v1/notification_statuses/opened\" -d 'user[alias]=10002&localized_notification_id=1&device_token_id=1' -X PUT \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Authorization: 123abc\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
     }
   ]
 }]
