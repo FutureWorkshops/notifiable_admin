@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'quiet_assets', '~> 1.0.3'
+gem 'pg', '~> 0.18.2'
 
 # UI
 gem 'rails-assets-bootstrap', '~> 3.3.2'
