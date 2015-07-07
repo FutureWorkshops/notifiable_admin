@@ -16,5 +16,4 @@
 //= require bootstrap
 //= require moment
 //= require eonasdan-bootstrap-datetimepicker
-//= require zeroclipboard
 //= require_tree .

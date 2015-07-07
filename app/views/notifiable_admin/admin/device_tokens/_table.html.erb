@@ -2,31 +2,17 @@
   <div class="row">
     <table class="table">
       <tr>
-        <th>Provider</th>
-        <th>Token</th>
-        <th>Locale</th>
+        <th>ID</th>
+        <% Notifiable.api_device_token_params.each do |param| %><th><%= param.to_s.titleize %></th><% end %>
         <th>Active</th>
       </tr>
       <% @device_tokens.each do |dt| %>
         <tr class="device_token-row">
-          <td><%= dt.provider %></td>
-          <td><%= truncate(dt.token, :length => 50) %>
-            <button class='btn btn-default btn-sm' data-clipboard-text='<%= dt.token %>' id='<%= dt.id %>_clip_button'>
-              <b>Copy</b>
-            </button>
-          </td>
-          <td><%= dt.locale %></td>
+          <td><%= dt.id %></td>
+          <% Notifiable.api_device_token_params.each do |param| %><td><%= truncate(eval("dt.#{param}"), :length => 50) %></td><% end %>
           <td><%= dt.is_valid %></td>
         </tr>
       <% end %>
     </table>
   </div>
 </div> 
-
-<script>
-  $(document).ready(function() {
-    <% @device_tokens.each do |dt| -%>
-      new ZeroClipboard($("#<%= dt.id %>_clip_button"))
-    <% end -%>
-  });
-</script> 
