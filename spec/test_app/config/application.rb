@@ -8,6 +8,10 @@ require "notifiable_admin"
 
 module TestApp
   class Application < Rails::Application
+    
+    # Use SQL representation in order to support hstore
+    config.active_record.schema_format = :sql
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

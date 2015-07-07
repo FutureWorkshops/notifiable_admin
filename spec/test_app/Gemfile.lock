@@ -195,6 +195,7 @@ GEM
     notifiable-rails (0.21.1)
       rails (~> 4.1.0)
     orm_adapter (0.5.0)
+    pg (0.18.2)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -351,6 +352,7 @@ DEPENDENCIES
   notifiable-mpns-nverinaud (~> 0.6.0)
   notifiable-rails (~> 0.21.1)
   notifiable_admin!
+  pg (~> 0.18.2)
   quiet_assets (~> 1.0.3)
   rails (= 4.1.8)
   rails-assets-bootstrap (~> 3.3.2)
