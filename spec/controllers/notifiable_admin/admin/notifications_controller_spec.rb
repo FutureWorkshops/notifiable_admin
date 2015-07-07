@@ -42,7 +42,7 @@ describe NotifiableAdmin::Admin::NotificationsController do
         let!(:token2) { create(:apns_token, :app => the_rules_app, :user_id => user2.id)}
       
         before(:each) do          
-          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => [{:message => "Hello", :locale => :en}]}}
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}}}
         end
       
         it { expect(Notifiable::Notification.count).to eq 1 }
@@ -60,7 +60,7 @@ describe NotifiableAdmin::Admin::NotificationsController do
         let!(:ar_token) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :locale => :ar)}
       
         before(:each) do          
-          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => [{:locale => :en, :message => "Hello"}, {:locale => :ar, :message => "مرحبا"}]}}
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:locale => :en, :message => "Hello"}, "1" => {:locale => :ar, :message => "مرحبا"}}}}
         end
       
         it { expect(Notifiable::Notification.count).to eq 1 }
@@ -85,7 +85,7 @@ describe NotifiableAdmin::Admin::NotificationsController do
         after(:all) { Delayed::Worker.delay_jobs = false }
         
         before(:each) do          
-          post :create, {:schedule_at => schedule_at, :account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => [{:locale => :en, :message => "Hello"}]}}
+          post :create, {:schedule_at => schedule_at, :account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:locale => :en, :message => "Hello"}}}}
         end
       
         it { expect(Delayed::Job.count).to eq 1 }
