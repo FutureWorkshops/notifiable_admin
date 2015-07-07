@@ -268,7 +268,7 @@ CREATE TABLE notifiable_device_tokens (
     app_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    settings hstore
+    custom_properties hstore
 );
 
 
