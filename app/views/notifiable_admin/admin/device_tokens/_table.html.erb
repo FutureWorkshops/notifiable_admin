@@ -9,7 +9,9 @@
       <% @device_tokens.each do |dt| %>
         <tr class="device_token-row">
           <td><%= dt.id %></td>
-          <% Notifiable.api_device_token_params.each do |param| %><td><%= truncate(eval("dt.#{param}"), :length => 50) %></td><% end %>
+          <% Notifiable.api_device_token_params.each do |param| %>
+            <td><%= truncate(eval("dt.#{param}").to_s, :length => 20) %></td>
+          <% end %>
           <td><%= dt.is_valid %></td>
         </tr>
       <% end %>
