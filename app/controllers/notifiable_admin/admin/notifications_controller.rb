@@ -5,11 +5,7 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
     
   prepend_before_filter :find_user, :only => [:new, :create]
   prepend_before_filter :parse_params, :only => :create
-
-  def find_user
-    @user = NotifiableAdmin::User.find(params[:notification].delete(:user_id)) if params[:notification] && params[:notification][:user_id]
-  end
-  
+    
   def new
     Notifiable.locales.each do |locale|
       @notification.localized_notifications.append(Notifiable::LocalizedNotification.new :locale => locale)
@@ -19,7 +15,13 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
   def create
     @notification.app = @app
     if @notification.save
-      @notification.delay(run_at: run_at, app_id: @app.id, notification_id: @notification.id).enqueue_send(@user)
+      
+      if @user
+        @notification.delay_private(@user,  run_at)      
+      else
+        @notification.delay_public(run_at)               
+      end
+      
       redirect_to admin_account_app_jobs_path(@account, @app), notice: "Notification(s) sent successfully"
     else
       redirect_to new_admin_account_app_notification_path(@account, @app, @notification), notice: "Notification(s) not sent successfully"
@@ -36,6 +38,10 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
   private
     def run_at
       !params[:schedule_at] || params[:schedule_at].empty? ? DateTime.now : DateTime.strptime(params[:schedule_at], "%m/%d/%Y %H:%M %p")
+    end
+    
+    def find_user
+      @user = NotifiableAdmin::User.find(params[:notification].delete(:user_id)) if params[:notification] && params[:notification][:user_id]
     end
     
     def create_params
