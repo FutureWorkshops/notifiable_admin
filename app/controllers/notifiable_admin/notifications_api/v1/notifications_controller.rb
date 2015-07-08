@@ -8,7 +8,15 @@ class NotifiableAdmin::NotificationsApi::V1::NotificationsController < Notifiabl
   def create
     @notification.app = @app
     if @notification.save
-      @notification.delay(:app_id => @app.id, :notification_id => @notification.id).enqueue_send(@user)
+      
+      if @user
+        @notification.delay_private(@user) 
+      elsif params[:device_token_filters]
+        @notification.delay_filtered(params[:device_token_filters])     
+      else
+        @notification.delay_public                
+      end
+      
       head :status => :ok                  
     else
       render :json => n.errors, :status => :unprocessable_entity

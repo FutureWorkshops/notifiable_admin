@@ -12,7 +12,7 @@ feature 'List jobs' do
   let(:notification) { create(:notification, :app => notifiable_app) }
   let!(:localized_notification) { create(:localized_notification, :notification => notification, :locale => :en)}
 
-  before(:each) { notification.delay(run_at: 5.hours.from_now, :app_id => notifiable_app.id, :notification_id => notification.id).enqueue_send(@user) }
+  before(:each) { notification.delay_private(@user, 5.hours.from_now) }
 
   context "As account owner" do
     before(:each) { login_as account_owner, :scope => :admin }

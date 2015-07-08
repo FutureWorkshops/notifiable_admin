@@ -26,5 +26,25 @@ describe NotifiableAdmin::NotificationsApi::V1::NotificationsController do
       it { expect(Notifiable::Notification.first.localized_notifications.count).to eq 1 }
       it { expect(Notifiable::Notification.first.localized_notifications.first.params['video_id']).to eq "123" }
     end
+    
+    context "filtered" do
+      let!(:token1) { create(:apns_token, :app => n_app, :locale => :en, :device_name => "MBS iPhone")}
+      let!(:token2) { create(:apns_token, :app => n_app, :locale => :en, :device_name => "MBS iPad")}
+      
+      before(:each) do 
+        post :create, {
+          :device_token_filters => {:device_name => "MBS iPhone"},
+          :app_id => n_app.id, 
+          :notification => {
+            :localized_notifications_attributes => [
+              {:message => "Hello", :locale => :en}
+            ]
+          } 
+        }        
+      end
+
+      it { expect(Notifiable::Notification.count).to eq 1 }
+      it { expect(Notifiable::Notification.first.sent_count).to eq 1 }
+    end
   end
 end
