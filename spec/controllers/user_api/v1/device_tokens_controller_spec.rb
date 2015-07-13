@@ -61,6 +61,19 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
       it { expect(Notifiable::DeviceToken.first.device_name).to eq "MBS iPhone" } 
       it { expect(json['id']).to eq Notifiable::DeviceToken.first.id }    
     end
+    
+    
+    context "android hack for The Open" do
+      before(:each) { post :create, {"device_token"=>{"device_token_properties"=>{"device_name"=>"Jonathan A Android"}, "locale"=>"en", "app_id"=>1}, "provider"=>"gcm", "token"=>"APA91bFhpenH3QRqs_LHgkvyjbHERL8Dk5gT35IZHR19UHsl3WFF92i4S7eFXhfD_y6wxo0ehOor8W_DwuBbLgf3IL0U7nuA86fxtKH8K3jXciaaQeHQ_KQ"}} 
+      
+      it { expect(Notifiable::DeviceToken.count).to eq 1 }
+      it { expect(Notifiable::DeviceToken.first.provider).to eq "gcm" }
+      it { expect(Notifiable::DeviceToken.first.token).to eq "APA91bFhpenH3QRqs_LHgkvyjbHERL8Dk5gT35IZHR19UHsl3WFF92i4S7eFXhfD_y6wxo0ehOor8W_DwuBbLgf3IL0U7nuA86fxtKH8K3jXciaaQeHQ_KQ" }      
+      it { expect(Notifiable::DeviceToken.first.locale).to eq "en" }    
+      it { expect(Notifiable::DeviceToken.first.is_valid).to eq true } 
+      it { expect(Notifiable::DeviceToken.first.device_name).to eq "Jonathan A Android" } 
+      it { expect(json['id']).to eq Notifiable::DeviceToken.first.id }    
+    end
   end
   
   describe "#update" do

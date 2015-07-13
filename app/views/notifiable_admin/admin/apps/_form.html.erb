@@ -8,11 +8,13 @@
 
   <%= f.input :apns_certificate, :as => :text, :label => "APNS Certificate" %>
   
+  Export from keychain and use <code>openssl pkcs12 -in Certificates.p12 -out certificate.pem -nodes -clcerts</code>
+  
   <%= f.input :apns_passphrase, :label => "APNS Passphrase" %>
   
   <%= f.input :apns_sandbox, :as => :boolean, :label => "APNS Sandbox" %>
   
-  <hr/>
+  <h4>GCM</h4>
   
   <%= f.input :gcm_api_key, :label => "GCM API Key" %>
 

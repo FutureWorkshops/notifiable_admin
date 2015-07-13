@@ -34,7 +34,8 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
   
     def device_token_params
       # hack for The Open
-      params[:device_token_properties].each_pair {|k,v| params[k] = v}
+      params[:device_token].each_pair {|k,v| params[k] = v} if params[:device_token]
+      params[:device_token_properties].each_pair {|k,v| params[k] = v} if params[:device_token_properties]
       
       device_token_params = params.permit(Notifiable.api_device_token_params)
       
