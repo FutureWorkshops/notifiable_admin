@@ -25,19 +25,19 @@ Notifiable::Notification.class_eval do
       end
       
       self.batch do
-        device_tokens.each {|d| self.add_device_token(d) } 
+        device_tokens.find_each {|d| self.add_device_token(d) } 
       end 
     end
   
     def send_private(user)
       self.batch do
-        user.device_tokens.each {|d| self.add_device_token(d) } 
+        user.device_tokens.find_each {|d| self.add_device_token(d) } 
       end 
     end
   
     def send_public
       self.batch do
-        self.app.device_tokens.each {|d| self.add_device_token(d) } 
+        self.app.device_tokens.find_each {|d| self.add_device_token(d) } 
       end 
     end
   
