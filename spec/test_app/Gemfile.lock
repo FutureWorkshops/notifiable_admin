@@ -150,6 +150,8 @@ GEM
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
+    iso (0.2.1)
+      i18n
     jbuilder (2.2.8)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -342,6 +344,7 @@ DEPENDENCIES
   faker
   guard (~> 2.10.5)
   guard-rspec (~> 4.5.0)
+  iso (~> 0.2.1)
   jbuilder (~> 2.0)
   jquery-rails
   json_spec (~> 1.1.1)
