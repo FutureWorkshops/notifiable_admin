@@ -48,7 +48,6 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
     
     def param_device_token_filters?
       return false unless params[:device_token_filters]
-      byebug
       params[:device_token_filters].each_pair do |k,v|
         return true unless params[:device_token_filters][k].empty?
       end
