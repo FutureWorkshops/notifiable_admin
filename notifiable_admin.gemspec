@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks'
   s.add_dependency 'jbuilder', '~> 2.0'
   s.add_dependency 'quiet_assets', '~> 1.0.3'
+  s.add_dependency 'iso', '~> 0.2.1'
 
   # UI
   s.add_dependency 'rails-assets-bootstrap', '~> 3.3.2'
