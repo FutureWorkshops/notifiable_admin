@@ -17,7 +17,9 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
     if @notification.save
       
       if @user
-        @notification.delay_private(@user,  run_at)      
+        @notification.delay_private(@user,  run_at) 
+      elsif params[:device_token_filters]
+        @notification.delay_filtered(params[:device_token_filters], run_at)     
       else
         @notification.delay_public(run_at)               
       end
