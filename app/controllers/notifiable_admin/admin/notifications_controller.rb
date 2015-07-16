@@ -18,7 +18,7 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
       
       if @user
         @notification.delay_private(@user,  run_at) 
-      elsif params[:device_token_filters]
+      elsif param_device_token_filters?
         @notification.delay_filtered(params[:device_token_filters], run_at)     
       else
         @notification.delay_public(run_at)               
@@ -44,6 +44,16 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
     
     def find_user
       @user = NotifiableAdmin::User.find(params[:notification].delete(:user_id)) if params[:notification] && params[:notification][:user_id]
+    end
+    
+    def param_device_token_filters?
+      return false unless params[:device_token_filters]
+      byebug
+      params[:device_token_filters].each_pair do |k,v|
+        return true unless params[:device_token_filters][k].empty?
+      end
+      
+      false
     end
     
     def create_params

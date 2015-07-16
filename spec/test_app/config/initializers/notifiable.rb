@@ -13,6 +13,6 @@ Notifiable.configure do |config|
   config.locales = [:en, :ar]
   
   # Set the params permitted for creation of device tokens
-  config.api_device_token_params = [:token, :provider, :locale, :device_name]
+  config.api_device_token_params = [:token, :provider, :locale, :device_name, :onsite]
 
 end

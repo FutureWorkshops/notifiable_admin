@@ -8,6 +8,7 @@ PATH
       coffee-rails (>= 4.0.0)
       delayed_job_active_record (~> 4.0.0)
       devise (~> 3.4.1)
+      iso (~> 0.2.1)
       jbuilder (~> 2.0)
       jquery-rails
       kaminari (~> 0.15.1)

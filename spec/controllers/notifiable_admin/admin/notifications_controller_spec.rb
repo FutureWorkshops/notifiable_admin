@@ -111,6 +111,20 @@ describe NotifiableAdmin::Admin::NotificationsController do
         it { expect(Notifiable::NotificationStatus.first.localized_notification).to eq Notifiable::LocalizedNotification.first }
       end
       
+      describe "empty filters" do
+        let(:user1) { create(:user) }
+        let(:user2) { create(:user) }
+      
+        let!(:token1) { create(:apns_token, :app => the_open_app, :user_id => user1.id, :onsite => true)}
+        let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :onsite => false)}
+      
+        before(:each) do          
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}}, :device_token_filters => {:onsite => ""} }
+        end
+      
+        it { expect(Notifiable::NotificationStatus.count).to eq 2 }
+      end
+      
     end
         
   end 
