@@ -101,7 +101,7 @@ describe NotifiableAdmin::Admin::NotificationsController do
         let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :device_name => "MBS iPad")}
       
         before(:each) do          
-          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}}, :device_token_filters => {:device_name => "MBS iPhone"} }
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}, :device_token_filters => {:device_name => "MBS iPhone"}}}
         end
       
         it { expect(Notifiable::Notification.count).to eq 1 }
@@ -119,7 +119,7 @@ describe NotifiableAdmin::Admin::NotificationsController do
         let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :onsite => false)}
       
         before(:each) do          
-          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}}, :device_token_filters => {:onsite => ""} }
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}, :device_token_filters => {:onsite => ""}}}
         end
       
         it { expect(Notifiable::NotificationStatus.count).to eq 2 }
