@@ -40,7 +40,6 @@ Gem::Specification.new do |s|
 
   # Push Notifications
   s.add_dependency 'notifiable-rails', '~> 0.21.1'
-  s.add_dependency 'notifiable-apns-grocer', '~> 0.11.0'
 
   # Background processing
   s.add_dependency 'delayed_job_active_record', '~> 4.0.0'
