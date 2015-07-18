@@ -1,4 +1,5 @@
 require 'notifiable_admin/engine'
+require 'notifiable'
 
 module NotifiableAdmin
 
