@@ -24,20 +24,20 @@ Notifiable::Notification.class_eval do
         device_tokens = device_tokens.where("custom_properties -> '#{key}' = '#{value}'")
       end
       
-      self.batch do
-        device_tokens.find_each {|d| self.add_device_token(d) } 
-      end 
+      send_batch(device_tokens)
     end
   
     def send_private(user)
-      self.batch do
-        user.device_tokens.find_each {|d| self.add_device_token(d) } 
-      end 
+      send_batch(user.device_tokens)
     end
   
     def send_public
+      send_batch(self.app.device_tokens)
+    end
+    
+    def send_batch(tokens)
       self.batch do
-        self.app.device_tokens.find_each {|d| self.add_device_token(d) } 
+        tokens.find_each {|d| self.add_device_token(d) } 
       end 
     end
   
