@@ -20,7 +20,7 @@
             <td><%= truncate(n.localized_notification(l).message, :length => 50) if n.localized_notification(l) %></td>
           <% end %>
           <td><%= n.sent_count %></td>
-          <td><%= truncate(j.last_error.message, :length => 50) if j.last_error %></td>
+          <td><%= truncate(j.last_error, :length => 50) if j.last_error %></td>
           <td><%= delete_button(admin_account_app_job_path(@account, @app, j)) %>
         </tr>
       <% end %>
