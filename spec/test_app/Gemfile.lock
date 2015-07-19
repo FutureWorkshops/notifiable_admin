@@ -12,7 +12,6 @@ PATH
       jbuilder (~> 2.0)
       jquery-rails
       kaminari (~> 0.15.1)
-      notifiable-apns-grocer (~> 0.11.0)
       notifiable-rails (~> 0.21.1)
       quiet_assets (~> 1.0.3)
       rails (>= 4.1.0)
