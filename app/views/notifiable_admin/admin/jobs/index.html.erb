@@ -6,7 +6,7 @@
       <tr>
         <th>Start(ed) At</th>
         <% Notifiable.locales.each do |l| %>
-          <th>Message(<%= l %>)</th>        
+          <th><%= ISO::Language.find(l.to_s).name %> Message</th>        
         <% end %>
         <th>Sent</th>
         <th>Error</th>
