@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'api-auth', '~> 1.1.0'
 
   # Push Notifications
-  s.add_dependency 'notifiable-rails', '~> 0.21.1'
+  s.add_dependency 'notifiable-rails', '> 0.21.1'
 
   # Background processing
   s.add_dependency 'delayed_job_active_record', '~> 4.0.0'
