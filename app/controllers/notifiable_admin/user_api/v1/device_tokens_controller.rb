@@ -1,7 +1,4 @@
 class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::UserApi::V1::BaseController
-  rescue_from ActiveRecord::RecordNotFound do |error|
-    render :json => {:error => error.message}, :status => :not_found
-  end
   
   before_filter :find_device_token!, :ensure_authorized!, :except => :create
   
