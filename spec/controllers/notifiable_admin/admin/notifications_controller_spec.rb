@@ -42,7 +42,7 @@ describe NotifiableAdmin::Admin::NotificationsController do
         let!(:token2) { create(:apns_token, :app => the_rules_app, :user_id => user2.id)}
       
         before(:each) do          
-          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => [{:message => "Hello", :locale => :en}]}}
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}}}
         end
       
         it { expect(Notifiable::Notification.count).to eq 1 }
@@ -60,7 +60,7 @@ describe NotifiableAdmin::Admin::NotificationsController do
         let!(:ar_token) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :locale => :ar)}
       
         before(:each) do          
-          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => [{:locale => :en, :message => "Hello"}, {:locale => :ar, :message => "مرحبا"}]}}
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:locale => :en, :message => "Hello"}, "1" => {:locale => :ar, :message => "مرحبا"}}}}
         end
       
         it { expect(Notifiable::Notification.count).to eq 1 }
@@ -85,12 +85,44 @@ describe NotifiableAdmin::Admin::NotificationsController do
         after(:all) { Delayed::Worker.delay_jobs = false }
         
         before(:each) do          
-          post :create, {:schedule_at => schedule_at, :account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => [{:locale => :en, :message => "Hello"}]}}
+          post :create, {:schedule_at => schedule_at, :account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:locale => :en, :message => "Hello"}}}}
         end
       
         it { expect(Delayed::Job.count).to eq 1 }
         it { expect(Delayed::Job.first.run_at.strftime("%m/%d/%Y %H:%M %p")).to eq schedule_at }
         
+      end
+      
+      describe "filtered notification" do
+        let(:user1) { create(:user) }
+        let(:user2) { create(:user) }
+      
+        let!(:token1) { create(:apns_token, :app => the_open_app, :user_id => user1.id, :device_name => "MBS iPhone")}
+        let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :device_name => "MBS iPad")}
+      
+        before(:each) do          
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}, :device_token_filters => {:device_name => "MBS iPhone"}}}
+        end
+      
+        it { expect(Notifiable::Notification.count).to eq 1 }
+        it { expect(Notifiable::Notification.first.app).to eq the_open_app }
+        it { expect(Notifiable::NotificationStatus.count).to eq 1 }
+        it { expect(Notifiable::NotificationStatus.first.device_token).to eq token1 }
+        it { expect(Notifiable::NotificationStatus.first.localized_notification).to eq Notifiable::LocalizedNotification.first }
+      end
+      
+      describe "empty filters" do
+        let(:user1) { create(:user) }
+        let(:user2) { create(:user) }
+      
+        let!(:token1) { create(:apns_token, :app => the_open_app, :user_id => user1.id, :onsite => true)}
+        let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :onsite => false)}
+      
+        before(:each) do          
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}, :device_token_filters => {:onsite => ""}}}
+        end
+      
+        it { expect(Notifiable::NotificationStatus.count).to eq 2 }
       end
       
     end

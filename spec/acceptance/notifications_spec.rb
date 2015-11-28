@@ -25,6 +25,35 @@ resource "Notification" do
     end
   end
   
+  post "/notifications_api/v1/notifications" do    
+    let!(:token) { create(:apns_token, :app => notifiable_app, :locale => :en)}
+    let(:raw_post) {{:app_id => notifiable_app.id, :notification => {:localized_notifications_attributes => [{:message => "Hello", :locale => :en, :params => {:test_param => "abc123"}}]}}}
+    
+    example_request "Notify everybody with params", :document => :notifications_api do
+      expect(status).to eq 200
+      expect(Notifiable::Notification.count).to eq 1
+      expect(Notifiable::NotificationStatus.count).to eq 1
+      expect(Notifiable::Notification.first.localized_notifications.first.params['test_param']).to eq "abc123"
+    end
+  end
+  
+  post "/notifications_api/v1/notifications" do    
+    let!(:token1) { create(:apns_token, :app => notifiable_app, :locale => :en, :device_name => "MBS iPhone")}
+    let!(:token2) { create(:apns_token, :app => notifiable_app, :locale => :en, :device_name => "MBS iPad")}
+    
+    let(:raw_post) {{
+      :device_token_filters => {:device_name => "MBS iPhone"},
+      :app_id => notifiable_app.id, 
+      :notification => {:localized_notifications_attributes => [{:message => "Hello", :locale => :en}]}
+    }}
+    
+    example_request "Notify devices named MBS iPhone", :document => :notifications_api do
+      expect(status).to eq 200
+      expect(Notifiable::Notification.count).to eq 1
+      expect(Notifiable::NotificationStatus.count).to eq 1
+    end
+  end
+  
   post "/notifications_api/v1/notifications" do
     parameter :message, "Message", :required => true, :scope => :notification
     parameter :app_id, "App ID", :required => true

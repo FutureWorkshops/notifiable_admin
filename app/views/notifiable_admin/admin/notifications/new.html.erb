@@ -18,6 +18,16 @@
 
 <%= simple_form_for [:admin, @account, @app, @notification] do |f| %>
   
+  <%= f.input :user_id, :as => :hidden, :input_html => { :value => @user.id } if @user %>
+
+  <%= f.simple_fields_for :localized_notifications do |n| %>
+    <h4><%= ISO::Language.find(n.object.locale.to_s).name %></h4>
+    <%= n.input :locale, :as => :hidden %>
+    <%= n.input :message %>
+    <%= n.input :params, :as => :string %>
+    <hr/>
+  <% end %>
+  
   <h4>Schedule</h4>
   <div class='input-group date' id='datetimepicker1'>
       <input type='text' class="form-control" name="schedule_at" />
@@ -25,14 +35,13 @@
       </span>
   </div>
   
-  <%= f.input :user_id, :as => :hidden, :input_html => { :value => @user.id } if @user %>
-
-
-  <%= f.simple_fields_for :localized_notifications do |n| %>
-    <h4><%= n.object.locale %></h4>
-    <%= n.input :locale, :as => :hidden %>
-    <%= n.input :message %>
+  <h4>Filters</h4>
+  <%= f.simple_fields_for :device_token_filters do |n| %>
+    <% NotifiableAdmin.custom_device_token_properties.each_pair do |k, v| %>
+      <%= n.input k, :as => v %>
+    <% end %> 
   <% end %>
+  <hr/>
 
   <%= f.submit "Send", :class => "btn btn-default" %>    
   

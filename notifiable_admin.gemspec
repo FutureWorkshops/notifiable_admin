@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'turbolinks'
   s.add_dependency 'jbuilder', '~> 2.0'
   s.add_dependency 'quiet_assets', '~> 1.0.3'
+  s.add_dependency 'iso', '~> 0.2.1'
 
   # UI
   s.add_dependency 'rails-assets-bootstrap', '~> 3.3.2'
@@ -38,8 +39,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'api-auth', '~> 1.1.0'
 
   # Push Notifications
-  s.add_dependency 'notifiable-rails', '~> 0.21.1'
-  s.add_dependency 'notifiable-apns-grocer', '~> 0.11.0'
+  s.add_dependency 'notifiable-rails', '> 0.21.1'
 
   # Background processing
   s.add_dependency 'delayed_job_active_record', '~> 4.0.0'

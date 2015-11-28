@@ -18,7 +18,10 @@ RSpec.configure do |config|
   config.include RSpec::Rails::RequestExampleGroup, type: :feature
   
   # path helpers for the engine
-  config.include PathHelpers 
+  config.include PathHelpers
+  
+  # request helpers
+  config.include Requests::JsonHelpers 
 
   # ApiAuth helpers
   config.include ApiAuthHelpers 
@@ -29,6 +32,9 @@ RSpec.configure do |config|
   # Notifiable Rails is set to test mode
   Notifiable.delivery_method = :test
 
+  config.before(:suite) {
+    FactoryGirl.lint
+  }
   
   config.before(:all) {
     Warden.test_mode!

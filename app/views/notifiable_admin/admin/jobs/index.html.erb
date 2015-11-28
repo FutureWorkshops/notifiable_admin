@@ -4,11 +4,12 @@
   <div class="row">
     <table class="table">
       <tr>
-        <th>Run At</th>
+        <th>Start(ed) At</th>
         <% Notifiable.locales.each do |l| %>
-          <th>Message(<%= l %>)</th>        
+          <th><%= ISO::Language.find(l.to_s).name %> Message</th>        
         <% end %>
         <th>Sent</th>
+        <th>Error</th>
         <th>Actions</th>
       </tr>
       <% @jobs.each do |j| %>
@@ -19,6 +20,7 @@
             <td><%= truncate(n.localized_notification(l).message, :length => 50) if n.localized_notification(l) %></td>
           <% end %>
           <td><%= n.sent_count %></td>
+          <td><%= truncate(j.last_error, :length => 50) if j.last_error %></td>
           <td><%= delete_button(admin_account_app_job_path(@account, @app, j)) %>
         </tr>
       <% end %>
