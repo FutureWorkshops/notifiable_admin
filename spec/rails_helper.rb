@@ -32,6 +32,9 @@ RSpec.configure do |config|
   # Notifiable Rails is set to test mode
   Notifiable.delivery_method = :test
 
+  config.before(:suite) {
+    FactoryGirl.lint
+  }
   
   config.before(:all) {
     Warden.test_mode!
