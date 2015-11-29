@@ -1,0 +1,67 @@
+<div class="col-md-12">
+  <% json.each do |api| %>
+  <div class="row">
+    <h2><%= api["description"] %></h2>
+    <p class="lead"><%= api["http_method"]%> <%= api["route"] =%></p>
+    
+    <% unless api["parameters"].empty? %>
+      <h4>Parameters</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% api["parameters"].each do |p| %>
+          <tr>
+            <% if p["scope"].nil? %>
+              <td><%= p["name"] %></td>
+            <% else %>
+              <td><%= p["scope"] %>[<%= p["name"] %>]</td>          
+            <% end %>
+            <td><%= p["description"] %></td>
+            <td><%= "required" if p["required"] %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    
+    <% api["requests"].each do |r| %>
+      <h4>Example <%= api["requests"].index(r) + 1 %></h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Header</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% r["request_headers"].each_pair do |k,v| %>
+          <tr>
+            <td><%= k %></td>
+            <td><%= v %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
+      <h5>Request Body</h5>
+      <pre><%= r["request_body"] %></pre>      
+      <h5>Curl</h5>
+      <pre><%= r["curl"] %></pre>
+      <h5>Response Status</h5>
+      <p><%= r["response_status"] %></p>
+      <h5>Response Body</h5>
+      <% if r["response_body"].strip.empty? %>
+        <p>Empty</p>
+      <% else %>
+        <pre><%= r["response_body"] %></pre>
+      <% end %>
+    <% end %>
+  </div>
+  <% end %>
+</div>

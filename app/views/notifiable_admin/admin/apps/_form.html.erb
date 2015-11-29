@@ -3,6 +3,9 @@
 <%= simple_form_for [:admin, @account, @app] do |f| %>
 
   <%= f.input :name %>
+  
+  <p>Access ID: <%= @app.access_id %></p>
+  <p>Secret Key: <%= @app.secret_key %></p>
 
   <h4>APNS</h4>
 
