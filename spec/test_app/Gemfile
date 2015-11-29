@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'quiet_assets', '~> 1.0.3'
 gem 'pg', '~> 0.18.2'
 gem 'iso', '~> 0.2.1'
+gem 'figaro', '~> 1.1'
 
 # UI
 gem 'rails-assets-bootstrap', '~> 3.3.2'
@@ -34,7 +35,7 @@ gem 'api-auth', '~> 1.1.0'
 # Push Notifications
 gem 'notifiable_admin', :path => "../.."
 gem 'notifiable-rails', '~> 0.22.1'
-gem 'notifiable-apns-grocer', '~> 0.11.0'
+gem 'notifiable-apns-grocer', "~> 0.12.1"
 gem 'notifiable-gcm-spacialdb', '~> 0.7.0'
 gem 'notifiable-mpns-nverinaud', '~> 0.6.0'
 
