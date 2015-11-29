@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
-ruby "2.1.5"
+ruby "2.1.7"
 
 # Core
 gem 'rails', '4.1.8'
@@ -33,7 +33,7 @@ gem 'api-auth', '~> 1.1.0'
 
 # Push Notifications
 gem 'notifiable_admin', :path => "../.."
-gem 'notifiable-rails', '~> 0.21.1'
+gem 'notifiable-rails', '~> 0.22.1'
 gem 'notifiable-apns-grocer', '~> 0.11.0'
 gem 'notifiable-gcm-spacialdb', '~> 0.7.0'
 gem 'notifiable-mpns-nverinaud', '~> 0.6.0'
