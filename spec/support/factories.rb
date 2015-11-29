@@ -15,6 +15,11 @@ FactoryGirl.define do
   factory :app, :class => Notifiable::App do
     sequence(:name) {|n| "My App #{n}" }
     account
+    
+    after(:create) do |app, evaluator|
+      app.apns_certificate = File.read(File.join(File.dirname(__FILE__), "..", "fixtures", "apns-development.pem"))
+      app.save
+    end
   end
   
   factory :user, :class => NotifiableAdmin::User do
