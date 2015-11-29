@@ -14,7 +14,7 @@ resource "Notification" do
     let!(:token) { create(:apns_token, :app => notifiable_app, :user_id => user.id)}
     let(:raw_post) { {:user => {:alias => user.alias}} }
     
-    example "Get device tokens for user", :document => :user_api do
+    example "List device tokens for user", :document => :user_api do
       do_request
       expect(status).to eq 200
     end
