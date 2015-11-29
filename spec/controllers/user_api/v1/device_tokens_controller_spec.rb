@@ -91,4 +91,24 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
     
   end
   
+  describe "index" do
+    let!(:user) { create(:user, :alias => "123456789") }
+        
+    context "Single device token" do
+      let!(:device_token) { create(:apns_token, :user_id => user.id, :app => n_app) }
+
+      it "recognises correct parameters" do
+        get :index, { :user => {:alias => "123456789"}, :format => :json }
+        expect(response).to have_http_status(:ok)
+        expect(assigns(:device_tokens).count).to eq 1
+      end
+      
+      it "returns 200 if the user is not found" do
+        get :index, { :user => {:alias => "987654321"}, :format => :json }
+        expect(response).to have_http_status(:ok)
+        expect(assigns(:device_tokens).count).to eq 0
+      end
+    end
+  end
+  
 end
