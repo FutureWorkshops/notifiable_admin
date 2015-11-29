@@ -40,6 +40,9 @@ RSpec.configure do |config|
   config.before(:all) {
     Warden.test_mode!
     Delayed::Worker.delay_jobs = false
+    
+    @grocer = Grocer.server(port: 2195)
+    @grocer.accept
   }
   
   config.before(:each) {
@@ -50,6 +53,11 @@ RSpec.configure do |config|
     Warden.test_reset!
     DatabaseCleaner.clean
     ApiAuthHelpers.reset_credentials
+    @grocer.notifications.clear
+  }
+  
+  config.after(:all) {
+    @grocer.close
   }
   
 end
