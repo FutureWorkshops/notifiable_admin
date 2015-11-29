@@ -14,7 +14,7 @@
     {
       "request_method": "POST",
       "request_path": "/notifications_api/v1/notifications",
-      "request_body": "app_id=15&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en",
+      "request_body": "app_id=6&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en",
       "request_headers": {
         "Content-Accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
@@ -28,7 +28,7 @@
       "response_headers": {
       },
       "response_content_type": "text/html",
-      "curl": "curl \"localhost:3000/notifications_api/v1/notifications\" -d 'app_id=15&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
+      "curl": "curl \"localhost:3000/notifications_api/v1/notifications\" -d 'app_id=6&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
     }
   ]
 }]

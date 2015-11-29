@@ -1,77 +1,4 @@
 [{
-  "resource": "Notification",
-  "http_method": "GET",
-  "route": "/user_api/v1/device_tokens.json",
-  "description": "Get device tokens for user",
-  "explanation": null,
-  "parameters": [
-
-  ],
-  "response_fields": [
-
-  ],
-  "requests": [
-    {
-      "request_method": "GET",
-      "request_path": "/user_api/v1/device_tokens.json",
-      "request_body": null,
-      "request_headers": {
-        "Content-Accept": "application/json"
-      },
-      "request_query_parameters": {
-        "user": {
-          "alias": "123456789"
-        }
-      },
-      "request_content_type": null,
-      "response_status": 200,
-      "response_status_text": "OK",
-      "response_body": "[{\"id\":1,\"name\":null,\"created_at\":\"2015-11-29T15:01:54.466Z\"}]",
-      "response_headers": {
-      },
-      "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"localhost:3000/user_api/v1/device_tokens.json\" -X GET \\\n\t-H \"Content-Accept: application/json\""
-    }
-  ]
-},{
-  "resource": "DeviceToken",
-  "http_method": "DELETE",
-  "route": "/user_api/v1/device_tokens/:device_token_id",
-  "description": "Delete a device",
-  "explanation": null,
-  "parameters": [
-    {
-      "required": true,
-      "scope": "user",
-      "name": "alias",
-      "description": "Username/Alias"
-    }
-  ],
-  "response_fields": [
-
-  ],
-  "requests": [
-    {
-      "request_method": "DELETE",
-      "request_path": "/user_api/v1/device_tokens/2",
-      "request_body": "user[alias]=broomba&document=user_api",
-      "request_headers": {
-        "Content-Accept": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "request_query_parameters": {
-      },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 200,
-      "response_status_text": "OK",
-      "response_body": " ",
-      "response_headers": {
-      },
-      "response_content_type": "text/html",
-      "curl": "curl \"localhost:3000/user_api/v1/device_tokens/2\" -d 'user[alias]=broomba&document=user_api' -X DELETE \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
-    }
-  ]
-},{
   "resource": "NotificationStatus",
   "http_method": "PUT",
   "route": "/user_api/v1/notification_statuses/opened",
@@ -102,7 +29,7 @@
     {
       "request_method": "PUT",
       "request_path": "/user_api/v1/notification_statuses/opened",
-      "request_body": "user[alias]=10004&localized_notification_id=1&device_token_id=3",
+      "request_body": "user[alias]=10005&localized_notification_id=5&device_token_id=8",
       "request_headers": {
         "Content-Accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
@@ -116,64 +43,42 @@
       "response_headers": {
       },
       "response_content_type": "text/html",
-      "curl": "curl \"localhost:3000/user_api/v1/notification_statuses/opened\" -d 'user[alias]=10004&localized_notification_id=1&device_token_id=3' -X PUT \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
+      "curl": "curl \"localhost:3000/user_api/v1/notification_statuses/opened\" -d 'user[alias]=10005&localized_notification_id=5&device_token_id=8' -X PUT \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
     }
   ]
 },{
-  "resource": "DeviceToken",
-  "http_method": "POST",
-  "route": "/user_api/v1/device_tokens",
-  "description": "Register an iOS device",
+  "resource": "Notification",
+  "http_method": "GET",
+  "route": "/user_api/v1/device_tokens.json",
+  "description": "List device tokens for user",
   "explanation": null,
   "parameters": [
-    {
-      "required": true,
-      "scope": "user",
-      "name": "alias",
-      "description": "Username/Alias"
-    },
-    {
-      "required": true,
-      "name": "provider",
-      "description": "Provider"
-    },
-    {
-      "required": true,
-      "name": "token",
-      "description": "Token"
-    },
-    {
-      "required": true,
-      "name": "app_id",
-      "description": "App ID"
-    },
-    {
-      "name": "locale",
-      "description": "Locale"
-    }
+
   ],
   "response_fields": [
 
   ],
   "requests": [
     {
-      "request_method": "POST",
-      "request_path": "/user_api/v1/device_tokens",
-      "request_body": "user[alias]=broomba&provider=apns&token=ABC123&app_id=17&locale=en&document=user_api",
+      "request_method": "GET",
+      "request_path": "/user_api/v1/device_tokens.json",
+      "request_body": null,
       "request_headers": {
-        "Content-Accept": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Accept": "application/json"
       },
       "request_query_parameters": {
+        "user": {
+          "alias": "123456789"
+        }
       },
-      "request_content_type": "application/x-www-form-urlencoded",
+      "request_content_type": null,
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\"id\":9}",
+      "response_body": "[{\"id\":9,\"name\":null,\"created_at\":\"2015-11-29T16:26:04.894Z\"}]",
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"localhost:3000/user_api/v1/device_tokens\" -d 'user[alias]=broomba&provider=apns&token=ABC123&app_id=17&locale=en&document=user_api' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
+      "curl": "curl \"localhost:3000/user_api/v1/device_tokens.json\" -X GET \\\n\t-H \"Content-Accept: application/json\""
     }
   ]
 }]
