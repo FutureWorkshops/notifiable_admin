@@ -1,72 +1,36 @@
 <h1>iOS Installation</h1>
 Please follow instructions <%= link_to "here", "https://github.com/FutureWorkshops/Notifiable-iOS" %>.
 
-<h1>API Documentation</h1>
+<h1>Client authorisation</h1>
+All API calls require client authorisation to prevent unsolicited access.
 
-<div class="col-md-8">
-  <% @json.each do |api| %>
-  <div class="row">
-    <h2><%= api["description"] %></h2>
-    <p class="lead"><%= api["http_method"]%> <%= api["route"] =%></p>
-    
-    <% unless api["parameters"].empty? %>
-      <h4>Parameters</h4>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% api["parameters"].each do |p| %>
-          <tr>
-            <% if p["scope"].nil? %>
-              <td><%= p["name"] %></td>
-            <% else %>
-              <td><%= p["scope"] %>[<%= p["name"] %>]</td>          
-            <% end %>
-            <td><%= p["description"] %></td>
-            <td><%= "required" if p["required"] %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% end %>
-    
-    <% api["requests"].each do |r| %>
-      <h4>Example <%= api["requests"].index(r) + 1 %></h4>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Header</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% r["request_headers"].each_pair do |k,v| %>
-          <tr>
-            <td><%= k %></td>
-            <td><%= v %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-      
-      <h5>Request Body</h5>
-      <pre><%= r["request_body"] %></pre>      
-      <h5>Curl</h5>
-      <pre><%= r["curl"] %></pre>
-      <h5>Response Status</h5>
-      <p><%= r["response_status"] %></p>
-      <h5>Response Body</h5>
-      <% if r["response_body"].strip.empty? %>
-        <p>Empty</p>
-      <% else %>
-        <pre><%= r["response_body"] %></pre>
-      <% end %>
-    <% end %>
-  </div>
-  <% end %>
-</div>
+<ol>
+<li>A canonical string is first created using your HTTP headers containing the content-type, content-MD5, request URI and the timestamp. If content-type or content-MD5 are not present, then a blank string is used in their place. If the timestamp isn't present, a valid HTTP date is automatically added to the request. The canonical string is computed as follows:
+
+canonical_string = 'content-type,content-MD5,request URI,timestamp'</li>
+
+<li>This string is then used to create the signature which is a Base64 encoded SHA1 HMAC, using the client's secret key.</li>
+
+<li>This signature is then added as the Authorization HTTP header in the form:
+
+Authorization = APIAuth 'client access id':'signature from step 2'</li>
+
+<li>On the server side, the SHA1 HMAC is computed in the same way using the request headers and the client's secret key, which is known to only the client and the server but can be looked up on the server using the client's access id that was attached in the header. The access id can be any integer or string that uniquely identifies the client. The signed request expires after 15 minutes in order to avoid replay attacks.</li>
+</ol>
+
+<h1>Notifications API Documentation</h1>
+The notifications API is used to send notifications from other internal systems, for example the billing system would send billing alerts.
+
+You can create a notifications API user per system. Each notifications API user has an access key and secret key.
+
+<%= render partial: "api", locals: {json: @notifications_api_json} %>
+
+<hr/>
+<h1>User API Documentation</h1>
+The user API is used by your Apps to register tokens and preferences. 
+
+The access ID and secret key for your app is avalible in the App Settings screen.
+
+<%= render partial: "api", locals: {json: @user_api_json} %>
+
+
