@@ -75,6 +75,10 @@ FactoryGirl.define do
     app    
     locale :en
     
+    # need to do this to pass lint
+    provider :apns
+    sequence(:token) {|n| "XXX#{n}" }
+    
     factory :apns_token do
       provider :apns
       sequence(:token) {|n| "ABCD#{n}" }
@@ -88,6 +92,7 @@ FactoryGirl.define do
   
   factory :notification_status, :class => Notifiable::NotificationStatus do
     localized_notification
+    device_token
     status 0
   end
 
