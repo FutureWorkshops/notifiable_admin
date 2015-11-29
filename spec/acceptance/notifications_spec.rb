@@ -65,8 +65,8 @@ resource "Notification" do
     let(:raw_post) {{:alias => user.alias, :app_id => notifiable_app.id, :notification => {:app_id => notifiable_app.id, :localized_notifications_attributes => [{:message => "Hello", :locale => :en}]}}}
     
     example_request "Notify One User", :document => :notifications_api do
-      status.should == 200    
-      Notifiable::NotificationStatus.count.should == 1  
+      expect(status).to eql 200    
+      expect(Notifiable::NotificationStatus.count).to eql 1  
     end
   end
   

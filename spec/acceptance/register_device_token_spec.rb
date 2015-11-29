@@ -14,15 +14,17 @@ resource "DeviceToken" do
     parameter :token, "Token", :required => true
     parameter :app_id, "App ID", :required => true
     parameter :locale, "Locale"
+    parameter :name, "The user's name for the device"
     
     let(:alias) { "broomba" }
     let(:provider) { 'apns' }
     let(:token) { "ABC123" }
     let(:app_id) { notifiable_app.id }
     let(:locale) { 'en' }
+    let(:locale) { "Matt's iPhone" }
     
     example_request "Register an iOS device", :document => :user_api do
-      status.should == 200
+      expect(status).to eql 200
     end
     
   end
