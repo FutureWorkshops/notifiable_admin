@@ -34,6 +34,7 @@ RSpec.configure do |config|
 
   config.before(:suite) {
     FactoryGirl.lint
+    DatabaseCleaner.clean_with(:truncation)
   }
   
   config.before(:all) {

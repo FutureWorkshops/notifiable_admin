@@ -1,0 +1,1 @@
+json.array! @device_tokens, :id, :name, :created_at

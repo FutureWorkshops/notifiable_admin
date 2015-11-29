@@ -268,6 +268,7 @@ CREATE TABLE notifiable_device_tokens (
     app_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    name character varying(255),
     custom_properties hstore
 );
 
@@ -728,6 +729,8 @@ INSERT INTO schema_migrations (version) VALUES ('20131210115650');
 INSERT INTO schema_migrations (version) VALUES ('20131210115651');
 
 INSERT INTO schema_migrations (version) VALUES ('20131210115652');
+
+INSERT INTO schema_migrations (version) VALUES ('20131210115653');
 
 INSERT INTO schema_migrations (version) VALUES ('20131227155314');
 

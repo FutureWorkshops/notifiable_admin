@@ -24,7 +24,7 @@ NotifiableAdmin::Engine.routes.draw do
 
   namespace :user_api do
     namespace :v1 do
-    	resources :device_tokens, :only => [:create, :update, :destroy]
+    	resources :device_tokens, :except => :show
     	put 'notification_statuses/opened', :to => "notification_statuses#opened"
     end
   end

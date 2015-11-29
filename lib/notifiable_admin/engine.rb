@@ -13,7 +13,14 @@ module NotifiableAdmin
       g.helper false
     end
     
-    # load decorators
+    # load notifiable_admin decorators
+    config.to_prepare do
+      Dir.glob(File.dirname(__FILE__) + "/../../app/decorators/**/*_decorator*.rb").each do |c|
+        require_dependency(c)
+      end
+    end    
+    
+    # load app decorators
     config.to_prepare do
       Dir.glob(Rails.root + "app/decorators/**/*_decorator*.rb").each do |c|
         require_dependency(c)

@@ -1,6 +1,6 @@
 class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::UserApi::V1::BaseController
   
-  before_filter :find_device_token!, :ensure_authorized!, :except => :create
+  before_filter :find_device_token!, :ensure_authorized!, :except => [:create, :index]
   
   def create
     @device_token = Notifiable::DeviceToken.find_or_initialize_by(:token => params[:token], :app_id => @app.id)
@@ -18,6 +18,10 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
     else
       render :json => { :errors => @device_token.errors.full_messages }, :status => :unprocessable_entity
     end
+  end
+  
+  def index
+    @device_tokens = current_notifiable_user.device_tokens
   end
   
   private
