@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description = "Push Notifications Administration Engine"
   s.licenses    = ["Apache 2.0"]
 
-  s.files = Dir["{app,config,db,lib}/**/*", "LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib,doc}/**/*", "LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
   s.required_ruby_version = '~> 2.1.7'
   
