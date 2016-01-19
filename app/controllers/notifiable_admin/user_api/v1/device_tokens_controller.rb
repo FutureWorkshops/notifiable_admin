@@ -1,6 +1,8 @@
 class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::UserApi::V1::BaseController
-  
+
+  before_filter :create_user, :only => :create, :unless => :current_notifiable_user?
   before_filter :find_device_token!, :ensure_authorized!, :except => [:create, :index]
+  before_filter :ensure_current_notifiable_user!, :only => :index
   
   def create
     @device_token = Notifiable::DeviceToken.find_or_initialize_by(:token => params[:token], :app_id => @app.id)
@@ -25,6 +27,10 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
   end
   
   private
+    def create_user
+      @current_api_v1_user = NotifiableAdmin::User.create(:alias => params[:user][:alias]) if params[:user] && params[:user][:alias]
+    end
+  
     def perform_update(params)
       if @device_token.update_attributes(params)
         render :json => @device_token.to_json(:only => [ :id ] ), :status => :ok
@@ -43,6 +49,10 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
       end
 
       device_token_params
+    end
+    
+    def ensure_current_notifiable_user!
+      head :status => :not_found unless current_notifiable_user
     end
   
     def ensure_authorized!

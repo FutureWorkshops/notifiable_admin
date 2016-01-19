@@ -9,11 +9,15 @@ class NotifiableAdmin::UserApi::V1::BaseController < NotifiableAdmin::ApiControl
   end
   
   def current_api_v1_user
-    @current_api_v1_user ||= NotifiableAdmin::User.find_or_create_by(:alias => params[:user][:alias]) if params[:user] && params[:user][:alias]
+    @current_api_v1_user ||= NotifiableAdmin::User.find_by_alias(params[:user][:alias]) if params[:user] && params[:user][:alias]
   end
   
   def current_notifiable_user
     current_api_v1_user
+  end
+  
+  def current_notifiable_user?
+    !current_notifiable_user.nil?
   end
   
   def current_ability

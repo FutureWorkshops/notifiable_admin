@@ -103,10 +103,14 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
         expect(assigns(:device_tokens).count).to eq 1
       end
       
-      it "returns 200 if the user is not found" do
+      it "not found if the user is not found" do
         get :index, { :user => {:alias => "987654321"}, :format => :json }
-        expect(response).to have_http_status(:ok)
-        expect(assigns(:device_tokens).count).to eq 0
+        expect(response).to have_http_status(:not_found)
+      end
+      
+      it "not found if the user is not specified" do
+        get :index, { :format => :json }
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
