@@ -39,6 +39,24 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
       it { expect(json['id']).to eq Notifiable::DeviceToken.first.id }    
     end
     
+    describe "new user for existing token" do
+      let!(:user) { create(:user, :alias => "matt@futureworkshops.com") }
+      let!(:device_token) { create(:apns_token, :token => "ABC12345678910", :app_id => n_app.id, :user_id => user.id ) }
+      
+      before(:each) { post :create, {:provider => 'apns', :token => 'ABC12345678910', :locale => 'en', :user => {:alias => "igor@futureworkshops.com"}} }
+
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(json['id']).to eq Notifiable::DeviceToken.first.id }
+      
+      it { expect(NotifiableAdmin::User.count).to eq 2 } 
+      it { expect(Notifiable::DeviceToken.count).to eq 1 }
+      it { expect(Notifiable::DeviceToken.first.provider).to eq "apns" }
+      it { expect(Notifiable::DeviceToken.first.token).to eq "ABC12345678910" }      
+      it { expect(Notifiable::DeviceToken.first.locale).to eq "en" }    
+      it { expect(Notifiable::DeviceToken.first.is_valid).to eq true } 
+      it { expect(Notifiable::DeviceToken.first.user.alias).to eq "igor@futureworkshops.com" } 
+    end
+    
     context "new token without user" do
       before(:each) { post :create, {:provider => 'apns', :token => 'ABC12345678910', :locale => "en"} }
       

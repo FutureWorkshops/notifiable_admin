@@ -7,6 +7,7 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
   def create
     @device_token = Notifiable::DeviceToken.find_or_initialize_by(:token => params[:token], :app_id => @app.id)
     @device_token.is_valid = true
+    @device_token.user_id = current_notifiable_user
     
     if @device_token.update_attributes(device_token_params)
       render :json => @device_token.to_json(:only => [ :id ] ), :status => :ok
