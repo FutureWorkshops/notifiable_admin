@@ -1,17 +1,27 @@
 class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::UserApi::V1::BaseController
 
-  before_filter :create_user, :only => :create, :unless => :current_notifiable_user?
+  before_filter :create_user, :only => [:create, :update], :unless => :current_notifiable_user?
   before_filter :find_device_token!, :ensure_authorized!, :except => [:create, :index]
   before_filter :ensure_current_notifiable_user!, :only => :index
   
   def create
     @device_token = Notifiable::DeviceToken.find_or_initialize_by(:token => params[:token], :app_id => @app.id)
     @device_token.is_valid = true
-    perform_update(device_token_params)
+    
+    if @device_token.update_attributes(device_token_params)
+      render :json => @device_token.to_json(:only => [ :id ] ), :status => :ok
+    else
+      render :json => { :errors => @device_token.errors.full_messages }, :status => :unprocessable_entity
+    end
   end
   
   def update
-    perform_update(device_token_params)
+    @device_token.user_id = current_notifiable_user
+    if @device_token.update_attributes(device_token_params)
+      render :json => @device_token.to_json(:only => [ :id ] ), :status => :ok
+    else
+      render :json => { :errors => @device_token.errors.full_messages }, :status => :unprocessable_entity
+    end
   end
 
   def destroy    
@@ -29,14 +39,6 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
   private
     def create_user
       @current_api_v1_user = NotifiableAdmin::User.create(:alias => params[:user][:alias]) if params[:user] && params[:user][:alias]
-    end
-  
-    def perform_update(params)
-      if @device_token.update_attributes(params)
-        render :json => @device_token.to_json(:only => [ :id ] ), :status => :ok
-      else
-        render :json => { :errors => @device_token.errors.full_messages }, :status => :unprocessable_entity
-      end
     end
   
     def device_token_params

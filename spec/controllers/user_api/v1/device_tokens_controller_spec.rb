@@ -74,6 +74,19 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
       it { expect(Notifiable::DeviceToken.first.token).to eq "DEF987654321" }      
     end
     
+    context "change user" do
+      let!(:user) { create(:user, :alias => "matt@futureworkshops.com") }
+      let(:device_token) { create(:apns_token, :token => "ABC12345678910", :app_id => n_app.id ) }
+      
+      before(:each) { put :update, {:id => device_token.id, :user => {:alias => "igor@futureworkshops.com"} } }
+      
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(NotifiableAdmin::User.count).to eq 2 }
+      it { expect(Notifiable::DeviceToken.count).to eq 1 }
+      it { expect(Notifiable::DeviceToken.first.token).to eq "ABC12345678910" }     
+      it { expect(Notifiable::DeviceToken.first.user.alias).to eq "igor@futureworkshops.com" }       
+    end
+    
     context "change locale" do
       let(:device_token) { create(:apns_token, :locale => "en", :app_id => n_app.id ) }
       
@@ -86,7 +99,7 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
     context "token does not exist" do      
       before(:each) { put :update, {:id => -1, :token => 'DEF987654321' } }
       
-      it { expect(response.status).to eq(404) }
+      it { expect(response).to have_http_status(:not_found) }
     end
     
   end
@@ -97,20 +110,20 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
     context "Single device token" do
       let!(:device_token) { create(:apns_token, :user_id => user.id, :app => n_app) }
 
-      it "recognises correct parameters" do
-        get :index, { :user => {:alias => "123456789"}, :format => :json }
-        expect(response).to have_http_status(:ok)
-        expect(assigns(:device_tokens).count).to eq 1
+      describe "recognises correct parameters" do
+        before(:each) { get :index, { :user => {:alias => "123456789"}, :format => :json } }
+        it { expect(response).to have_http_status(:ok) }
+        it { expect(assigns(:device_tokens).count).to eq 1 }
       end
       
-      it "not found if the user is not found" do
-        get :index, { :user => {:alias => "987654321"}, :format => :json }
-        expect(response).to have_http_status(:not_found)
+      describe "not found if the user is not found" do
+        before(:each) { get :index, { :user => {:alias => "987654321"}, :format => :json } }
+        it { expect(response).to have_http_status(:not_found) }
       end
       
-      it "not found if the user is not specified" do
-        get :index, { :format => :json }
-        expect(response).to have_http_status(:not_found)
+      describe "not found if the user is not specified" do
+        before(:each) { get :index, { :format => :json } }
+        it { expect(response).to have_http_status(:not_found) }
       end
     end
   end
