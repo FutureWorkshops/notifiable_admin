@@ -4,7 +4,8 @@ class NotifiableAdmin::AdminAbility
   def initialize(admin) 
     return unless admin
     
-    if admin.account_owner?      
+    if admin.account_owner?
+      can :read, NotifiableAdmin::Account, :id => admin.account_id    
       can :create, Notifiable::App      
       can :create, NotifiableAdmin::Admin    
       can :create, NotifiableAdmin::NotificationsApiUser
@@ -20,6 +21,7 @@ class NotifiableAdmin::AdminAbility
       can :read, Notifiable::DeviceToken, :app => {:account => {:id => admin.account_id}}
       can :read, NotifiableAdmin::User, :device_tokens => {:app => {:account => {:id => admin.account_id}}}
     else
+      can :read, NotifiableAdmin::Account, :id => admin.account_id    
       can :create, Notifiable::Notification
 
       can :read, Notifiable::App, :admins => {:id => admin.id}
