@@ -21,7 +21,7 @@ Notifiable::Notification.class_eval do
       
       device_tokens = self.app.device_tokens
       filters.each_pair do |key,value|
-        device_tokens = device_tokens.where("custom_properties -> '#{key}' = '#{value}'")
+        device_tokens = device_tokens.where_custom_property(key, value)
       end
       
       send_batch(device_tokens)
