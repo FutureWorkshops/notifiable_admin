@@ -14,7 +14,7 @@ feature 'Add admin' do
       visit notifiable_admin.new_admin_account_admin_path(account)
       fill_in 'admin_email', :with => 'admin2@example.com'
       fill_in 'admin_password', :with => 'london123'
-      select 'Account Owner', :from => "admin_role"
+      select 'Account owner', :from => "admin_role"
       click_button 'Create'
     
       expect(NotifiableAdmin::Admin.where(:role => "account_owner").count).to eq 2
@@ -24,7 +24,7 @@ feature 'Add admin' do
       visit notifiable_admin.new_admin_account_admin_path(account)
       fill_in 'admin_email', :with => 'admin2@example.com'
       fill_in 'admin_password', :with => 'london123'
-      select 'Content Admin', :from => "admin_role"
+      select 'Content admin', :from => "admin_role"
       check "admin_app_ids_#{notifiable_app.id}"
       click_button 'Create'
     

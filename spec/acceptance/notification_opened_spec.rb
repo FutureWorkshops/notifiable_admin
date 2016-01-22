@@ -7,13 +7,14 @@ resource "NotificationStatus" do
   
   let(:account) { create(:account) }
   let(:user) { create(:user) }
-  let(:notifiable_app) { create(:app, :account => account) }  
-  let(:device_token) { create(:apns_token, :app => notifiable_app, :user_id => user.id, :locale => :en)}
-  let(:notification) { create(:notification, :app => notifiable_app)}
+  let(:n_app) { FactoryGirl.create(:app) }
+  let(:api_user) { FactoryGirl.create(:user_api_user, :app => n_app) }
+  let(:device_token) { create(:apns_token, :app => n_app, :user_id => user.id, :locale => :en)}
+  let(:notification) { create(:notification, :app => n_app)}
   let(:localized_notification) { create(:localized_notification)}
   let(:status) {  }
   
-  before(:each){ ApiAuthHelpers.set_credentials(notifiable_app.access_id, notifiable_app.secret_key) }
+  before(:each) { ApiAuthHelpers.set_credentials(api_user.access_id, api_user.secret_key) } 
   
   put "/user_api/v1/notification_statuses/opened" do
     parameter :alias, "App Username", :required => true, :scope => :user
