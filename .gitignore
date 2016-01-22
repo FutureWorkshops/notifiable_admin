@@ -44,3 +44,4 @@ build/*
 xcuserdata
 profile
 *.moved-aside
+.byebug_history
