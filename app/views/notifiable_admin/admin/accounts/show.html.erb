@@ -1,0 +1,31 @@
+<% if @account.apps.empty? %>
+  <div class="text-center">
+    <h3>Add an App to get started.</h3>
+    <br/>
+    <%= new_app_button %>
+  </div>
+<% else %>
+
+<h1>Apps <%= new_app_button %></h1>
+
+<div class="col-md-12">
+  <div class="row">
+    <table class="table">
+      <tr>
+        <th>App</th>
+        <th>Notifications</th>
+        <th>Registrations</th>
+      </tr>
+      <% @account.apps.each do |app| %>
+        <tr class="app-row">
+          <td><%= link_to app.name, admin_account_app_path(@account, app) %></td>
+          <td><%= app.notifications.count %></td>
+          <td><%= app.device_tokens.count %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<% end %>
+

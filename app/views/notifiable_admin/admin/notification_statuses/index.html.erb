@@ -5,15 +5,15 @@
     <table class="table">
       <tr>
         <th>User</th>
+        <th>Device</th>
         <th>Provider</th>
-        <th>Device Token</th>
         <th>Status</th>
       </tr>
       <% @notification_statuses.each do |ns| %>
         <tr class="notification-status-row">
-          <td><%= ns.device_token.user %></td>
+          <td><%= link_to(ns.device_token.user.alias, admin_account_app_user_path(@account, @app, ns.device_token.user)) if ns.device_token.user %></td>   
+          <td><%= ns.device_token.name %></td>
           <td><%= ns.device_token.provider %></td>
-          <td><%= truncate(ns.device_token.token, :length => 50) %></td>
           <td><%= ns.status %></td>
         </tr>
       <% end %>

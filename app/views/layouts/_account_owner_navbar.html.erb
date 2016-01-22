@@ -5,40 +5,57 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="/"><%= @account.name %></a>
+    <a class="navbar-brand" href="<%= admin_account_path(@current_admin.account) %>"><%= @account.name %></a>
   </div>
   <div class="navbar-collapse collapse">        
     <ul class="nav navbar-nav">
-      <% if @apps.count > 1 %>
+      <% if @app && !@app.new_record? %>
+        <%= app_navbar_item(@app) %>        
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= @app && !@app.new_record? ? @app.name : "Apps" %> <b class="caret"></b></a>
-          <ul class="dropdown-menu">          
-            <% @apps.each do |app| %>
-              <%= app_navbar_item(app) unless app == @app %>        
-            <% end %>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= "Notifications" %> <b class="caret"></b></a>
+          <ul class="dropdown-menu">  
+            <%= app_send_public_notification_navbar_item %>
+            <li role="separator" class="divider"></li>
+            <%= app_jobs_navbar_item  %>
+            <%= notifications_navbar_item %>
           </ul>
         </li>
-      <% else %>
-        <%= app_navbar_item(@app) if @app && !@app.new_record? %>
+          
+        <%= app_users_navbar_item  %>
+        <%= edit_app_navbar_item %>        
+        
       <% end %>
-      <%= edit_app_navbar_item if @app && !@app.new_record? %>
-      <%= notifications_navbar_item %>
-      <%= app_users_navbar_item  %>
-      <%= app_device_tokens_navbar_item  %>
-      <%= app_jobs_navbar_item  %>
+
     </ul>
     
     <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">        
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
-        <ul class="dropdown-menu">
-          <%= new_app_navbar_item %>
-          <%= admins_navbar_item %>
+      
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= "Developer" %> <b class="caret"></b></a>
+        <ul class="dropdown-menu">  
           <%= api_keys_navbar_item  %>
           <%= api_documentation_navbar_item  %>
-          <%= logout_navbar_item %>
         </ul>
-      </li>     
+      </li>
+      
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Apps <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          
+          <%= new_app_navbar_item %>
+          
+          <% if @apps.count > 0 %>
+            <li role="separator" class="divider"></li>
+                    
+            <% @apps.each do |app| %>
+              <%= app_navbar_item(app) %>        
+            <% end %>
+          <% end %>
+        </ul>
+      </li>
+
+      <%= admins_navbar_item %>
+      <%= logout_navbar_item %>    
     </ul>
   </div>
 </div>
