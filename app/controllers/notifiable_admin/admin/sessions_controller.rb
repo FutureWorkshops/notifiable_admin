@@ -5,7 +5,7 @@ class NotifiableAdmin::Admin::SessionsController < ::Devise::SessionsController
     if admin.super_admin?
       super_admin_accounts_path
     else
-      notifiable_admin.admin_account_app_path(admin.account, admin.default_app)      
+      notifiable_admin.admin_account_path(admin.account)      
     end
   end
 
