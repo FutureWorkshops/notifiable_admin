@@ -6,7 +6,9 @@ describe NotifiableAdmin::NotificationsApi::V1::NotificationsController do
   let(:n_app) { create(:app, :account => account, :name => "The Open") }
   let(:api_user) { create(:notifications_api_user, :account => account, :apps => [n_app]) }
     
-  before(:each) { controller.stub(:authenticate_from_headers!){ controller.instance_variable_set(:@current_user, api_user) } }
+  before(:each) do    
+    allow(controller).to receive(:authenticate_from_headers!) { controller.instance_variable_set(:@current_user, api_user) }
+  end
   
   describe "#create" do
 

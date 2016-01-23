@@ -25,14 +25,14 @@ feature 'Send private notifications' do
     ApiAuthHelpers.set_credentials(nil, nil)
     
     post notifiable_admin.notifications_api_v1_notifications_path, nil, request_headers
-    response.status.should == 403
+    expect(response.status).to eq 403
   end
   
   it "fails when invalid credentials are provided" do
     ApiAuthHelpers.set_credentials(notifications_api_user.access_id, "INVALID SECRET KEY")
      
     post notifiable_admin.notifications_api_v1_notifications_path, {:token => "ABC1234"}, request_headers
-    response.status.should == 403
+    expect(response.status).to eq 403
   end
   
   it "fails when not authorised" do 
@@ -40,8 +40,8 @@ feature 'Send private notifications' do
       
     post notifiable_admin.notifications_api_v1_notifications_path, {:app_id => notifiable_app2.id, :user => {:alias => user.alias}, :notification => {:message => "Test"}}, request_headers
 
-    response.status.should == 401
-    Notifiable::NotificationStatus.count.should == 0
+    expect(response.status).to eq 401
+    expect(Notifiable::NotificationStatus.count).to eq 0
   end
   
 
