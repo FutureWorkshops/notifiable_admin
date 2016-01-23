@@ -1,5 +1,4 @@
 Notifiable::App.class_eval do
-  include ApiAuthenticatable
   
   serialize :configuration
   

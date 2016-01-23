@@ -1,10 +1,11 @@
+default: &default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+
 test:
-  adapter: postgresql
-  host: localhost
-  port: 5432
-  database: notifiable-test
-  username: matt
-  password: 
+  <<: *default
+  database: db/test.sqlite3
   
 development:
   adapter: postgresql

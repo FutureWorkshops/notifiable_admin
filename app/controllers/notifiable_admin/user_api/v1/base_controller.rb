@@ -31,8 +31,11 @@ class NotifiableAdmin::UserApi::V1::BaseController < NotifiableAdmin::ApiControl
   private
     def authenticate_from_headers!
       access_id = ApiAuth.access_id(request)
-      @app = Notifiable::App.find_by_access_id(access_id)
-      head :forbidden unless @app && ApiAuth.authentic?(request, @app.secret_key)    
+      api_user = NotifiableAdmin::UserApiUser.find_by_access_id(access_id)      
+      if api_user && ApiAuth.authentic?(request, api_user.secret_key)
+        @app = api_user.app
+      else
+        head :forbidden
+      end      
     end
-  
 end

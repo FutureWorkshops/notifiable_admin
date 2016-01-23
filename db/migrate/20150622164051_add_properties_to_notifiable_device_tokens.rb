@@ -5,6 +5,10 @@ class AddPropertiesToNotifiableDeviceTokens < ActiveRecord::Migration
   end
   
   def change
-    add_column :notifiable_device_tokens, :custom_properties, :hstore if is_connection_postgres?
+    if is_connection_postgres?
+      add_column :notifiable_device_tokens, :custom_properties, :hstore
+    else
+      add_column :notifiable_device_tokens, :custom_properties, :string   
+    end
   end
 end

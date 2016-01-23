@@ -97,11 +97,11 @@ describe NotifiableAdmin::Admin::NotificationsController do
         let(:user1) { create(:user) }
         let(:user2) { create(:user) }
       
-        let!(:token1) { create(:apns_token, :app => the_open_app, :user_id => user1.id, :device_name => "MBS iPhone")}
-        let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :device_name => "MBS iPad")}
+        let!(:token1) { create(:apns_token, :app => the_open_app, :user_id => user1.id, :onsite => "0")}
+        let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :onsite => "1")}
       
         before(:each) do          
-          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}, :device_token_filters => {:device_name => "MBS iPhone"}}}
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}, :device_token_filters => {:onsite => "0"}}}
         end
       
         it { expect(Notifiable::Notification.count).to eq 1 }

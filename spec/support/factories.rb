@@ -64,6 +64,11 @@ FactoryGirl.define do
     apps {[FactoryGirl.create(:app)]}
   end
   
+  factory :user_api_user, :class => NotifiableAdmin::UserApiUser do
+    sequence(:service_name) {|n| "service-#{n}"}
+    app
+  end
+  
   factory :notification, :class => Notifiable::Notification do
     app
   end

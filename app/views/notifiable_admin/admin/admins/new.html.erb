@@ -6,7 +6,7 @@
     
   <%= f.input :email %>
   <%= f.input :password %>
-  <%= f.input :role, collection: {"Content Admin" => "content_admin", "Account Owner" => "account_owner"}, include_blank: false %>
+  <%= f.input :role, collection: {"Account owner" => "account_owner", "Content admin" => "content_admin"}, include_blank: false %>
     
   <%= f.association :apps, as: :check_boxes, collection: @apps %>
 

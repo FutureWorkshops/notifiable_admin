@@ -4,9 +4,10 @@ require 'rspec_api_documentation/dsl'
 resource "DeviceToken" do
   header "Content-Accept", "application/json"
   
-  let(:notifiable_app) { FactoryGirl.create(:app) }
+  let(:n_app) { FactoryGirl.create(:app) }
+  let(:api_user) { FactoryGirl.create(:user_api_user, :app => n_app) }
   
-  before(:each){ ApiAuthHelpers.set_credentials(notifiable_app.access_id, notifiable_app.secret_key) }
+  before(:each){ ApiAuthHelpers.set_credentials(api_user.access_id, api_user.secret_key) }
   
   post "/user_api/v1/device_tokens" do
     parameter :alias, "Username/Alias", :required => true, :scope => :user
@@ -19,7 +20,7 @@ resource "DeviceToken" do
     let(:alias) { "broomba" }
     let(:provider) { 'apns' }
     let(:token) { "ABC123" }
-    let(:app_id) { notifiable_app.id }
+    let(:app_id) { n_app.id }
     let(:locale) { 'en' }
     let(:locale) { "Matt's iPhone" }
     

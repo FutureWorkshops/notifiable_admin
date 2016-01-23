@@ -15,10 +15,8 @@ class NotifiableAdmin::Admin::NotificationsApiUsersController < NotifiableAdmin:
     end
   end
   
-  def destroy
-    @notifications_api_user = NotifiableAdmin::NotificationsApiUser.find(params[:id])
-    
-    if @notifications_api_user.delete
+  def destroy    
+    if @notifications_api_user.destroy
       redirect_to admin_account_notifications_api_users_path(@account), notice: "Notifications API Key deleted."      
     else
       redirect_to admin_account_notifications_api_users_path(@account), alert: @notifications_api_user.errors.full_messages.to_sentence

@@ -8,10 +8,11 @@ resource "DeviceToken" do
   
   let(:account) { create(:account) }
   let(:user) { create(:user, :alias => "broomba") }
-  let(:notifiable_app) { create(:app, :account => account) }  
-  let(:device_token) { create(:apns_token, :app => notifiable_app, :user_id => user.id)}
+  let(:n_app) { FactoryGirl.create(:app) }
+  let(:api_user) { FactoryGirl.create(:user_api_user, :app => n_app) }
+  let(:device_token) { create(:apns_token, :app => n_app, :user_id => user.id)}
   
-  before(:each){ ApiAuthHelpers.set_credentials(notifiable_app.access_id, notifiable_app.secret_key) }
+  before(:each) { ApiAuthHelpers.set_credentials(api_user.access_id, api_user.secret_key) } 
   
   delete "/user_api/v1/device_tokens/:device_token_id" do
     parameter :alias, "Username/Alias", :required => true, :scope => :user

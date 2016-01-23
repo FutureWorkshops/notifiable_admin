@@ -12,7 +12,7 @@
       <% @admins.each do |admin| %>
         <tr class="admin-row">
           <td><%= admin.email %></td>
-          <td><%= admin.role %></td>
+          <td><%= admin.role.humanize %></td>
           <td><%= admin.account_owner? ? "All" : admin.apps.pluck(:name).join(", ") %></td>
           <td><%= delete_button(admin_account_admin_path(@account, admin)) unless admin == current_admin %>
         </tr>

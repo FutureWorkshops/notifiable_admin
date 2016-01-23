@@ -2,13 +2,13 @@
   <div class="row">
     <table class="table">
       <tr>
-        <th>ID</th>
+        <th>Device</th>
         <% Notifiable.api_device_token_params.each do |param| %><th><%= param.to_s.titleize %></th><% end %>
         <th>Active</th>
       </tr>
       <% @device_tokens.each do |dt| %>
         <tr class="device_token-row">
-          <td><%= dt.id %></td>
+          <td><%= dt.name %></td>
           <% Notifiable.api_device_token_params.each do |param| %>
             <td><%= truncate(eval("dt.#{param}").to_s, :length => 20) %></td>
           <% end %>

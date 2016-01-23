@@ -11,7 +11,7 @@
         <th>Action</th>
       </tr>
       <% @notifications_api_users.each do |u| %>
-        <tr>
+        <tr class="notifications-api-user-row">
           <td><%= u.service_name %></td>
           <td><%= u.apps.pluck(:name).join(", ") %></td>
           <td><%= u.access_id %></td>

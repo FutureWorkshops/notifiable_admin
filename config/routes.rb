@@ -7,9 +7,9 @@ NotifiableAdmin::Engine.routes.draw do
   end
   
   namespace :admin do
-    resources :accounts, :only => [] do
+    resources :accounts, :only => :show do
       resources :apps, :except => [:index, :destroy] do
-        resources :users, :only => [:index, :show]
+        resources :users, :only => :show
         resources :device_tokens, :only => :index
         resources :jobs, :only => [:index, :destroy]
         resources :notifications, :only => [:new, :create, :index] do
@@ -17,6 +17,7 @@ NotifiableAdmin::Engine.routes.draw do
         end
       end
       resources :notifications_api_users, :except => :view
+      resources :user_api_users, :except => :view
       resources :admins, :except => :view
       resources :api_docs, :only => :index
     end
