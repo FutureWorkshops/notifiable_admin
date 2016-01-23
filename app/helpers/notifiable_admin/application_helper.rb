@@ -72,8 +72,12 @@ module NotifiableAdmin::ApplicationHelper
     navbar_item("Settings", edit_admin_account_app_path(@account, @app), params[:controller] == "admin/apps" && params[:action] == "edit")
   end
 
-  def api_keys_navbar_item
+  def notification_api_keys_navbar_item
     navbar_item("Notification API Keys", admin_account_notifications_api_users_path(@account), params[:controller] == "admin/notifications_api_users" && params[:action] == "index")   
+  end
+  
+  def user_api_keys_navbar_item
+    navbar_item("User API Keys", admin_account_user_api_users_path(@account), params[:controller] == "admin/user_api_users" && params[:action] == "index")   
   end
   
   def api_documentation_navbar_item

@@ -1,0 +1,15 @@
+<div class="row"><div class="col-md-4">
+  
+<h3>New User API Key</h3>
+
+<%= simple_form_for @user_api_user, :url => admin_account_user_api_users_path(@account) do |f| %>
+    
+  <%= f.input :service_name %>
+  
+  <%= f.input :app_id, :collection => @account.apps %>
+
+  <%= f.submit "Create", :class => "btn btn-default" %>    
+
+<% end %>
+
+</div></div>

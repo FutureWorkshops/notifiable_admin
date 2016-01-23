@@ -17,6 +17,7 @@ NotifiableAdmin::Engine.routes.draw do
         end
       end
       resources :notifications_api_users, :except => :view
+      resources :user_api_users, :except => :view
       resources :admins, :except => :view
       resources :api_docs, :only => :index
     end
