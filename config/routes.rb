@@ -16,7 +16,12 @@ NotifiableAdmin::Engine.routes.draw do
           resources :notification_statuses, :only => :index
         end
       end
-      resources :notifications_api_users, :except => :view
+      resources :notifications_api_users, :except => :view do
+        member do
+          put 'enable'
+          put 'disable'
+        end
+      end
       resources :user_api_users, :except => :view
       resources :admins, :except => :view
       resources :api_docs, :only => :index
