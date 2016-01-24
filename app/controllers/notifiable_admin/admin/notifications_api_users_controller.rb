@@ -8,25 +8,35 @@ class NotifiableAdmin::Admin::NotificationsApiUsersController < NotifiableAdmin:
 
   def create
     @notifications_api_user.account = @account
-    if @notifications_api_user.save
-      redirect_to admin_account_notifications_api_users_path(@account), notice: "Notifications API Key created."
-    else
-      redirect_to new_admin_account_notifications_api_user_path(@account), alert: @notifications_api_user.errors.full_messages.to_sentence
-    end
+    @notifications_api_user.save ? notice_redirect_to_index("Key created") : alert_redirect_to_new
   end
   
   def destroy    
-    if @notifications_api_user.destroy
-      redirect_to admin_account_notifications_api_users_path(@account), notice: "Notifications API Key deleted."      
-    else
-      redirect_to admin_account_notifications_api_users_path(@account), alert: @notifications_api_user.errors.full_messages.to_sentence
-    end
+    @notifications_api_user.destroy ? notice_redirect_to_index("Key deleted") : alert_redirect_to_index
+  end
+  
+  def enable
+    @notifications_api_user.enable ? notice_redirect_to_index("Key enabled") : alert_redirect_to_index
+  end
+  
+  def disable
+    @notifications_api_user.disable ? notice_redirect_to_index("Key disabled") : alert_redirect_to_index    
   end
   
   private
+    def notice_redirect_to_index(notice)
+      redirect_to admin_account_notifications_api_users_path(@account), notice: notice
+    end
+    
+    def alert_redirect_to_index
+      redirect_to admin_account_notifications_api_users_path(@account), alert: @notifications_api_user.errors.full_messages.to_sentence
+    end
+    
+    def alert_redirect_to_new
+      redirect_to new_admin_account_notifications_api_user_path(@account, @notifications_api_user), alert: @notifications_api_user.errors.full_messages.to_sentence
+    end
+  
     def create_params
       params.require(:notifications_api_user).permit(:service_name, :app_ids => [])
     end
-  
-
 end

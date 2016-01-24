@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require zeroclipboard
 //= require moment
 //= require eonasdan-bootstrap-datetimepicker
 //= require_tree .

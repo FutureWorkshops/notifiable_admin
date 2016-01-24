@@ -11,6 +11,7 @@
     <% @apps.each do |app| %>
       <%= check_box_tag "notifications_api_user[app_ids][]", app.id, @notifications_api_user.apps.include?(app), {:id => "notifications_api_user_app_ids_#{app.id}"} %>
       <%= app.name %>
+      <br/>
     <% end %>
   </div>
 

@@ -8,6 +8,8 @@ class CreateNotificationsApiUsers < ActiveRecord::Migration
       t.string :access_id
       t.string :secret_key
       
+      t.boolean :enabled, :default => true
+      
       t.references :account
 
       t.timestamps

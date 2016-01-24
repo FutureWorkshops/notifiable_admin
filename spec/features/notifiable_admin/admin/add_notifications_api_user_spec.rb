@@ -20,7 +20,7 @@ feature 'Add a notifications api user' do
     expect(NotifiableAdmin::NotificationsApiUser.first.account).to eq account
   end
   
-  scenario "Fail to add a user without Apps" do 
+  scenario "except without apps" do 
     visit notifiable_admin.new_admin_account_notifications_api_user_path(account_owner.account)
     fill_in 'notifications_api_user_service_name', :with => 'CRM'
     click_button 'Create'

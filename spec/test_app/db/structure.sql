@@ -13,7 +13,7 @@ CREATE UNIQUE INDEX "index_admins_on_email" ON "admins" ("email");
 CREATE UNIQUE INDEX "index_admins_on_reset_password_token" ON "admins" ("reset_password_token");
 CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "alias" varchar(255) NOT NULL);
 CREATE UNIQUE INDEX "index_users_on_alias" ON "users" ("alias");
-CREATE TABLE "notifications_api_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "service_name" varchar(255) DEFAULT '' NOT NULL, "access_id" varchar(255), "secret_key" varchar(255), "account_id" integer, "created_at" datetime, "updated_at" datetime);
+CREATE TABLE "notifications_api_users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "service_name" varchar(255) DEFAULT '' NOT NULL, "access_id" varchar(255), "secret_key" varchar(255), "enabled" boolean DEFAULT 't', "account_id" integer, "created_at" datetime, "updated_at" datetime);
 CREATE UNIQUE INDEX "index_notifications_api_users_on_access_id" ON "notifications_api_users" ("access_id");
 CREATE UNIQUE INDEX "index_notifications_api_users_on_secret_key" ON "notifications_api_users" ("secret_key");
 CREATE TABLE "delayed_jobs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "priority" integer DEFAULT 0 NOT NULL, "attempts" integer DEFAULT 0 NOT NULL, "handler" text NOT NULL, "last_error" text, "run_at" datetime, "locked_at" datetime, "failed_at" datetime, "locked_by" varchar(255), "queue" varchar(255), "notification_id" integer, "app_id" integer, "created_at" datetime, "updated_at" datetime);
