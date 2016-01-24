@@ -77,7 +77,7 @@ module NotifiableAdmin::ApplicationHelper
   end
   
   def admins_navbar_item
-    navbar_item("Account", admin_account_admins_path(@account), params[:controller] == "admin/admin" && params[:action] == "index")
+    navbar_item("Users", admin_account_admins_path(@account), params[:controller] == "admin/admin" && params[:action] == "index")
   end
   
   def new_app_navbar_item
