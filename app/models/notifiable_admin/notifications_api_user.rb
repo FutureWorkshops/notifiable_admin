@@ -11,4 +11,14 @@ class NotifiableAdmin::NotificationsApiUser < ActiveRecord::Base
   
   validates :apps, :length => { :minimum => 1, :message => "must include one at least one App"}
   
+  def enable
+    self.enabled = true
+    self.save
+  end
+  
+  def disable
+    self.enabled = false
+    self.save
+  end
+  
 end
