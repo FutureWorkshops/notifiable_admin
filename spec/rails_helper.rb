@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'grocer'
 
 RSpec.configure do |config|
   
