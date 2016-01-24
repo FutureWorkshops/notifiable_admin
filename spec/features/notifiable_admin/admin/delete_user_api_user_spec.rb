@@ -9,7 +9,7 @@ feature 'Delete User API User' do
     
   before(:each) { login_as account_owner, :scope => :admin }    
   
-  scenario "single" do     
+  scenario do     
     visit notifiable_admin.admin_account_user_api_users_path(account)
     click_on 'Delete'
     
