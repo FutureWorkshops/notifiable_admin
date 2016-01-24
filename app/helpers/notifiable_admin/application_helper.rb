@@ -40,7 +40,7 @@ module NotifiableAdmin::ApplicationHelper
   end
   
   def user_notification_button(app, user)
-    button new_admin_account_app_user_notification_path(@account, app, user), "Send Private Notification", "envelope"
+    button new_admin_account_app_user_notification_path(@account, app, user), "Send Notification", "envelope"
   end
   
   def notification_statuses_button(notification)
