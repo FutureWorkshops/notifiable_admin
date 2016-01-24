@@ -10,6 +10,10 @@ module NotifiableAdmin::ApplicationHelper
     link_to raw("<span class='glyphicon glyphicon-#{icon}'></span> #{text}"), path, :class => "btn btn-default btn-#{size}", :method => method, :data => data
   end
   
+  def copy_button(id, title, text)
+    button_tag title, data: { clipboard_text: text }, id: id, class: "btn btn-default btn-sm"
+  end
+  
   def add_button(path)
     button path, "Add", "plus", :get, nil    
   end
@@ -18,7 +22,19 @@ module NotifiableAdmin::ApplicationHelper
     button path, text, "trash", :delete, :sm, { confirm: "Are you sure?" }
   end
   
-  # Buttons    
+  def danger_label(text, options = {})
+    content_tag("span", text, {:class => "label label-danger"}.merge!(options))    
+  end
+  
+  # Buttons
+  def enable_notifications_api_user_button(user)
+    button enable_admin_account_notifications_api_user_path(user.account, user), "Enable", "ok-circle", :put
+  end
+  
+  def disable_notifications_api_user_button(user)
+    button disable_admin_account_notifications_api_user_path(user.account, user), "Disable", "ban-circle", :put
+  end
+      
   def public_notification_button(app)
     button new_admin_account_app_notification_path(@account, app), "Send Public Notification", "bullhorn"
   end
