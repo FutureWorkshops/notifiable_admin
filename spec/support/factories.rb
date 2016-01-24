@@ -18,6 +18,7 @@ FactoryGirl.define do
     
     after(:create) do |app, evaluator|
       app.apns_certificate = File.read(File.join(File.dirname(__FILE__), "..", "fixtures", "apns-development.pem"))
+      app.apns_sandbox = "0"
       app.save
     end
   end

@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'grocer'
 
 RSpec.configure do |config|
   
@@ -41,6 +40,9 @@ RSpec.configure do |config|
   config.before(:all) {
     Warden.test_mode!
     Delayed::Worker.delay_jobs = false
+    
+    ENV["apns_gateway_host"] = "localhost"
+    ENV["apns_gateway_port"] = "2195"
     
     @grocer = Grocer.server(port: 2195)
     @grocer.accept

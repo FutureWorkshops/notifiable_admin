@@ -4,9 +4,15 @@ require 'bundler/setup'
 require 'combustion'
 require 'notifiable_admin'
 
+# needed for testing
+require 'notifiable/apns/grocer'
+
 # require delayed job before initializing combustion because otherwise DelayedJob's railties get confused
 require 'delayed_job'
 require 'delayed/performable_mailer'
+
+require 'cancan/model_adapters/active_record_adapter'
+require 'cancan/model_adapters/active_record_4_adapter'
 
 Combustion.initialize! :all
 

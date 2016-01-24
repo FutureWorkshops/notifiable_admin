@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
 
   # Authentication
   s.add_dependency 'devise', '~> 3.4.1'
-  s.add_dependency 'cancancan', '~> 1.9.2'
+  s.add_dependency 'cancancan', '~> 1.13.1'
   s.add_dependency 'api-auth', '~> 1.1.0'
 
   # Push Notifications
@@ -65,5 +65,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "json_spec", "~> 1.1.1"
   s.add_development_dependency "brakeman", "~> 3.0.1"
   s.add_development_dependency "launchy", "~> 2.4.2"
+  s.add_development_dependency "byebug"
 
 end
