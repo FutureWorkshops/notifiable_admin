@@ -14,7 +14,7 @@ feature 'Delete User API User' do
     click_on 'Delete'
     
     expect(NotifiableAdmin::UserApiUser.count).to eq 0
-    expect(page).to have_content "User API Key deleted"
+    expect(page).to have_content "Key deleted"
     expect(current_path).to eql notifiable_admin.admin_account_user_api_users_path(account)
   end
   
