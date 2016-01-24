@@ -1,3 +1,9 @@
+<script>
+  $(document).ready(function() {
+    var clip = new ZeroClipboard($("#clip_button"))
+  });
+</script>
+
 <h1>Notification API Keys <%= add_button new_admin_account_notifications_api_user_path(@account) %></h1>
 
 <div class="col-md-12">
@@ -8,15 +14,22 @@
         <th>Apps</th>
         <th>Access ID</th>
         <th>Secret Key</th>
-        <th>Action</th>
+        <th>Actions</th>
       </tr>
       <% @notifications_api_users.each do |u| %>
         <tr class="notifications-api-user-row">
-          <td><%= u.service_name %></td>
+          <td><%= u.service_name %> <%= danger_label("Disabled") unless u.enabled? %></td>
           <td><%= u.apps.pluck(:name).join(", ") %></td>
           <td><%= u.access_id %></td>
-          <td><%= u.secret_key %></td>
-          <td><%= delete_button admin_account_notifications_api_user_path(@account, u) %>
+          <td><%= copy_button "clip_button", "Copy to Clipboard", u.secret_key %></td>
+          <td>
+            <% if u.enabled? %>
+              <%= disable_notifications_api_user_button(u) %>                        
+            <% else %>
+              <%= enable_notifications_api_user_button(u) %>                        
+              <%= delete_button admin_account_notifications_api_user_path(@account, u) %>
+            <% end %>            
+          </td>
         </tr>
       <% end %>
     </table>
