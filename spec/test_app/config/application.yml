@@ -1,8 +1,0 @@
-apns_gateway_host: "localhost"
-apns_gateway_port: "2195"
-apns_feedback_host: "localhost"
-apns_feedback_port: "2196"
-apns_sandbox_gateway_host: "localhost"
-apns_sandbox_gateway_port: "2195"
-apns_sandbox_feedback_host: "localhost"
-apns_sandbox_feedback_port: "2196"
