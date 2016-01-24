@@ -4,9 +4,12 @@ describe NotifiableAdmin::NotificationsApi::V1::NotificationsController do
 
   let(:account) { create(:account) }  
   let(:n_app) { create(:app, :account => account, :name => "The Open") }
-  let(:api_user) { create(:notifications_api_user, :account => account, :apps => [n_app]) }
+  let(:api_user) { create(:notifications_api_user, :account => account, :apps => [n_app], :enabled => true) }
     
-  before(:each) { ApiAuth.sign!(request, api_user.access_id, api_user.secret_key) }
+  before(:each) do
+    ApiAuth.sign!(request, api_user.access_id, api_user.secret_key)
+    allow(ApiAuth).to receive(:authentic?).and_return(true)    
+  end
   
   describe "#create" do
 
