@@ -1,3 +1,9 @@
+<script>
+  $(document).ready(function() {
+    var clip = new ZeroClipboard($("#clip_button"))
+  });
+</script>
+
 <h1>User API Keys <%= add_button new_admin_account_user_api_user_path(@account) %></h1>
 
 <div class="col-md-12">
@@ -15,7 +21,7 @@
           <td><%= u.service_name %></td>
           <td><%= u.app.name %></td>
           <td><%= u.access_id %></td>
-          <td><%= u.secret_key %></td>
+          <td><%= copy_button "clip_button", "Copy to Clipboard", u.secret_key %></td>
           <td><%= delete_button admin_account_user_api_user_path(@account, u) %>
         </tr>
       <% end %>
