@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '~> 2.1.7'
   
   # Core
-  s.add_dependency 'rails', '>= 4.1.0'
+  s.add_dependency 'rails', '>= 4.1.14'
   s.add_dependency 'sass-rails', '>= 4.0.3'
   s.add_dependency 'uglifier', '>= 1.3.0'
   s.add_dependency 'coffee-rails', '>= 4.0.0'
@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'jbuilder', '~> 2.0'
   s.add_dependency 'quiet_assets', '~> 1.0.3'
   s.add_dependency 'iso', '~> 0.2.1'
-  s.add_dependency 'figaro', '~> 1.1'
 
   # UI
   s.add_dependency 'rails-assets-bootstrap', '~> 3.3.2'
@@ -36,20 +35,22 @@ Gem::Specification.new do |s|
 
   # Authentication
   s.add_dependency 'devise', '~> 3.4.1'
-  s.add_dependency 'cancancan', '~> 1.9.2'
+  s.add_dependency 'cancancan', '~> 1.13.1'
   s.add_dependency 'api-auth', '~> 1.1.0'
 
   # Push Notifications
   s.add_dependency 'notifiable-rails', '>= 0.22.1'
 
   # Background processing
-  s.add_dependency 'delayed_job_active_record', '~> 4.0.0'
+  s.add_dependency 'delayed_job_active_record', '~> 4.0.3'
 
   # Pagination
   s.add_dependency "kaminari", "~> 0.15.1"
   s.add_dependency "bootstrap-kaminari-views", "~> 0.0.3"
   
   # Testing dependencies
+  s.add_development_dependency 'combustion', '~> 0.5.4'
+  s.add_development_dependency 'notifiable-apns-grocer', '~> 0.12.1'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails', '~> 3.0.2'
   s.add_development_dependency 'rspec-html-matchers', '~> 0.6.1'
@@ -61,7 +62,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov', '~> 0.8.2'
   s.add_development_dependency "simplecov-rcov", "~> 0.2.3"
   s.add_development_dependency "json_spec", "~> 1.1.1"
-  s.add_development_dependency "brakeman", "~> 3.0.1"
   s.add_development_dependency "launchy", "~> 2.4.2"
+  s.add_development_dependency "byebug"
 
 end

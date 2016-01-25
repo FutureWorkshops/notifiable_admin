@@ -45,3 +45,4 @@ xcuserdata
 profile
 *.moved-aside
 .byebug_history
+Gemfile.lock
