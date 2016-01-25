@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'uglifier', '>= 1.3.0'
   s.add_dependency 'coffee-rails', '>= 4.0.0'
   s.add_dependency 'jquery-rails'
-  s.add_dependency 'turbolinks'
   s.add_dependency 'jbuilder', '~> 2.0'
   s.add_dependency 'quiet_assets', '~> 1.0.3'
   s.add_dependency 'iso', '~> 0.2.1'
