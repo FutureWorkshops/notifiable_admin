@@ -11,23 +11,33 @@ require 'notifiable/apns/grocer'
 require 'delayed_job'
 require 'delayed/performable_mailer'
 
+# cancan needs to be loaded here otherwise it doesnt attach properly
+# todo can this be removed/moved?
 require 'cancan/model_adapters/active_record_adapter'
 require 'cancan/model_adapters/active_record_4_adapter'
 
 Combustion.initialize! :all
 
+ENV["RAILS_ENV"] ||= 'test'
+
+# Now require all development dependencies
+require 'rspec/rails'
+require 'rspec/mocks'
+require 'rspec-html-matchers'
+require 'sqlite3'
+require 'rspec_api_documentation'
+require 'rspec_api_documentation/dsl'
+require 'capybara'
+require 'capybara/rspec'
+require 'factory_girl_rails'
+require 'database_cleaner'
+require 'json_spec'
+
+# Configure/start simplecov
 require 'simplecov'
 require 'simplecov-rcov'
 SimpleCov.formatter = SimpleCov::Formatter::RcovFormatter
 SimpleCov.start 'rails'
-
-ENV["RAILS_ENV"] ||= 'test'
-
-require 'rspec/rails'
-require 'rspec_api_documentation/dsl'
-require 'factory_girl_rails'
-require 'capybara/rspec'
-require 'database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

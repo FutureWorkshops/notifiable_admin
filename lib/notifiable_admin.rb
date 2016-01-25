@@ -1,7 +1,22 @@
-gems_to_ignore = ['notifiable-rails', 'notifiable-apns-grocer', 'rspec-mocks', 'figaro']
-Gem.loaded_specs['notifiable_admin'].dependencies.each do |d|
- require d.name unless gems_to_ignore.include?(d.name)
-end
+require 'rails'
+require 'sass-rails'
+require 'uglifier'
+require 'coffee-rails'
+require 'jquery-rails'
+require 'turbolinks'
+require 'jbuilder'
+require 'quiet_assets'
+require 'iso'
+require 'rails-assets-bootstrap'
+require 'rails-assets-eonasdan-bootstrap-datetimepicker'
+require 'simple_form'
+require 'zeroclipboard-rails'
+require 'devise'
+require 'cancancan'
+require 'api-auth'
+require 'delayed_job_active_record'
+require 'kaminari'
+require 'bootstrap-kaminari-views'
 
 require 'notifiable_admin/engine'
 require 'notifiable'
