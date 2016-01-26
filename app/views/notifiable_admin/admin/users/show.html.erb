@@ -1,4 +1,4 @@
-<h1><%= @user.alias %> <%= user_notification_button(@account, @user) %></h1>
+<h1><%= @user.alias %> <%= user_notification_button(@app, @user) %></h1>
 
 <% @device_tokens = @user.device_tokens %>
 <%= render "notifiable_admin/admin/device_tokens/table" %>
