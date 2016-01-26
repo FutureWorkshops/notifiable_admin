@@ -7,8 +7,9 @@ class NotifiableAdmin::Admin::AdminsController < NotifiableAdmin::Admin::BaseCon
   end
 
   def create
+    @admin.account = @account
     if @admin.save
-      redirect_to admin_account_admins_path(@account), notice: "Account user created."
+      redirect_to admin_account_admins_path(@account), notice: "User created."
     else
       redirect_to new_admin_account_admin_path(@account, @admin), alert: @admin.errors.full_messages.to_sentence
     end
@@ -16,7 +17,7 @@ class NotifiableAdmin::Admin::AdminsController < NotifiableAdmin::Admin::BaseCon
   
   def destroy    
     if @admin.delete
-      redirect_to admin_account_admins_path(@account), notice: "Account user deleted."      
+      redirect_to admin_account_admins_path(@account), notice: "User deleted."      
     else
       redirect_to admin_account_admins_path(@account), alert: @admin.errors.full_messages.to_sentence
     end
