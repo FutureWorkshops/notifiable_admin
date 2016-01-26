@@ -4,6 +4,7 @@
   <div class="row">
     <table class="table">
       <tr>
+        <th>Date</th>
         <th>User</th>
         <th>Device</th>
         <th>Provider</th>
@@ -11,6 +12,7 @@
       </tr>
       <% @notification_statuses.each do |ns| %>
         <tr class="notification-status-row">
+          <td><%= ns.created_at %></td>
           <td><%= link_to(ns.device_token.user.alias, admin_account_app_user_path(@account, @app, ns.device_token.user)) if ns.device_token.user %></td>   
           <td><%= ns.device_token.name %></td>
           <td><%= ns.device_token.provider %></td>
