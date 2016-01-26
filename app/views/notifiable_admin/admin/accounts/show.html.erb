@@ -16,7 +16,7 @@
         <th>Notifications</th>
         <th>Registrations</th>
       </tr>
-      <% @account.apps.each do |app| %>
+      <% @apps.each do |app| %>
         <tr class="app-row">
           <td><%= link_to app.name, admin_account_app_path(@account, app) %></td>
           <td><%= app.notifications.count %></td>
