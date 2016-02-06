@@ -23,6 +23,14 @@ class NotifiableAdmin::Admin::NotificationsApiUsersController < NotifiableAdmin:
     @notifications_api_user.disable ? notice_redirect_to_index("Key disabled") : alert_redirect_to_index    
   end
   
+  def require_authorization
+    @notifications_api_user.require_authorization ? notice_redirect_to_index("Authorization enabled") : alert_redirect_to_index
+  end
+  
+  def dont_require_authorization
+    @notifications_api_user.dont_require_authorization ? notice_redirect_to_index("Authorization disabled") : alert_redirect_to_index    
+  end
+  
   private
     def notice_redirect_to_index(notice)
       redirect_to admin_account_notifications_api_users_path(@account), notice: notice
