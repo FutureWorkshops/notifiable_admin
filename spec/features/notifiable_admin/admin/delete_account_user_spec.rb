@@ -15,7 +15,7 @@ feature 'delete account user' do
     click_on 'Delete'
     
     expect(NotifiableAdmin::Admin.count).to eq 1
-    expect(page).to have_content "Account user deleted"
+    expect(page).to have_content "User deleted"
     expect(current_path).to eq notifiable_admin.admin_account_admins_path(account_owner.account)
   end
   
