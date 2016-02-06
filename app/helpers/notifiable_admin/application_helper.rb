@@ -28,11 +28,19 @@ module NotifiableAdmin::ApplicationHelper
   
   # Buttons
   def enable_notifications_api_user_button(user)
-    button enable_admin_account_notifications_api_user_path(user.account, user), "Enable", "ok-circle", :put
+    button enable_admin_account_notifications_api_user_path(user.account, user), "Enable Key", "ok-circle", :put
   end
   
   def disable_notifications_api_user_button(user)
-    button disable_admin_account_notifications_api_user_path(user.account, user), "Disable", "ban-circle", :put
+    button disable_admin_account_notifications_api_user_path(user.account, user), "Disable Key", "ban-circle", :put
+  end
+  
+  def require_authorization_notifications_api_user_authorization_button(user)
+    button require_authorization_admin_account_notifications_api_user_path(user.account, user), "Enable Auth", "ok-circle", :put    
+  end
+  
+  def dont_require_authorization_notifications_api_user_authorization_button(user)
+    button dont_require_authorization_admin_account_notifications_api_user_path(user.account, user), "Disable Auth", "ban-circle", :put      
   end
       
   def public_notification_button(app)

@@ -10,7 +10,7 @@ feature 'Disable Notifications API User' do
   
   scenario do     
     visit notifiable_admin.admin_account_notifications_api_users_path(account)
-    click_on 'Disable'
+    click_on 'Disable Key'
     
     expect(page).to have_content "Key disabled"
     expect(current_path).to eql notifiable_admin.admin_account_notifications_api_users_path(account)

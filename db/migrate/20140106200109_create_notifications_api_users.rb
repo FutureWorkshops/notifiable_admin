@@ -8,6 +8,7 @@ class CreateNotificationsApiUsers < ActiveRecord::Migration
       t.string :access_id
       t.string :secret_key
       
+      t.boolean :authorization_required, :default => true
       t.boolean :enabled, :default => true
       
       t.references :account

@@ -20,6 +20,8 @@ NotifiableAdmin::Engine.routes.draw do
         member do
           put 'enable'
           put 'disable'
+          put 'require_authorization'
+          put 'dont_require_authorization'
         end
       end
       resources :user_api_users, :except => :view

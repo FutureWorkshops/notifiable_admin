@@ -32,6 +32,7 @@ require 'capybara/rspec'
 require 'factory_girl_rails'
 require 'database_cleaner'
 require 'json_spec'
+require 'byebug'
 
 # Configure/start simplecov
 require 'simplecov'

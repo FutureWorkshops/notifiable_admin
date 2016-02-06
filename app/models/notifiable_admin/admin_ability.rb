@@ -13,7 +13,7 @@ class NotifiableAdmin::AdminAbility
       can :create, Notifiable::Notification
 
       can [:read, :update, :destroy], NotifiableAdmin::Admin, :account => {:id => admin.account_id}
-      can [:read, :update, :destroy, :enable, :disable], NotifiableAdmin::NotificationsApiUser, :account => {:id => admin.account_id}
+      can [:read, :update, :destroy, :enable, :disable, :require_authorization, :dont_require_authorization], NotifiableAdmin::NotificationsApiUser, :account => {:id => admin.account_id}
       can [:read, :update, :destroy], NotifiableAdmin::UserApiUser, :app => {:account => {:id => admin.account_id}}
       can [:read, :update, :destroy], Notifiable::App, :account => {:id => admin.account_id}
       can [:read, :destroy], Delayed::Job

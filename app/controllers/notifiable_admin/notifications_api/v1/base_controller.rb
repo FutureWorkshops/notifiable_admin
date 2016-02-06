@@ -19,12 +19,18 @@ class NotifiableAdmin::NotificationsApi::V1::BaseController < NotifiableAdmin::A
   private
     def authenticate_from_headers!
       access_id = ApiAuth.access_id(request)
-      user = NotifiableAdmin::NotificationsApiUser.find_by_access_id(access_id)
-      if user && user.enabled? && ApiAuth.authentic?(request, user.secret_key)
+      user = NotifiableAdmin::NotificationsApiUser.find_by_access_id(access_id)      
+      user ||= unauthorized_user
+      
+      if user && user.enabled? && (!user.authorization_required || ApiAuth.authentic?(request, user.secret_key))
         @current_user = user
       else
         head :forbidden
       end      
+    end
+    
+    def unauthorized_user
+      NotifiableAdmin::NotificationsApiUser.find_by_access_id_and_authorization_required(request.headers['Authorization'], false)
     end
   
 end
