@@ -23,6 +23,8 @@
           <td><%= u.access_id %></td>
           <td><%= copy_button "clip_button", "Copy to Clipboard", u.secret_key %></td>
           <td>
+            <%= u.authorization_required ? dont_require_authorization_notifications_api_user_authorization_button(u) : require_authorization_notifications_api_user_authorization_button(u) %>
+            
             <% if u.enabled? %>
               <%= disable_notifications_api_user_button(u) %>                        
             <% else %>
