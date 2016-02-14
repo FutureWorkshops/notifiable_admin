@@ -20,7 +20,7 @@ class NotifiableAdmin::Admin::AppsController < NotifiableAdmin::Admin::BaseContr
   end
   
   def show
-    @days = 10
+    @days = 60
   end
   
   private 
