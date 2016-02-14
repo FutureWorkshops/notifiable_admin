@@ -12,6 +12,12 @@
     
   <%= f.input :gcm_api_key, :label => "GCM API Key" %>
   
+  <%= f.input :sms_account_sid, :label => "SMS Twilio Account SID" %>
+  
+  <%= f.input :sms_auth_token, :label => "SMS Twilio Auth Token" %>
+  
+  <%= f.input :sms_sms_originator, :label => "SMS Originator" %>
+  
   <%= f.submit :class => "btn btn-default" %>    
 
 <% end %>

@@ -10,7 +10,7 @@ Notifiable::App.class_eval do
   
   def configuration
     unless read_attribute(:configuration)
-      write_attribute(:configuration, {:apns => {:passphrase => nil, :certificate => nil}, :gcm => {:api_key => nil}, :sms => {:account_sid => "AC2f5750caec1776c8670b5824f9f655a8", :auth_token => "dc7e050ff216ea36523bb181a9d926fc", :sms_originator => "+441554260032"}})
+      write_attribute(:configuration, {:apns => {:passphrase => nil, :certificate => nil}, :gcm => {:api_key => nil}, :sms => {:account_sid => nil, :auth_token => nil, :sms_originator => nil}})
       self.apns_sandbox = "1"
     end
     read_attribute(:configuration)
@@ -56,5 +56,29 @@ Notifiable::App.class_eval do
   
   def gcm_api_key
     self.configuration[:gcm][:api_key]
+  end
+  
+  def sms_account_sid=(sms_account_sid)
+    self.configuration[:sms][:account_sid] = sms_account_sid
+  end
+  
+  def sms_account_sid
+    self.configuration[:sms][:account_sid]
+  end
+  
+  def sms_auth_token=(sms_auth_token)
+    self.configuration[:sms][:auth_token] = sms_auth_token
+  end
+  
+  def sms_auth_token
+    self.configuration[:sms][:auth_token]
+  end
+  
+  def sms_sms_originator=(sms_originator)
+    self.configuration[:sms][:sms_originator] = sms_originator
+  end
+  
+  def sms_sms_originator
+    self.configuration[:sms][:sms_originator]
   end
 end
