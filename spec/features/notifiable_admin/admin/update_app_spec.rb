@@ -13,7 +13,7 @@ feature 'update app' do
 
     visit notifiable_admin.edit_admin_account_app_path(account, account.apps.first)
     fill_in 'app_apns_certificate', :with => 'abc123'
-    click_button 'Update'
+    click_button 'Save'
     
     expect(page).to have_content("App was updated")
     expect(Notifiable::App.first.configuration[:apns][:certificate]).to eq 'abc123'

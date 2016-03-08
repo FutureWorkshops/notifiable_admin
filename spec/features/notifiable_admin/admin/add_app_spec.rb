@@ -9,7 +9,7 @@ feature 'add app' do
     visit notifiable_admin.new_admin_account_app_path(account_owner.account) 
     fill_in 'app_apns_certificate', :with => 'abc123'
     fill_in 'app_gcm_api_key', :with => 'zxy456'    
-    click_button 'Create'
+    click_button 'Save'
     
     expect(page).to have_content("App was created")
     expect(Notifiable::App.count).to eq 2
