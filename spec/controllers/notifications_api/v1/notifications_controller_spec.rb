@@ -3,7 +3,7 @@ require 'rails_helper'
 describe NotifiableAdmin::NotificationsApi::V1::NotificationsController do
 
   let(:account) { create(:account) } 
-  let(:n_app) { create(:app, :account => account, :name => "The Open") }
+  let(:n_app) { create(:app, :account => account, :name => "The Open", :custom_device_properties => [:onsite]) }
   
   context 'authorization required' do
     let(:api_user) { create(:notifications_api_user, :account => account, :apps => [n_app], :enabled => true, :authorization_required => true) }    
@@ -44,8 +44,8 @@ describe NotifiableAdmin::NotificationsApi::V1::NotificationsController do
       end
     
       context "filtered" do
-        let!(:token1) { create(:apns_token, :app => n_app, :locale => :en, :onsite => "1")}
-        let!(:token2) { create(:apns_token, :app => n_app, :locale => :en, :onsite => "0")}
+        let!(:token1) { create(:apns_token, :app => n_app, :locale => :en, :custom_properties => {:onsite => "1"})}
+        let!(:token2) { create(:apns_token, :app => n_app, :locale => :en, :custom_properties => {:onsite => "0"})}
       
         before(:each) do 
           post :create, {

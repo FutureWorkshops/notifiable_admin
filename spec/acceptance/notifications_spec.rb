@@ -5,7 +5,7 @@ resource "Notification" do
   header "Content-Accept", "application/json"
 
   let(:account) { create(:account) }
-  let(:notifiable_app) { create(:app, :account => account) }  
+  let(:notifiable_app) { create(:app, :account => account, :custom_device_properties => [:onsite]) }  
   let(:notifications_api_user) { create(:notifications_api_user, :apps => [notifiable_app], :account => account) }
   
   before(:each) do
@@ -38,8 +38,8 @@ resource "Notification" do
   end
   
   post "/notifications_api/v1/notifications" do    
-    let!(:token1) { create(:apns_token, :app => notifiable_app, :locale => :en, :onsite => "1")}
-    let!(:token2) { create(:apns_token, :app => notifiable_app, :locale => :en, :onsite => "0")}
+    let!(:token1) { create(:apns_token, :app => notifiable_app, :locale => :en, :custom_properties => {:onsite => "1"})}
+    let!(:token2) { create(:apns_token, :app => notifiable_app, :locale => :en, :custom_properties => {:onsite => "0"})}
     
     let(:raw_post) {{
       :device_token_filters => {:onsite => "1"},

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe NotifiableAdmin::Admin::NotificationsController do
 
   let(:account) { create(:account) }  
-  let(:the_open_app) { create(:app, :account => account, :name => "The Open") }
+  let(:the_open_app) { create(:app, :account => account, :name => "The Open", :custom_device_properties => [:onsite]) }
   let(:the_rules_app) { create(:app, :account => account, :name => "The Rules of Golf") }
   
   describe "#new" do
@@ -93,12 +93,12 @@ describe NotifiableAdmin::Admin::NotificationsController do
         
       end
       
-      describe "filtered notification" do
+      describe "single filter" do
         let(:user1) { create(:user) }
         let(:user2) { create(:user) }
       
-        let!(:token1) { create(:apns_token, :app => the_open_app, :user_id => user1.id, :onsite => "0")}
-        let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :onsite => "1")}
+        let!(:token1) { create(:apns_token, :app => the_open_app, :user_id => user1.id, :custom_properties => {:onsite => "0"})}
+        let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :custom_properties => {:onsite => "1"})}
       
         before(:each) do          
           post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}, :device_token_filters => {:onsite => "0"}}}
@@ -111,15 +111,15 @@ describe NotifiableAdmin::Admin::NotificationsController do
         it { expect(Notifiable::NotificationStatus.first.localized_notification).to eq Notifiable::LocalizedNotification.first }
       end
       
-      describe "empty filters" do
+      describe "no filter" do
         let(:user1) { create(:user) }
         let(:user2) { create(:user) }
       
-        let!(:token1) { create(:apns_token, :app => the_open_app, :user_id => user1.id, :onsite => true)}
-        let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :onsite => false)}
+        let!(:token1) { create(:apns_token, :app => the_open_app, :user_id => user1.id, :custom_properties => {:onsite => "0"})}
+        let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :custom_properties => {:onsite => "1"})}
       
         before(:each) do          
-          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}, :device_token_filters => {:onsite => ""}}}
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}}}
         end
       
         it { expect(Notifiable::NotificationStatus.count).to eq 2 }
