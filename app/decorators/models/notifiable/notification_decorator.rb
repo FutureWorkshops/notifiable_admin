@@ -20,7 +20,13 @@ Notifiable::Notification.class_eval do
     def send_filtered(filters)
       device_tokens = self.app.device_tokens
       filters.each_pair do |key,value|
-        device_tokens = device_tokens.where_custom_property(key, value)
+        if(value.kind_of?(Array))
+          value.each do |v|
+            device_tokens = device_tokens.where_custom_property_like(key, v)
+          end
+        else
+          device_tokens = device_tokens.where_custom_property(key, value)          
+        end
       end
       
       send_batch(device_tokens)
