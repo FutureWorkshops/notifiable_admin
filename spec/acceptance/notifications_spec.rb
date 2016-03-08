@@ -54,6 +54,23 @@ resource "Notification" do
     end
   end
   
+  post "/notifications_api/v1/notifications" do    
+    let!(:token1) { create(:apns_token, :app => notifiable_app, :locale => :en, :custom_properties => {:onsite => ["0", "1"]})}
+    let!(:token2) { create(:apns_token, :app => notifiable_app, :locale => :en, :custom_properties => {:onsite => ["0", "2"]})}
+    
+    let(:raw_post) {{
+      :device_token_filters => {:onsite => ["1"]},
+      :app_id => notifiable_app.id, 
+      :notification => {:localized_notifications_attributes => [{:message => "Hello", :locale => :en}]}
+    }}
+    
+    example_request "Notify devices onsite", :document => :notifications_api do
+      expect(status).to eq 200
+      expect(Notifiable::Notification.count).to eq 1
+      expect(Notifiable::NotificationStatus.count).to eq 1
+    end
+  end
+  
   post "/notifications_api/v1/notifications" do
     parameter :message, "Message", :required => true, :scope => :notification
     parameter :app_id, "App ID", :required => true

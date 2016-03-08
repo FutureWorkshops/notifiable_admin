@@ -125,6 +125,20 @@ describe NotifiableAdmin::Admin::NotificationsController do
         it { expect(Notifiable::NotificationStatus.count).to eq 2 }
       end
       
+      describe "contains filter" do
+        let(:user1) { create(:user) }
+        let(:user2) { create(:user) }
+      
+        let!(:token1) { create(:apns_token, :app => the_open_app, :user_id => user1.id, :custom_properties => {:onsite => ["0", "1"]})}
+        let!(:token2) { create(:apns_token, :app => the_open_app, :user_id => user2.id, :custom_properties => {:onsite => ["2"]})}
+      
+        before(:each) do          
+          post :create, {:account_id => account.id, :app_id => the_open_app.id, :notification => {:localized_notifications_attributes => {"0" => {:message => "Hello", :locale => :en}}, :device_token_filters => {:onsite => ["0"]}}}
+        end
+      
+        it { expect(Notifiable::NotificationStatus.count).to eq 1 }
+      end
+      
     end
         
   end 
