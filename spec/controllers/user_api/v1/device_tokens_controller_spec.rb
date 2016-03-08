@@ -3,7 +3,7 @@ require 'rails_helper'
 describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
 
   let(:account) { create(:account) }  
-  let(:n_app) { create(:app, :account => account, :name => "The Open") }
+  let(:n_app) { create(:app, :account => account, :name => "The Open", :custom_device_properties => [:onsite]) }
   
   before(:each) { controller.stub(:authenticate_from_headers!){ controller.instance_variable_set(:@app, n_app) } }
   
@@ -77,7 +77,7 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
       it { expect(Notifiable::DeviceToken.first.locale).to eq "en" }    
       it { expect(Notifiable::DeviceToken.first.is_valid).to eq true } 
       it { expect(Notifiable::DeviceToken.first.name).to eq "MBS iPhone" } 
-      it { expect(Notifiable::DeviceToken.first.onsite).to eq "1" } 
+      it { expect(Notifiable::DeviceToken.first.custom_properties[:onsite]).to eq "1" } 
       it { expect(json['id']).to eq Notifiable::DeviceToken.first.id }    
     end
   end

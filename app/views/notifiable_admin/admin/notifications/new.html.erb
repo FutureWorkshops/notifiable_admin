@@ -37,8 +37,8 @@
   
   <h4>Filters</h4>
   <%= f.simple_fields_for :device_token_filters do |n| %>
-    <% NotifiableAdmin.custom_device_token_properties.each_pair do |k, v| %>
-      <%= n.input k, :as => v %>
+    <% @app.custom_device_properties.each do |p| %>
+      <%= n.input p, :as => :select %>
     <% end %> 
   <% end %>
   <hr/>

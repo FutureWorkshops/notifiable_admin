@@ -43,7 +43,8 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
     end
   
     def device_token_params
-      device_token_params = params.permit(Notifiable.api_device_token_params)
+      device_token_params = params.permit([:token, :provider, :locale, :name])
+      device_token_params[:custom_properties] = params.permit(@app.custom_device_properties)
       
       if current_notifiable_user
         device_token_params[:user_id] = current_notifiable_user.id 

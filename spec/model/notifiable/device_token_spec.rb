@@ -11,7 +11,7 @@ RSpec.describe Notifiable::DeviceToken, :type => :model do
     end
     
     context "filter" do
-      subject! { create(:apns_token, :onsite => "1") }
+      subject! { create(:apns_token, :custom_properties => {:onsite => "1"}) }
             
       it { expect(Notifiable::DeviceToken.where_custom_property('onsite', '1').count).to eq 1 }
     end
