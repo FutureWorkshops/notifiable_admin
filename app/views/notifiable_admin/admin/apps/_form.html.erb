@@ -2,7 +2,9 @@
 
 <%= simple_form_for [:admin, @account, @app] do |f| %>
 
-  <%= f.input :name %>
+  <%= f.input :name, :hint => "The name of the App" %>
+
+  <%= f.input :custom_device_properties_s, :label => "Custom Properties", :placeholder => "tags,latitude,longitude", :hint => "A comma separated list of custom properties for a device" %>
 
   <%= f.input :apns_certificate, :as => :text, :label => "APNS Certificate", :hint => "openssl pkcs12  -in exported_certificate.p12  -nodes -clcerts | pbcopy" %>
   
@@ -12,13 +14,13 @@
     
   <%= f.input :gcm_api_key, :label => "GCM API Key" %>
   
-  <%= f.input :sms_account_sid, :label => "SMS Twilio Account SID" %>
+  <%= f.input :sms_account_sid, :label => "Twilio SMS Account SID" %>
   
-  <%= f.input :sms_auth_token, :label => "SMS Twilio Auth Token" %>
+  <%= f.input :sms_auth_token, :label => "Twilio SMS Auth Token" %>
   
-  <%= f.input :sms_sms_originator, :label => "SMS Originator" %>
+  <%= f.input :sms_sms_originator, :label => "Twilio SMS Originator" %>
   
-  <%= f.submit :class => "btn btn-default" %>    
+  <%= f.submit "Save", :class => "btn btn-default" %>    
 
 <% end %>
 

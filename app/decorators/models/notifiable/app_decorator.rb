@@ -23,6 +23,14 @@ Notifiable::App.class_eval do
   def custom_device_properties
     self.configuration[:custom_device_properties] || []
   end
+  
+  def custom_device_properties_s=(custom_device_properties_s)
+    self.custom_device_properties = custom_device_properties_s.gsub(/\s+/, "").split(",").collect{|i| i.to_sym }
+  end
+  
+  def custom_device_properties_s
+    self.custom_device_properties.join(",")
+  end
 
   def apns_passphrase=(apns_passphrase)
     self.configuration[:apns][:passphrase] = apns_passphrase
