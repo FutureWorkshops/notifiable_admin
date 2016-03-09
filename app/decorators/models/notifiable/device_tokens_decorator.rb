@@ -5,7 +5,7 @@ Notifiable::DeviceToken.class_eval do
   end
   
   if Notifiable::DeviceToken.is_adapter_postgres?
-    store :custom_properties
+    store :custom_properties, coder: HstoreCoder
     scope :where_custom_property, ->(name, value) { where("custom_properties -> '#{name}' = '#{value}'") }
     scope :where_custom_property_like, -> (name, value) { where("custom_properties -> '#{name}' LIKE '%#{value}%'")}
   else    
@@ -17,4 +17,16 @@ Notifiable::DeviceToken.class_eval do
     scope :where_custom_property_like, ->(key, value) { where(id: all.select{|d| d.custom_properties[key.to_sym].include?(value) }.map(&:id)) }    
 
   end  
+end
+
+class HstoreCoder
+  class << self
+    def load(hash)
+      hash
+    end
+
+    def dump(value)
+      value.to_hash
+    end
+  end
 end
