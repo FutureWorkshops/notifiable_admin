@@ -43,13 +43,34 @@ describe NotifiableAdmin::NotificationsApi::V1::NotificationsController do
         it { expect(response.status).to eq 403 }
       end
     
-      context "filtered" do
+      context "single filter" do
         let!(:token1) { create(:apns_token, :app => n_app, :locale => :en, :custom_properties => {:onsite => "1"})}
         let!(:token2) { create(:apns_token, :app => n_app, :locale => :en, :custom_properties => {:onsite => "0"})}
       
         before(:each) do 
           post :create, {
             :device_token_filters => {:onsite => "1"},
+            :app_id => n_app.id, 
+            :notification => {
+              :localized_notifications_attributes => [
+                {:message => "Hello", :locale => :en}
+              ]
+            } 
+          }        
+        end
+
+        it { expect(response.status).to eq 200 }
+        it { expect(Notifiable::Notification.count).to eq 1 }
+        it { expect(Notifiable::Notification.first.sent_count).to eq 1 }
+      end
+      
+      context "include filter" do
+        let!(:token1) { create(:apns_token, :app => n_app, :locale => :en, :custom_properties => {:onsite => "0,1"})}
+        let!(:token2) { create(:apns_token, :app => n_app, :locale => :en, :custom_properties => {:onsite => "0"})}
+      
+        before(:each) do 
+          post :create, {
+            :device_token_filters => {:onsite => ["1"]},
             :app_id => n_app.id, 
             :notification => {
               :localized_notifications_attributes => [
