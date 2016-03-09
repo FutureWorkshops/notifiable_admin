@@ -1,3 +1,15 @@
+class HstoreCoder
+  class << self
+    def load(hash)
+      hash
+    end
+
+    def dump(value)
+      value.to_hash
+    end
+  end
+end
+
 Notifiable::DeviceToken.class_eval do
 
   def self.is_adapter_postgres?
@@ -17,16 +29,4 @@ Notifiable::DeviceToken.class_eval do
     scope :where_custom_property_like, ->(key, value) { where(id: all.select{|d| d.custom_properties[key.to_sym].include?(value) }.map(&:id)) }    
 
   end  
-end
-
-class HstoreCoder
-  class << self
-    def load(hash)
-      hash
-    end
-
-    def dump(value)
-      value.to_hash
-    end
-  end
 end
