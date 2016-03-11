@@ -1,8 +1,10 @@
-<script>
-  $(document).ready(function() {
-    var clip = new ZeroClipboard($("#clip_button"))
-  });
-</script>
+<% @notifications_api_users.each do |u| %>
+  <script>
+    $(document).ready(function() {
+      var clip = new ZeroClipboard($("#clip_button-<%= u.id %>"))
+    });
+  </script>
+<% end %>
 
 <h1>Notification API Keys <%= add_button new_admin_account_notifications_api_user_path(@account) %></h1>
 
@@ -21,7 +23,7 @@
           <td><%= u.service_name %> <%= danger_label("Disabled") unless u.enabled? %></td>
           <td><%= u.apps.pluck(:name).join(", ") %></td>
           <td><%= u.access_id %></td>
-          <td><%= copy_button "clip_button", "Copy to Clipboard", u.secret_key %></td>
+          <td><%= copy_button "clip_button-#{u.id}", "Copy to Clipboard", u.secret_key %></td>
           <td>
             <%= u.authorization_required ? dont_require_authorization_notifications_api_user_authorization_button(u) : require_authorization_notifications_api_user_authorization_button(u) %>
             
