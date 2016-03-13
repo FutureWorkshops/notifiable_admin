@@ -1,16 +1,20 @@
-<div class="row"><div class="col-md-4">
+<div class="row"><div class="col-md-8">
 
 <%= simple_form_for [:admin, @account, @app] do |f| %>
 
   <%= f.input :name, :hint => "The name of the App" %>
+  
+  <%= f.input :save_notification_statuses?, :as => :boolean, :label => "Save Notification Receipts", :hint => "Saving notification reciepts gives you a full audit trail, but can mean notifications are sent more slowly." %>
 
   <%= f.input :custom_device_properties_s, :label => "Custom Properties", :placeholder => "tags,latitude,longitude", :hint => "A comma separated list of custom properties for a device" %>
 
-  <%= f.input :apns_certificate, :as => :text, :label => "APNS Certificate", :hint => "openssl pkcs12  -in exported_certificate.p12  -nodes -clcerts | pbcopy" %>
+  <h1>Apple Push Notification Service</h1>
+
+  <%= f.input :apns_certificate, :as => :text, :label => "Certificate", :hint => "The certificate for APNS. Can be extracted using `openssl pkcs12  -in exported_certificate.p12  -nodes -clcerts | pbcopy`" %>
   
-  <%= f.input :apns_passphrase, :label => "APNS Passphrase" %>
+  <%= f.input :apns_passphrase, :label => "Passphrase", :hint => "The passphrase for your certificate." %>
   
-  <%= f.input :apns_sandbox, :as => :boolean, :label => "APNS Sandbox" %>
+  <%= f.input :apns_sandbox, :as => :boolean, :label => "Use Sandbox", :hint => "Use the APNS sandbox." %>
   
   <%= f.submit "Save", :class => "btn btn-default" %>    
 
