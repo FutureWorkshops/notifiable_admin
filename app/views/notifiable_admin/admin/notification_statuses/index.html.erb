@@ -1,4 +1,4 @@
-<h1>Notification Statuses</h1>
+<h1><%= truncate(@notification.localized_notification(:en).message, :length => 50)%></h1>
 
 <div class="col-md-12">
   <div class="row">
@@ -12,7 +12,7 @@
       </tr>
       <% @notification_statuses.each do |ns| %>
         <tr class="notification-status-row">
-          <td><%= ns.created_at %></td>
+          <td><%= ns.created_at.to_s(:seconds) %></td>
           <td><%= link_to(ns.device_token.user.alias, admin_account_app_user_path(@account, @app, ns.device_token.user)) if ns.device_token.user %></td>   
           <td><%= ns.device_token.name %></td>
           <td><%= ns.device_token.provider %></td>
