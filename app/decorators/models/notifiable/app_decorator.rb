@@ -7,14 +7,6 @@ Notifiable::App.class_eval do
   
   belongs_to :account, :class_name => "NotifiableAdmin::Account"
   validates :account, :presence => true
-  
-  def configuration
-    unless read_attribute(:configuration)
-      write_attribute(:configuration, {:apns => {:passphrase => nil, :certificate => nil}, :gcm => {:api_key => nil}, :sms => {:account_sid => nil, :auth_token => nil, :sms_originator => nil}})
-      self.apns_sandbox = "1"
-    end
-    read_attribute(:configuration)
-  end
 
   def custom_device_properties=(custom_device_properties)
     self.configuration[:custom_device_properties] = custom_device_properties
