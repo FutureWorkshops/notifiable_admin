@@ -24,22 +24,6 @@ Notifiable::App.class_eval do
     self.custom_device_properties.join(",")
   end
 
-  def apns_passphrase=(apns_passphrase)
-    self.configuration[:apns][:passphrase] = apns_passphrase
-  end
-  
-  def apns_passphrase
-    self.configuration[:apns][:passphrase]
-  end
-  
-  def apns_certificate=(apns_certificate)
-    self.configuration[:apns][:certificate] = apns_certificate
-  end
-  
-  def apns_certificate
-    self.configuration[:apns][:certificate]
-  end
-
   def apns_sandbox
     self.configuration[:apns][:gateway_host].eql? ENV["apns_gateway_host"]
   end
@@ -57,12 +41,5 @@ Notifiable::App.class_eval do
       self.configuration[:apns][:feedback_port] = ENV["apns_feedback_port"]
     end
   end
-  
-  def gcm_api_key=(gcm_api_key)
-    self.configuration[:gcm][:api_key] = gcm_api_key
-  end
-  
-  def gcm_api_key
-    self.configuration[:gcm][:api_key]
-  end
+
 end
