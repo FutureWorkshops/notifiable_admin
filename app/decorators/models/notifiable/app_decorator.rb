@@ -25,7 +25,7 @@ Notifiable::App.class_eval do
   end
 
   def apns_sandbox
-    self.configuration[:apns][:gateway_host].eql? ENV["apns_gateway_host"]
+    self.configuration[:apns][:gateway_host].eql? ENV["apns_sandbox_gateway_host"]
   end
   
   def apns_sandbox=(apns_sandbox)
