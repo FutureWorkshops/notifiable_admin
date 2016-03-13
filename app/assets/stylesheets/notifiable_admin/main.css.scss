@@ -11,7 +11,7 @@
  *= require eonasdan-bootstrap-datetimepicker
  *= require_self
  */
-
+ 
 @import "bootstrap";
 
 $baseFontFamily: 'Helvetica Neue', Helvetica, sans-serif !default;
@@ -21,11 +21,12 @@ body {
   font-size: 150%;
 }
 
-h1 {
+h1, h2, h3, h4 {
   font-weight: 300 !important;
-  padding-bottom: 2%;  
+  padding-top: 1%;
+  padding-bottom: 1%;  
 }
 
-h4 {
-  padding-top: 4%;
+.form-group {
+  margin-bottom: 30px;
 }
