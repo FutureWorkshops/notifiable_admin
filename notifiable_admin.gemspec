@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'api-auth', '~> 1.1.0'
 
   # Push Notifications
-  s.add_dependency 'notifiable-rails', '>= 0.22.1'
+  s.add_dependency 'notifiable-rails', '>= 0.24.1'
 
   # Background processing
   s.add_dependency 'delayed_job_active_record', '~> 4.0.3'
@@ -49,7 +49,7 @@ Gem::Specification.new do |s|
   
   # Testing dependencies
   s.add_development_dependency 'combustion', '~> 0.5.4'
-  s.add_development_dependency 'notifiable-apns-grocer', '~> 0.12.1'
+  s.add_development_dependency 'notifiable-apns-grocer', '~> 0.13.0'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails', '~> 3.0.2'
   s.add_development_dependency 'rspec-html-matchers', '~> 0.6.1'

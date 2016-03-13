@@ -33,6 +33,9 @@ RSpec.configure do |config|
   Notifiable.delivery_method = :test
 
   config.before(:suite) {
+    Notifiable.notifier_classes[:apns] = Notifiable::Apns::Grocer::Stream
+    Notifiable::App.define_configuration_accessors(Notifiable.notifier_classes)
+    
     FactoryGirl.lint
     DatabaseCleaner.clean_with(:truncation)
   }
