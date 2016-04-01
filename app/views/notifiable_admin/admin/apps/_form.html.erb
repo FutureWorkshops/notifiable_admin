@@ -16,6 +16,10 @@
   
   <%= f.input :apns_sandbox, :as => :boolean, :label => "Use Sandbox Service", :hint => "Use the APNS sandbox if checke. Use the production service if unchecked." %>
   
+  <h1>Google Cloud Messaging Service</h1>
+
+  <%= f.input :gcm_api_key, :placeholder => "AFzaSyCxydJ0vWfUoT579gOKuKXr2ro-t5ekTB7", :label => "API Key", :hint => "Your GCM API Key, issued by Google." %>
+  
   <%= f.submit "Save", :class => "btn btn-default" %>    
 
 <% end %>
