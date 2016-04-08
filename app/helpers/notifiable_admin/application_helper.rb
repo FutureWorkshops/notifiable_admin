@@ -67,10 +67,6 @@ module NotifiableAdmin::ApplicationHelper
   def super_admin_accounts_navbar_item
     navbar_item("Accounts", super_admin_accounts_path, params[:controller] == "super_admin/accounts" && params[:action] == "index")
   end
-    
-  def device_tokens_navbar_item
-    navbar_item("Device Tokens", @app.new_record? ? "/" : admin_app_device_tokens_path(@app), params[:controller] == "admin/device_tokens" && params[:action] == "index")    
-  end
   
   def notifications_navbar_item
     navbar_item("Sent", admin_account_app_notifications_path(@account, @app), params[:controller] == "admin/notifications" && params[:action] == "index")
