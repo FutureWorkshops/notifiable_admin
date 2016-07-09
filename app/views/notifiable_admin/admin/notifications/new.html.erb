@@ -21,7 +21,7 @@
   <%= f.input :user_id, :as => :hidden, :input_html => { :value => @user.id } if @user %>
 
   <%= f.simple_fields_for :localized_notifications do |n| %>
-    <%= n.input :locale, :as => :hidden %>
+    <%= n.input :locale, collection: @regions, include_blank: false, label: "Country" %>
     <%= n.input :message %>
     <%= n.input :params %>
   <% end %>
@@ -40,11 +40,6 @@
       <%= n.input k, :as => v %>
     <% end %> 
   <% end %>
-  
-  <div class='input-group select'>
-    <label class="select required control-label" for="notification_locale">Country</label>
-    <%= select_tag("notification_locale", options_for_select(@regions), class: "form-control") %>
-  </div>
   
   <hr/>
 
