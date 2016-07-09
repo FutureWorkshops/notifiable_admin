@@ -8,7 +8,7 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
     
   def new
     region_codes = Notifiable::DeviceToken.where(app: @app).uniq.pluck(:locale).collect{|l| l.split("_").last}.uniq.sort
-    @regions = region_codes.map {|e| r = ISO::Region.find(e); [r.name, e] if r }
+    @regions = region_codes.map {|e| r = ISO::Region.find(e); [r.name, e] if r }.compact
     @regions = [["ALL", "en"]] + @regions
     @notification.localized_notifications.append(Notifiable::LocalizedNotification.new)
   end
