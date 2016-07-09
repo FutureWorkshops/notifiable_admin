@@ -40,6 +40,12 @@
       <%= n.input k, :as => v %>
     <% end %> 
   <% end %>
+  
+  <div class='input-group select'>
+    <label class="select required control-label" for="notification_locale">Country</label>
+    <%= select_tag("notification_locale", options_for_select(@regions), class: "form-control") %>
+  </div>
+  
   <hr/>
 
   <%= f.submit "Send", :class => "btn btn-default" %>    

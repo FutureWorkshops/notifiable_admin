@@ -7,13 +7,17 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
   prepend_before_filter :parse_params, :only => :create
     
   def new
-    Notifiable.locales.each do |locale|
-      @notification.localized_notifications.append(Notifiable::LocalizedNotification.new :locale => locale)
-    end
+    @regions = Notifiable::DeviceToken.where(app: @app).uniq.pluck(:locale).collect{|l| l.split("_").last}.uniq.sort
+    @regions = ["ALL"] + @regions
+    @notification.localized_notifications.append(Notifiable::LocalizedNotification.new)
   end
 
   def create
     @notification.app = @app
+    
+    params["notification_locale"] = "en" if params["notification_locale"] == "ALL"
+    @notification.localized_notifications.first.locale = params["notification_locale"]
+    
     if @notification.save
       if @user
         @notification.delay_private(@user,  run_at) 
