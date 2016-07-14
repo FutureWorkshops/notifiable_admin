@@ -7,9 +7,7 @@
     <table class="table">
       <tr>
         <th>Created At</th>
-        <% Notifiable.locales.each do |l| %>
-          <th><%= ISO::Language.find(l.to_s).name %> Message</th>        
-        <% end %>
+        <th>Message</th>        
         <th>Sent</th>
         <th>Rejected</th>
         <th>Opened</th>        
@@ -18,9 +16,7 @@
       <% @notifications.each do |n| %>
         <tr class="notification-row">
           <td><%= n.created_at %></td>
-          <% Notifiable.locales.each do |l| %>
-            <td><%= truncate(n.localized_notification(l).message, :length => 50) if n.localized_notification(l) %></td>
-          <% end %>
+          <td><%= truncate(n.localized_notifications.first.message, :length => 50) if n.localized_notifications.first %></td>
           <td><%= n.sent_count %></td>
           <td><%= n.sent_count - n.gateway_accepted_count %></td>
           <td><%= n.opened_count %></td>      
