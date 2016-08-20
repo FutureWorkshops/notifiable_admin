@@ -7,6 +7,8 @@ Notifiable::App.class_eval do
   
   belongs_to :account, :class_name => "NotifiableAdmin::Account"
   validates :account, :presence => true
+  
+  has_many :users, :class_name => "NotifiableAdmin::User", dependent: :destroy
 
   def custom_device_properties=(custom_device_properties)
     self.configuration[:custom_device_properties] = custom_device_properties

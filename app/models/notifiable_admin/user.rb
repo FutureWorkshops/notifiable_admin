@@ -3,5 +3,7 @@ class NotifiableAdmin::User < ActiveRecord::Base
   
   notifiable
   
-  scope :for_app, ->(app) { joins('LEFT OUTER JOIN notifiable_device_tokens ON notifiable_device_tokens.user_id = users.id').where('notifiable_device_tokens.app_id = ?', app.id) }
+  belongs_to :app, class_name: "Notifiable::App"
+  validates :app, presence: true
+  
 end
