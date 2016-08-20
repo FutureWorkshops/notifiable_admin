@@ -5,8 +5,8 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
   let(:account) { create(:account) }  
   let(:n_app) { create(:app, :account => account, :name => "The Open", :custom_device_properties => [:onsite]) }
   
-  before(:each) { controller.stub(:authenticate_from_headers!){ controller.instance_variable_set(:@app, n_app) } }
-  
+  before(:each) { allow(controller).to receive(:authenticate_from_headers!) { controller.instance_variable_set(:@app, n_app) } }
+      
   describe "#create" do
 
     context "new user" do
