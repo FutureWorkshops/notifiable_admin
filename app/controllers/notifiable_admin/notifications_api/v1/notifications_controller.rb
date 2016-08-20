@@ -26,7 +26,7 @@ class NotifiableAdmin::NotificationsApi::V1::NotificationsController < Notifiabl
   private
   def find_user!
     if params[:user] && params[:user][:alias]
-      @user = NotifiableAdmin::User.find_by(:alias => params[:user][:alias])
+      @user = NotifiableAdmin::User.find_by(alias: params[:user][:alias], app_id: @app.id)
       head :status => :not_found unless @user 
     end
   end
