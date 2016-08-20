@@ -4,7 +4,7 @@ feature 'Send private notifications' do
   
   let(:account) { create(:account) }  
   let(:app) { create(:app, :account => account) }
-  let(:user1) { create(:user) }
+  let(:user1) { create(:user, app: app) }
   let!(:en_token) { create(:apns_token, :app => app, :user_id => user1.id, :locale => :en) }
   
   let(:content_admin) { FactoryGirl.create(:content_admin, :apps => [app]) }
