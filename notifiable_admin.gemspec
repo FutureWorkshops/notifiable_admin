@@ -50,6 +50,7 @@ Gem::Specification.new do |s|
   # Testing dependencies
   s.add_development_dependency 'combustion', '~> 0.5.4'
   s.add_development_dependency 'notifiable-apns-grocer', '~> 0.13.0'
+  s.add_development_dependency 'notifiable-gcm-spacialdb', '~> 0.9.0'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails', '~> 3.0.2'
   s.add_development_dependency 'rspec-html-matchers', '~> 0.6.1'

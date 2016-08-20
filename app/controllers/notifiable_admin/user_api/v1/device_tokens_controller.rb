@@ -39,7 +39,7 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
   
   private
     def create_user
-      @current_api_v1_user = NotifiableAdmin::User.create(:alias => params[:user][:alias]) if params[:user] && params[:user][:alias]
+      @current_api_v1_user = NotifiableAdmin::User.create(alias: params[:user][:alias], app: @app) if params[:user] && params[:user][:alias]
     end
   
     def device_token_params

@@ -6,6 +6,7 @@ require 'notifiable_admin'
 
 # needed for testing
 require 'notifiable/apns/grocer'
+require 'notifiable/gcm/spacialdb'
 
 # require delayed job before initializing combustion because otherwise DelayedJob's railties get confused
 require 'delayed_job'

@@ -34,6 +34,7 @@ RSpec.configure do |config|
 
   config.before(:suite) {
     Notifiable.notifier_classes[:apns] = Notifiable::Apns::Grocer::Stream
+    Notifiable.notifier_classes[:gcm] = Notifiable::Gcm::Spacialdb::Batch
     Notifiable::App.define_configuration_accessors(Notifiable.notifier_classes)
     
     FactoryGirl.lint

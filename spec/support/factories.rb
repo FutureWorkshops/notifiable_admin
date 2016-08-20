@@ -25,6 +25,7 @@ FactoryGirl.define do
   
   factory :user, :class => NotifiableAdmin::User do
     sequence(:alias) {|n| (n + 10000).to_s }
+    app
 
     factory :user_with_apns_token do
       after(:create) do |user, evaluator|

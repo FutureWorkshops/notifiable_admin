@@ -17,6 +17,17 @@ RSpec.describe Notifiable::App, :type => :model do
     expect(Notifiable::App.count).to eq 0  
   end
   
+  describe "#users" do
+    
+    context "with a single user" do
+      subject { create(:app) }
+      let!(:u1) { create(:user, app: subject)}
+            
+      it { expect(subject.users.count).to eq 1 }
+    end
+    
+  end
+  
   describe "#custom_device_properties" do
     
     context "default" do
