@@ -63,6 +63,27 @@ describe NotifiableAdmin::NotificationsApi::V1::NotificationsController do
         it { expect(Notifiable::Notification.count).to eq 1 }
         it { expect(Notifiable::Notification.first.sent_count).to eq 1 }
       end
+
+      context "for a user" do
+        let!(:token1) { create(:apns_token, :app => n_app, :locale => :en, user: create(:user, alias: "matt@futureworkshops.com", app: n_app))}
+        let!(:token2) { create(:apns_token, :app => n_app, :locale => :en, user: create(:user, alias: "davide@futureworkshops.com", app: n_app))}
+      
+        before(:each) do 
+          post :create, {
+            :app_id => n_app.id, 
+            :notification => {
+              :localized_notifications_attributes => [
+                {:message => "Hello", :locale => :en}
+              ]
+            },
+            :user => {:alias => "matt@futureworkshops.com"} 
+          }        
+        end
+
+        it { expect(response.status).to eq 200 }
+        it { expect(Notifiable::Notification.count).to eq 1 }
+        it { expect(Notifiable::Notification.first.sent_count).to eq 1 }
+      end
       
       context "include filter" do
         let!(:token1) { create(:apns_token, :app => n_app, :locale => :en, :custom_properties => {:onsite => "0,1"})}

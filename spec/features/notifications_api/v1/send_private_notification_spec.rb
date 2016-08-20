@@ -8,7 +8,7 @@ feature 'Send private notifications' do
   let(:notifiable_app) { create(:app, :account => account) }
   let(:notifications_api_user) { create(:notifications_api_user, :apps => [notifiable_app], :account => account) }
   let(:notifiable_app2) { create(:app) }
-  let(:user) { create(:user) { |user| create(:apns_token, :app_id => notifiable_app.id, :user_id => user.id, :locale => :en) }}
+  let(:user) { create(:user, app: notifiable_app) { |user| create(:apns_token, :app_id => notifiable_app.id, :user_id => user.id, :locale => :en) }}
 
   scenario "to a valid user" do    
     ApiAuthHelpers.set_credentials(notifications_api_user.access_id, notifications_api_user.secret_key)

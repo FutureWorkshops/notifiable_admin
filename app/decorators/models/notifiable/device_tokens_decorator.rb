@@ -12,6 +12,8 @@ end
 
 Notifiable::DeviceToken.class_eval do
 
+  belongs_to :user, class_name: "NotifiableAdmin::User"
+
   def self.is_adapter_postgres?
     ActiveRecord::Base.connection_config[:adapter].eql? "postgresql"
   end

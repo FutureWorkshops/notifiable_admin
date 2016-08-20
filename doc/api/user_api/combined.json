@@ -1,4 +1,39 @@
 [{
+  "resource": "Notification",
+  "http_method": "GET",
+  "route": "/user_api/v1/device_tokens.json",
+  "description": "List device tokens for user",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/user_api/v1/device_tokens.json",
+      "request_body": null,
+      "request_headers": {
+        "Content-Accept": "application/json"
+      },
+      "request_query_parameters": {
+        "user": {
+          "alias": "123456789"
+        }
+      },
+      "request_content_type": null,
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[{\"id\":1,\"name\":null,\"created_at\":\"2016-08-20T10:23:07.602Z\"}]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"localhost:3000/user_api/v1/device_tokens.json\" -X GET \\\n\t-H \"Content-Accept: application/json\""
+    }
+  ]
+},{
   "resource": "NotificationStatus",
   "http_method": "PUT",
   "route": "/user_api/v1/notification_statuses/opened",
@@ -29,7 +64,7 @@
     {
       "request_method": "PUT",
       "request_path": "/user_api/v1/notification_statuses/opened",
-      "request_body": "user[alias]=10005&localized_notification_id=5&device_token_id=8",
+      "request_body": "user[alias]=10005&localized_notification_id=1&device_token_id=1",
       "request_headers": {
         "Content-Accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
@@ -43,42 +78,7 @@
       "response_headers": {
       },
       "response_content_type": "text/html",
-      "curl": "curl \"localhost:3000/user_api/v1/notification_statuses/opened\" -d 'user[alias]=10005&localized_notification_id=5&device_token_id=8' -X PUT \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
-    }
-  ]
-},{
-  "resource": "Notification",
-  "http_method": "GET",
-  "route": "/user_api/v1/device_tokens.json",
-  "description": "List device tokens for user",
-  "explanation": null,
-  "parameters": [
-
-  ],
-  "response_fields": [
-
-  ],
-  "requests": [
-    {
-      "request_method": "GET",
-      "request_path": "/user_api/v1/device_tokens.json",
-      "request_body": null,
-      "request_headers": {
-        "Content-Accept": "application/json"
-      },
-      "request_query_parameters": {
-        "user": {
-          "alias": "123456789"
-        }
-      },
-      "request_content_type": null,
-      "response_status": 200,
-      "response_status_text": "OK",
-      "response_body": "[{\"id\":9,\"name\":null,\"created_at\":\"2015-11-29T16:26:04.894Z\"}]",
-      "response_headers": {
-      },
-      "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"localhost:3000/user_api/v1/device_tokens.json\" -X GET \\\n\t-H \"Content-Accept: application/json\""
+      "curl": "curl \"localhost:3000/user_api/v1/notification_statuses/opened\" -d 'user[alias]=10005&localized_notification_id=1&device_token_id=1' -X PUT \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
     }
   ]
 }]

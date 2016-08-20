@@ -1,4 +1,306 @@
 [{
+  "resource": "Notification",
+  "http_method": "POST",
+  "route": "/notifications_api/v1/notifications",
+  "description": "Notify devices via a custom property",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/notifications_api/v1/notifications",
+      "request_body": "device_token_filters[onsite][]=1&app_id=2&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en",
+      "request_headers": {
+        "Content-Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": " ",
+      "response_headers": {
+      },
+      "response_content_type": "text/html",
+      "curl": "curl \"localhost:3000/notifications_api/v1/notifications\" -d 'device_token_filters[onsite][]=1&app_id=2&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
+    }
+  ]
+},{
+  "resource": "Notification",
+  "http_method": "POST",
+  "route": "/notifications_api/v1/notifications",
+  "description": "Notify everybody using notification params",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/notifications_api/v1/notifications",
+      "request_body": "app_id=2&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en&notification[localized_notifications_attributes][][params][test_param]=abc123",
+      "request_headers": {
+        "Content-Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": " ",
+      "response_headers": {
+      },
+      "response_content_type": "text/html",
+      "curl": "curl \"localhost:3000/notifications_api/v1/notifications\" -d 'app_id=2&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en&notification[localized_notifications_attributes][][params][test_param]=abc123' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
+    }
+  ]
+},{
+  "resource": "Notification",
+  "http_method": "POST",
+  "route": "/notifications_api/v1/notifications",
+  "description": "Notify everybody",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/notifications_api/v1/notifications",
+      "request_body": "app_id=2&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en",
+      "request_headers": {
+        "Content-Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": " ",
+      "response_headers": {
+      },
+      "response_content_type": "text/html",
+      "curl": "curl \"localhost:3000/notifications_api/v1/notifications\" -d 'app_id=2&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
+    }
+  ]
+},{
+  "resource": "Notification",
+  "http_method": "POST",
+  "route": "/notifications_api/v1/notifications",
+  "description": "Notify devices via a custom property",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/notifications_api/v1/notifications",
+      "request_body": "device_token_filters[onsite]=1&app_id=2&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en",
+      "request_headers": {
+        "Content-Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": " ",
+      "response_headers": {
+      },
+      "response_content_type": "text/html",
+      "curl": "curl \"localhost:3000/notifications_api/v1/notifications\" -d 'device_token_filters[onsite]=1&app_id=2&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
+    }
+  ]
+},{
+  "resource": "Notification",
+  "http_method": "POST",
+  "route": "/notifications_api/v1/notifications",
+  "description": "Notify a single",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "scope": "notification",
+      "name": "message",
+      "description": "Message"
+    },
+    {
+      "required": true,
+      "name": "app_id",
+      "description": "App ID"
+    },
+    {
+      "scope": "user",
+      "required": true,
+      "name": "alias",
+      "description": "User Alias"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/notifications_api/v1/notifications",
+      "request_body": "alias=10004&app_id=2&notification[app_id]=2&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en",
+      "request_headers": {
+        "Content-Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": " ",
+      "response_headers": {
+      },
+      "response_content_type": "text/html",
+      "curl": "curl \"localhost:3000/notifications_api/v1/notifications\" -d 'alias=10004&app_id=2&notification[app_id]=2&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
+    }
+  ]
+},{
+  "resource": "Notification",
+  "http_method": "GET",
+  "route": "/user_api/v1/device_tokens.json",
+  "description": "List device tokens for user",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/user_api/v1/device_tokens.json",
+      "request_body": null,
+      "request_headers": {
+        "Content-Accept": "application/json"
+      },
+      "request_query_parameters": {
+        "user": {
+          "alias": "123456789"
+        }
+      },
+      "request_content_type": null,
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[{\"id\":1,\"name\":null,\"created_at\":\"2016-08-20T10:23:07.602Z\"}]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"localhost:3000/user_api/v1/device_tokens.json\" -X GET \\\n\t-H \"Content-Accept: application/json\""
+    }
+  ]
+},{
+  "resource": "DeviceToken",
+  "http_method": "DELETE",
+  "route": "/user_api/v1/device_tokens/:device_token_id",
+  "description": "Delete a device",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "scope": "user",
+      "name": "alias",
+      "description": "Username/Alias"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "DELETE",
+      "request_path": "/user_api/v1/device_tokens/1",
+      "request_body": "user[alias]=broomba&document=user_api",
+      "request_headers": {
+        "Content-Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": " ",
+      "response_headers": {
+      },
+      "response_content_type": "text/html",
+      "curl": "curl \"localhost:3000/user_api/v1/device_tokens/1\" -d 'user[alias]=broomba&document=user_api' -X DELETE \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
+    }
+  ]
+},{
+  "resource": "NotificationStatus",
+  "http_method": "PUT",
+  "route": "/user_api/v1/notification_statuses/opened",
+  "description": "Mark a notification as opened",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "scope": "user",
+      "name": "alias",
+      "description": "App Username"
+    },
+    {
+      "required": true,
+      "name": "localized_notification_id",
+      "description": "Localized Notification ID"
+    },
+    {
+      "required": true,
+      "name": "device_token_id",
+      "description": "Device Token ID"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PUT",
+      "request_path": "/user_api/v1/notification_statuses/opened",
+      "request_body": "user[alias]=10005&localized_notification_id=1&device_token_id=1",
+      "request_headers": {
+        "Content-Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": " ",
+      "response_headers": {
+      },
+      "response_content_type": "text/html",
+      "curl": "curl \"localhost:3000/user_api/v1/notification_statuses/opened\" -d 'user[alias]=10005&localized_notification_id=1&device_token_id=1' -X PUT \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
+    }
+  ]
+},{
   "resource": "DeviceToken",
   "http_method": "POST",
   "route": "/user_api/v1/device_tokens",
@@ -57,275 +359,6 @@
       },
       "response_content_type": "application/json; charset=utf-8",
       "curl": "curl \"localhost:3000/user_api/v1/device_tokens\" -d 'user[alias]=broomba&provider=apns&token=ABC123&app_id=2&locale=Matt%27s+iPhone&document=user_api' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
-    }
-  ]
-},{
-  "resource": "Notification",
-  "http_method": "POST",
-  "route": "/notifications_api/v1/notifications",
-  "description": "Notify One User",
-  "explanation": null,
-  "parameters": [
-    {
-      "required": true,
-      "scope": "notification",
-      "name": "message",
-      "description": "Message"
-    },
-    {
-      "required": true,
-      "name": "app_id",
-      "description": "App ID"
-    },
-    {
-      "scope": "user",
-      "required": true,
-      "name": "alias",
-      "description": "User Alias"
-    }
-  ],
-  "response_fields": [
-
-  ],
-  "requests": [
-    {
-      "request_method": "POST",
-      "request_path": "/notifications_api/v1/notifications",
-      "request_body": "alias=10004&app_id=4&notification[app_id]=4&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en",
-      "request_headers": {
-        "Content-Accept": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "request_query_parameters": {
-      },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 200,
-      "response_status_text": "OK",
-      "response_body": " ",
-      "response_headers": {
-      },
-      "response_content_type": "text/html",
-      "curl": "curl \"localhost:3000/notifications_api/v1/notifications\" -d 'alias=10004&app_id=4&notification[app_id]=4&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
-    }
-  ]
-},{
-  "resource": "Notification",
-  "http_method": "POST",
-  "route": "/notifications_api/v1/notifications",
-  "description": "Notify Everybody",
-  "explanation": null,
-  "parameters": [
-
-  ],
-  "response_fields": [
-
-  ],
-  "requests": [
-    {
-      "request_method": "POST",
-      "request_path": "/notifications_api/v1/notifications",
-      "request_body": "app_id=6&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en",
-      "request_headers": {
-        "Content-Accept": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "request_query_parameters": {
-      },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 200,
-      "response_status_text": "OK",
-      "response_body": " ",
-      "response_headers": {
-      },
-      "response_content_type": "text/html",
-      "curl": "curl \"localhost:3000/notifications_api/v1/notifications\" -d 'app_id=6&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
-    }
-  ]
-},{
-  "resource": "Notification",
-  "http_method": "POST",
-  "route": "/notifications_api/v1/notifications",
-  "description": "Notify devices named MBS iPhone",
-  "explanation": null,
-  "parameters": [
-
-  ],
-  "response_fields": [
-
-  ],
-  "requests": [
-    {
-      "request_method": "POST",
-      "request_path": "/notifications_api/v1/notifications",
-      "request_body": "device_token_filters[device_name]=MBS+iPhone&app_id=8&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en",
-      "request_headers": {
-        "Content-Accept": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "request_query_parameters": {
-      },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 200,
-      "response_status_text": "OK",
-      "response_body": " ",
-      "response_headers": {
-      },
-      "response_content_type": "text/html",
-      "curl": "curl \"localhost:3000/notifications_api/v1/notifications\" -d 'device_token_filters[device_name]=MBS+iPhone&app_id=8&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
-    }
-  ]
-},{
-  "resource": "Notification",
-  "http_method": "POST",
-  "route": "/notifications_api/v1/notifications",
-  "description": "Notify everybody with params",
-  "explanation": null,
-  "parameters": [
-
-  ],
-  "response_fields": [
-
-  ],
-  "requests": [
-    {
-      "request_method": "POST",
-      "request_path": "/notifications_api/v1/notifications",
-      "request_body": "app_id=10&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en&notification[localized_notifications_attributes][][params][test_param]=abc123",
-      "request_headers": {
-        "Content-Accept": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "request_query_parameters": {
-      },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 200,
-      "response_status_text": "OK",
-      "response_body": " ",
-      "response_headers": {
-      },
-      "response_content_type": "text/html",
-      "curl": "curl \"localhost:3000/notifications_api/v1/notifications\" -d 'app_id=10&notification[localized_notifications_attributes][][message]=Hello&notification[localized_notifications_attributes][][locale]=en&notification[localized_notifications_attributes][][params][test_param]=abc123' -X POST \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
-    }
-  ]
-},{
-  "resource": "DeviceToken",
-  "http_method": "DELETE",
-  "route": "/user_api/v1/device_tokens/:device_token_id",
-  "description": "Delete a device",
-  "explanation": null,
-  "parameters": [
-    {
-      "required": true,
-      "scope": "user",
-      "name": "alias",
-      "description": "Username/Alias"
-    }
-  ],
-  "response_fields": [
-
-  ],
-  "requests": [
-    {
-      "request_method": "DELETE",
-      "request_path": "/user_api/v1/device_tokens/7",
-      "request_body": "user[alias]=broomba&document=user_api",
-      "request_headers": {
-        "Content-Accept": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "request_query_parameters": {
-      },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 200,
-      "response_status_text": "OK",
-      "response_body": " ",
-      "response_headers": {
-      },
-      "response_content_type": "text/html",
-      "curl": "curl \"localhost:3000/user_api/v1/device_tokens/7\" -d 'user[alias]=broomba&document=user_api' -X DELETE \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
-    }
-  ]
-},{
-  "resource": "NotificationStatus",
-  "http_method": "PUT",
-  "route": "/user_api/v1/notification_statuses/opened",
-  "description": "Mark a notification as opened",
-  "explanation": null,
-  "parameters": [
-    {
-      "required": true,
-      "scope": "user",
-      "name": "alias",
-      "description": "App Username"
-    },
-    {
-      "required": true,
-      "name": "localized_notification_id",
-      "description": "Localized Notification ID"
-    },
-    {
-      "required": true,
-      "name": "device_token_id",
-      "description": "Device Token ID"
-    }
-  ],
-  "response_fields": [
-
-  ],
-  "requests": [
-    {
-      "request_method": "PUT",
-      "request_path": "/user_api/v1/notification_statuses/opened",
-      "request_body": "user[alias]=10005&localized_notification_id=5&device_token_id=8",
-      "request_headers": {
-        "Content-Accept": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      "request_query_parameters": {
-      },
-      "request_content_type": "application/x-www-form-urlencoded",
-      "response_status": 200,
-      "response_status_text": "OK",
-      "response_body": " ",
-      "response_headers": {
-      },
-      "response_content_type": "text/html",
-      "curl": "curl \"localhost:3000/user_api/v1/notification_statuses/opened\" -d 'user[alias]=10005&localized_notification_id=5&device_token_id=8' -X PUT \\\n\t-H \"Content-Accept: application/json\" \\\n\t-H \"Content-Type: application/x-www-form-urlencoded\""
-    }
-  ]
-},{
-  "resource": "Notification",
-  "http_method": "GET",
-  "route": "/user_api/v1/device_tokens.json",
-  "description": "List device tokens for user",
-  "explanation": null,
-  "parameters": [
-
-  ],
-  "response_fields": [
-
-  ],
-  "requests": [
-    {
-      "request_method": "GET",
-      "request_path": "/user_api/v1/device_tokens.json",
-      "request_body": null,
-      "request_headers": {
-        "Content-Accept": "application/json"
-      },
-      "request_query_parameters": {
-        "user": {
-          "alias": "123456789"
-        }
-      },
-      "request_content_type": null,
-      "response_status": 200,
-      "response_status_text": "OK",
-      "response_body": "[{\"id\":9,\"name\":null,\"created_at\":\"2015-11-29T16:26:04.894Z\"}]",
-      "response_headers": {
-      },
-      "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"localhost:3000/user_api/v1/device_tokens.json\" -X GET \\\n\t-H \"Content-Accept: application/json\""
     }
   ]
 }]
