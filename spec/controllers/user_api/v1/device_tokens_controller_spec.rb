@@ -2,18 +2,23 @@ require 'rails_helper'
 
 describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
 
+  def stub_authenticate_from_headers
+    allow(controller).to receive(:authenticate_from_headers!) { controller.instance_variable_set(:@app, n_app) }
+  end
+
   let(:account) { create(:account) }  
   let(:n_app) { create(:app, :account => account, :name => "The Open", :custom_device_properties => [:onsite]) }
   
-  before(:each) { allow(controller).to receive(:authenticate_from_headers!) { controller.instance_variable_set(:@app, n_app) } }
+  before(:each) { stub_authenticate_from_headers }
       
   describe "#create" do
 
     context "new user" do
-      before(:each) { post :create, {:app_id => n_app.id, :provider => 'apns', :token => 'ABC12345678910', :locale => "en", :user => {:alias => "matt@futureworkshops.com"}} }
+      before(:each) { stub_authenticate_from_headers; post :create, {:app_id => n_app.id, :provider => 'apns', :token => 'ABC12345678910', :locale => "en", :user => {:alias => "matt@futureworkshops.com"}} }
 
       it { expect(NotifiableAdmin::User.count).to eq 1 }
       it { expect(NotifiableAdmin::User.first.device_tokens.count).to eq 1 }
+      it { expect(NotifiableAdmin::User.first.alias).to eq "matt@futureworkshops.com" }
       
       it { expect(Notifiable::DeviceToken.count).to eq 1 }
       it { expect(Notifiable::DeviceToken.first.provider).to eq "apns" }

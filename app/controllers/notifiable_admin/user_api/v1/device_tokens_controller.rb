@@ -5,7 +5,8 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
   before_filter :ensure_current_notifiable_user!, :only => :index
   
   def create
-    @device_token = Notifiable::DeviceToken.find_or_initialize_by(:token => params[:token], :app_id => @app.id)
+    byebug
+    @device_token = Notifiable::DeviceToken.find_or_initialize_by(:token => params[:token], :app_id => current_notifiable_app.id)
     @device_token.is_valid = true
     @device_token.user_id = current_notifiable_user.id
     
@@ -39,7 +40,7 @@ class NotifiableAdmin::UserApi::V1::DeviceTokensController < NotifiableAdmin::Us
   
   private
     def create_user
-      @current_api_v1_user = NotifiableAdmin::User.create(alias: params[:user][:alias], app: @app) if params[:user] && params[:user][:alias]
+      @current_api_v1_user = NotifiableAdmin::User.create(alias: params[:user][:alias], app: current_notifiable_app) if params[:user] && params[:user][:alias]
     end
   
     def device_token_params
