@@ -9,7 +9,7 @@ class NotifiableAdmin::UserApi::V1::BaseController < NotifiableAdmin::ApiControl
   end
   
   def current_api_v1_user
-    @current_api_v1_user ||= NotifiableAdmin::User.find_by_alias(params[:user][:alias]) if params[:user] && params[:user][:alias]
+    @current_api_v1_user ||= NotifiableAdmin::User.find_by_alias_and_app_id(params[:user][:alias], params[:app_id]) if params[:user] && params[:user][:alias] && params[:app_id]
   end
   
   def current_notifiable_user
