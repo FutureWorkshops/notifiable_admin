@@ -2,11 +2,7 @@ class NotifiableAdmin::UserApi::V1::BaseController < NotifiableAdmin::ApiControl
 
   skip_authorization_check :if => :notifiable_rails_controller?
   
-  before_filter :authorize_current_api_v1_user!, :current_api_v1_user, :authenticate_from_headers!
-  
-  def authorize_current_api_v1_user!      
-
-  end
+  before_filter :authenticate_from_headers!
   
   def current_api_v1_user
     @current_api_v1_user ||= NotifiableAdmin::User.find_by_alias_and_app_id(params[:user][:alias], current_notifiable_app.id) if params[:user] && params[:user][:alias]

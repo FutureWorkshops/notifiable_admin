@@ -8,8 +8,6 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
 
   let(:account) { create(:account) }  
   let(:n_app) { create(:app, :account => account, :name => "The Open", :custom_device_properties => [:onsite]) }
-  
-  before(:each) { stub_authenticate_from_headers }
       
   describe "#create" do
 
@@ -31,7 +29,7 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
     context "existing user" do
       let!(:user) { create(:user, :alias => "matt@futureworkshops.com", :app => n_app) }
       
-      before(:each) { post :create, {:app_id => n_app.id, :provider => 'apns', :token => 'ABC12345678910', :locale => "en", :user => {:alias => "matt@futureworkshops.com"}} }
+      before(:each) { stub_authenticate_from_headers; post :create, {:app_id => n_app.id, :provider => 'apns', :token => 'ABC12345678910', :locale => "en", :user => {:alias => "matt@futureworkshops.com"}} }
 
       it { expect(NotifiableAdmin::User.count).to eq 1 }
       it { expect(NotifiableAdmin::User.first.device_tokens.count).to eq 1 }
@@ -48,7 +46,7 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
       let!(:user) { create(:user, :alias => "matt@futureworkshops.com") }
       let!(:device_token) { create(:apns_token, :token => "ABC12345678910", :app_id => n_app.id, :user_id => user.id ) }
       
-      before(:each) { post :create, {:app_id => n_app.id, :provider => 'apns', :token => 'ABC12345678910', :locale => 'en', :user => {:alias => "igor@futureworkshops.com"}} }
+      before(:each) { stub_authenticate_from_headers; post :create, {:app_id => n_app.id, :provider => 'apns', :token => 'ABC12345678910', :locale => 'en', :user => {:alias => "igor@futureworkshops.com"}} }
 
       it { expect(response).to have_http_status(:ok) }
       it { expect(json['id']).to eq Notifiable::DeviceToken.first.id }
@@ -63,7 +61,7 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
     end
     
     context "new token without user" do
-      before(:each) { post :create, {:app_id => n_app.id, :provider => 'apns', :token => 'ABC12345678910', :locale => "en"} }
+      before(:each) { stub_authenticate_from_headers; post :create, {:app_id => n_app.id, :provider => 'apns', :token => 'ABC12345678910', :locale => "en"} }
       
       it { expect(Notifiable::DeviceToken.count).to eq 1 }
       it { expect(Notifiable::DeviceToken.first.provider).to eq "apns" }
@@ -74,7 +72,7 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
     end
     
     context "new token with custom properties" do
-      before(:each) { post :create, {:app_id => n_app.id, :provider => 'apns', :token => 'ABC12345678910', :locale => "en", :name => "MBS iPhone", :onsite => "1"} }
+      before(:each) { stub_authenticate_from_headers; post :create, {:app_id => n_app.id, :provider => 'apns', :token => 'ABC12345678910', :locale => "en", :name => "MBS iPhone", :onsite => "1"} }
       
       it { expect(Notifiable::DeviceToken.count).to eq 1 }
       it { expect(Notifiable::DeviceToken.first.provider).to eq "apns" }
@@ -92,7 +90,7 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
     context "change token" do
       let(:device_token) { create(:apns_token, :token => "ABC12345678910", :app_id => n_app.id ) }
       
-      before(:each) { put :update, {:id => device_token.id, :token => 'DEF987654321' } }
+      before(:each) { stub_authenticate_from_headers; put :update, {:id => device_token.id, :token => 'DEF987654321' } }
       
       it { expect(Notifiable::DeviceToken.count).to eq 1 }
       it { expect(Notifiable::DeviceToken.first.token).to eq "DEF987654321" }      
@@ -102,7 +100,7 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
       let!(:user) { create(:user, :alias => "matt@futureworkshops.com") }
       let(:device_token) { create(:apns_token, :token => "ABC12345678910", :app_id => n_app.id ) }
       
-      before(:each) { put :update, {:app_id => n_app.id, :id => device_token.id, :user => {:alias => "igor@futureworkshops.com"} } }
+      before(:each) { stub_authenticate_from_headers; put :update, {:app_id => n_app.id, :id => device_token.id, :user => {:alias => "igor@futureworkshops.com"} } }
       
       it { expect(response).to have_http_status(:ok) }
       it { expect(NotifiableAdmin::User.count).to eq 2 }
@@ -114,14 +112,14 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
     context "change locale" do
       let(:device_token) { create(:apns_token, :locale => "en", :app_id => n_app.id ) }
       
-      before(:each) { put :update, {:app_id => n_app.id, :id => device_token.id, :locale => 'de' } }
+      before(:each) { stub_authenticate_from_headers; put :update, {:app_id => n_app.id, :id => device_token.id, :locale => 'de' } }
       
       it { expect(Notifiable::DeviceToken.count).to eq 1 }
       it { expect(Notifiable::DeviceToken.first.locale).to eq "de" }      
     end
     
     context "token does not exist" do      
-      before(:each) { put :update, {:app_id => n_app.id, :id => -1, :token => 'DEF987654321' } }
+      before(:each) { stub_authenticate_from_headers; put :update, {:app_id => n_app.id, :id => -1, :token => 'DEF987654321' } }
       
       it { expect(response).to have_http_status(:not_found) }
     end
@@ -135,18 +133,18 @@ describe NotifiableAdmin::UserApi::V1::DeviceTokensController do
       let!(:device_token) { create(:apns_token, :user_id => user.id, :app => n_app) }
 
       describe "recognises correct parameters" do
-        before(:each) { get :index, { :app_id => n_app.id, :user => {:alias => "123456789"}, :format => :json } }
+        before(:each) { stub_authenticate_from_headers; get :index, { :app_id => n_app.id, :user => {:alias => "123456789"}, :format => :json } }
         it { expect(response).to have_http_status(:ok) }
         it { expect(assigns(:device_tokens).count).to eq 1 }
       end
       
       describe "not found if the user is not found" do
-        before(:each) { get :index, { :app_id => n_app.id, :user => {:alias => "987654321"}, :format => :json } }
+        before(:each) { stub_authenticate_from_headers; get :index, { :app_id => n_app.id, :user => {:alias => "987654321"}, :format => :json } }
         it { expect(response).to have_http_status(:not_found) }
       end
       
       describe "not found if the user is not specified" do
-        before(:each) { get :index, { :format => :json } }
+        before(:each) { stub_authenticate_from_headers; get :index, { :format => :json } }
         it { expect(response).to have_http_status(:not_found) }
       end
     end
