@@ -49,12 +49,10 @@ describe NotifiableAdmin::NotificationsApi::V1::NotificationsController do
       
         before(:each) do 
           post :create, {
-            :device_token_filters => {:onsite => "1"},
             :app_id => n_app.id, 
             :notification => {
-              :localized_notifications_attributes => [
-                {:message => "Hello", :locale => :en}
-              ]
+              device_token_filters_attributes: [{property: "onsite", operator: "=", value: "1"}],
+              localized_notifications_attributes: [{:message => "Hello", :locale => :en}]
             } 
           }        
         end
@@ -91,12 +89,10 @@ describe NotifiableAdmin::NotificationsApi::V1::NotificationsController do
       
         before(:each) do 
           post :create, {
-            :device_token_filters => {:onsite => ["1"]},
             :app_id => n_app.id, 
             :notification => {
-              :localized_notifications_attributes => [
-                {:message => "Hello", :locale => :en}
-              ]
+              device_token_filters_attributes: [{property: "onsite", operator: "LIKE", value: "1"}],
+              localized_notifications_attributes: [{:message => "Hello", :locale => :en}]
             } 
           }        
         end

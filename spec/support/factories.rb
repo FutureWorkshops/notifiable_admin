@@ -102,6 +102,12 @@ FactoryGirl.define do
     end
   end
   
+  factory :device_token_filter, :class => Notifiable::DeviceTokenFilter do
+    sequence(:property) {|n| "Property#{n}" }
+    sequence(:operator) {|n| "Operator#{n}" }
+    sequence(:value) {|n| "Value#{n}" }
+  end
+  
   factory :notification_status, :class => Notifiable::NotificationStatus do
     localized_notification
     device_token
