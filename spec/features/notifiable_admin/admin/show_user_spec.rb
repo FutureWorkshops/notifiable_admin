@@ -13,7 +13,7 @@ feature 'show user details' do
   it "for a single user" do
     visit notifiable_admin.admin_account_app_user_path(content_admin.account, notifiable_app, user)
 
-    expect(page).to have_css(".device_token-row", :count=>1)
+    expect(page).to have_css(".device-token-row", :count=>1)
   end
   
 end
