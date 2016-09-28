@@ -12,8 +12,8 @@
       </tr>
       <% @device_tokens.each do |device_token| %>
         <tr class="device-token-row">
-          <td><%= link_to(device_token.user.alias, admin_account_app_user_path(@account, @app, device_token.user)) if device_token.user %></td>   
-          <td><%= device_token.name %></td>
+          <td><%= link_to(device_token.user.alias, admin_account_app_user_path(@account, @app, device_token.user)) if device_token.user %></td>
+          <td><%= link_to(device_token.name, admin_account_app_device_token_path(@account, @app, device_token)) %></td>
           <td><%= device_token.locale %></td>
           <td><%= device_token.created_at %></td>
           <td><%= device_token.provider %></td>

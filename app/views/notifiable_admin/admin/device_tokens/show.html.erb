@@ -1,5 +1,14 @@
-<h1>App Devices</h1>
+<h1><%= @device_token.name %></h1>
 
-<%= render "table" %>
-
-<%= paginate @device_tokens, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm" %>
+<div class="col-md-12">
+  <div class="row">
+    <table class="table">
+      <% @app.custom_device_properties.each do |param| %>
+        <tr>
+          <td><%= param.to_s.titleize %></td>
+          <td><%= @device_token.custom_properties[param] ? truncate(@device_token.custom_properties[param], :length => 20) : "-" %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
