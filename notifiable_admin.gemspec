@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails-assets-eonasdan-bootstrap-datetimepicker', '~> 4.0.0'
   s.add_dependency 'simple_form', '~> 3.1.0'
   s.add_dependency "zeroclipboard-rails", '~> 0.1.1'
+  s.add_dependency 'cocoon', '~> 1.2.9'
 
   # Authentication
   s.add_dependency 'devise', '~> 3.4.1'

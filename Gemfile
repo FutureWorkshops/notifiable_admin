@@ -7,4 +7,5 @@ gemspec
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-eonasdan-bootstrap-datetimepicker'
+  gem 'cocoon'
 end
