@@ -8,13 +8,12 @@ class NotifiableAdmin::NotificationsApi::V1::NotificationsController < Notifiabl
   def create
     @notification.app = @app
     if @notification.save
-      
       if @user
-        @notification.delay_private(@user) 
-      elsif params[:device_token_filters]
-        @notification.delay_filtered(params[:device_token_filters])     
+        @notification.delay_private @user 
+      elsif @notification.device_token_filters.count == 0
+        @notification.delay_public                            
       else
-        @notification.delay_public                
+        @notification.delay_filtered
       end
       
       head :status => :ok                  
@@ -32,8 +31,7 @@ class NotifiableAdmin::NotificationsApi::V1::NotificationsController < Notifiabl
   end
   
   def create_params
-    params.require(:notification).permit(localized_notifications_attributes: [:message, :locale, :params]).tap do |whitelisted|
-      
+      params.require(:notification).permit(localized_notifications_attributes: [:message, :locale, :params], device_token_filters_attributes: [:property, :operator, :value]).tap do |whitelisted|      
       # whitelist any params
       whitelisted[:localized_notifications_attributes].each_with_index do |item, index|
         item[:params] = params[:notification][:localized_notifications_attributes][index][:params]

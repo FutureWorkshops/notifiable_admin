@@ -42,9 +42,10 @@ resource "Notification" do
     let!(:token2) { create(:apns_token, :app => notifiable_app, :locale => :en, :custom_properties => {:onsite => "0"})}
     
     let(:raw_post) {{
-      :device_token_filters => {:onsite => "1"},
       :app_id => notifiable_app.id, 
-      :notification => {:localized_notifications_attributes => [{:message => "Hello", :locale => :en}]}
+      :notification => {
+        device_token_filters_attributes: [{property: "onsite", operator: "=", value: "1"}],
+        localized_notifications_attributes: [{:message => "Hello", :locale => :en}]}
     }}
     
     example_request "Notify devices via a custom property", :document => :notifications_api do
@@ -59,9 +60,10 @@ resource "Notification" do
     let!(:token2) { create(:apns_token, :app => notifiable_app, :locale => :en, :custom_properties => {:onsite => ["0", "2"]})}
     
     let(:raw_post) {{
-      :device_token_filters => {:onsite => ["1"]},
       :app_id => notifiable_app.id, 
-      :notification => {:localized_notifications_attributes => [{:message => "Hello", :locale => :en}]}
+      :notification => {
+        device_token_filters_attributes: [{property: "onsite", operator: "LIKE", value: "1"}],
+        localized_notifications_attributes: [{:message => "Hello", :locale => :en}]}
     }}
     
     example_request "Notify devices via a custom property", :document => :notifications_api do
