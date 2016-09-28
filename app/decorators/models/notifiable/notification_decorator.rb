@@ -1,4 +1,6 @@
 Notifiable::Notification.class_eval do
+  has_many :device_token_filters, class_name: "Notifiable::DeviceTokenFilter"
+  accepts_nested_attributes_for :device_token_filters
   
   def delay_public(run_at = nil)
     delayable(run_at).send_public
@@ -8,8 +10,8 @@ Notifiable::Notification.class_eval do
     delayable(run_at).send_private(user)
   end
   
-  def delay_filtered(filters, run_at = nil)
-    delayable(run_at).send_filtered(filters)
+  def delay_filtered(run_at = nil)
+    delayable(run_at).send_filtered
   end
   
   private
@@ -17,18 +19,8 @@ Notifiable::Notification.class_eval do
       self.delay(:app_id => self.app.id, :notification_id => self.id, :run_at => run_at)
     end
   
-    def send_filtered(filters)
-      device_tokens = self.app.device_tokens
-      filters.each_pair do |key,value|
-        if(value.kind_of?(Array))
-          value.each do |v|
-            device_tokens = device_tokens.where_custom_property_like(key, v)
-          end
-        else
-          device_tokens = device_tokens.where_custom_property(key, value)          
-        end
-      end
-      
+    def send_filtered
+      device_tokens = Notifiable::DeviceToken.where_custom_properties(app, device_token_filters)
       send_batch(device_tokens)
     end
   

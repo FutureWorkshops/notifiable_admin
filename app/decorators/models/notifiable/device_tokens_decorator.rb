@@ -20,15 +20,31 @@ Notifiable::DeviceToken.class_eval do
   
   if Notifiable::DeviceToken.is_adapter_postgres?
     store :custom_properties, coder: HstoreCoder
-    scope :where_custom_property, ->(name, value) { where("custom_properties -> '#{name}' = '#{value}'") }
-    scope :where_custom_property_like, -> (name, value) { where("custom_properties -> '#{name}' LIKE '%#{value}%'")}
+    scope :where_custom_property, ->(filter) { where("custom_properties -> #{filter.postgres_where_clause}") }
   else    
     store :custom_properties, coder: JSON
 
-    # todo this is baaad because it gets "all" every time
-    # should limit the query somehow and test better
-    scope :where_custom_property, ->(key, value) { where(id: all.select{|d| d.custom_properties[key.to_sym].eql?(value) }.map(&:id)) }    
-    scope :where_custom_property_like, ->(key, value) { where(id: all.select{|d| d.custom_properties[key.to_sym].include?(value) }.map(&:id)) }    
-
-  end  
+    # todo this is bad for performance because it gets "all" every time
+    scope :where_custom_property, ->(filter) { where(id: ids_for_custom_property(filter)) }    
+  end
+  
+  def self.where_custom_properties(app, device_token_filters)
+    device_tokens = app.device_tokens
+    device_token_filters.each do |filter|
+      device_tokens = device_tokens.where_custom_property(filter)          
+    end
+    device_tokens
+  end
+  
+  # helpers for scopes
+  def self.ids_for_custom_property(filter)
+    all.select do |d|
+      case filter.operator
+      when "="
+        d.custom_properties[filter.property.to_sym].eql?(filter.value)
+      when "LIKE"
+        d.custom_properties[filter.property.to_sym].include?(filter.value)
+      end
+    end.map(&:id)
+  end
 end
