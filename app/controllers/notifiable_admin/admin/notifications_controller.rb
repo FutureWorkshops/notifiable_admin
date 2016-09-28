@@ -15,12 +15,13 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
   def create
     @notification.app = @app
     if @notification.save
+      
       if @user
         @notification.delay_private(@user,  run_at) 
-      elsif device_token_filter_params?
-        @notification.delay_filtered(device_token_filter_params, run_at)     
+      elsif @notification.device_token_filters.count == 0
+        @notification.delay_public(run_at)                            
       else
-        @notification.delay_public(run_at)               
+        @notification.delay_filtered(run_at)
       end
       
       redirect_to admin_account_app_jobs_path(@account, @app), notice: "Notification(s) sent successfully"
@@ -45,21 +46,8 @@ class NotifiableAdmin::Admin::NotificationsController <NotifiableAdmin::Admin::B
       @user = NotifiableAdmin::User.find(params[:notification].delete(:user_id)) if params[:notification] && params[:notification][:user_id]
     end
     
-    def device_token_filter_params
-      params[:notification][:device_token_filters]
-    end
-    
-    def device_token_filter_params?
-      return false unless device_token_filter_params
-      device_token_filter_params.each_pair do |k,v|
-        return true unless device_token_filter_params[k].empty?
-      end
-      
-      false
-    end
-    
     def create_params
-      params.require(:notification).permit(localized_notifications_attributes: [:message, :locale, :params]).tap do |whitelisted|
+      params.require(:notification).permit(localized_notifications_attributes: [:message, :locale, :params], device_token_filters_attributes: [:property, :operator, :value]).tap do |whitelisted|
       
         # whitelist any params
         whitelisted[:localized_notifications_attributes].each_pair do |index, item|
