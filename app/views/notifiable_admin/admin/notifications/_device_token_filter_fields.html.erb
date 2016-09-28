@@ -1,7 +1,7 @@
 <div class="nested-fields form-group">
   <div class="row">
     <div class="col-md-5"><%= f.select :property, options_for_select(@app.custom_device_properties), {:include_blank => true}, class: "form-control" %></div>
-    <div class="col-md-2"><%= f.select :operator, options_for_select([["Equal", "="], ["Contains", "LIKE"]]), {:include_blank => true}, class: "form-control" %></div>
+    <div class="col-md-2"><%= f.select :operator, options_for_select([["Equal", "="], ["Less than", "<"], ["Greater than", ">"], ["Contains", "LIKE"]]), {:include_blank => true}, class: "form-control" %></div>
     <div class="col-md-4"><%= f.text_field :value, class: "form-control" %></div>
   </div>
 </div>
