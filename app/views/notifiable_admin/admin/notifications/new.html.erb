@@ -12,6 +12,16 @@
   
   <%= f.input :user_id, :as => :hidden, :input_html => { :value => @user.id } if @user %>
 
+  <h2>Filters</h2>      
+  <%= f.fields_for :device_token_filters do |o| %>
+    <%= render 'device_token_filter_fields', f: o %>
+  <% end %>
+
+  <div class="links">
+    <%= link_to_add_association "Add filter", f, :device_token_filters %></p>
+  </div>
+  <hr/>
+
   <%= f.simple_fields_for :localized_notifications do |n| %>
     <h2><%= ISO::Language.find(n.object.locale.to_s).name %></h2>
     <%= n.input :locale, :as => :hidden %>
@@ -21,19 +31,11 @@
   <% end %>
   
   <h2>Schedule</h2>
-  <div class='input-group date' id='datetimepicker1'>
+  <div class='form-group input-group date' id='datetimepicker1'>
       <input type='text' class="form-control" name="schedule_at" />
       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
       </span>
   </div>
-  
-  <h2>Filters</h2>
-  <%= f.simple_fields_for :device_token_filters do |n| %>
-    <% @app.custom_device_properties.each do |p| %>
-      <%= n.input p, :as => :select %>
-    <% end %> 
-  <% end %>
-  <hr/>
 
   <%= f.submit "Send", :class => "btn btn-default" %>    
   
