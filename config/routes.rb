@@ -10,7 +10,11 @@ NotifiableAdmin::Engine.routes.draw do
     resources :accounts, :only => :show do
       resources :apps, :except => [:index, :destroy] do
         resources :users, :only => :show
-        resources :device_tokens, :only => [:index, :show]
+        resources :device_tokens, :only => [:index, :show] do
+          collection do
+            delete :destroy_all
+          end
+        end
         resources :jobs, :only => [:index, :destroy]
         resources :notifications, :only => [:new, :create, :index] do
           resources :notification_statuses, :only => :index

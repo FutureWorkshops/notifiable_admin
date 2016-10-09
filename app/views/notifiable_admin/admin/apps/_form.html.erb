@@ -20,7 +20,13 @@
 
   <%= f.input :gcm_api_key, :placeholder => "AFzaSyCxydJ0vWfUoT579gOKuKXr2ro-t5ekTB7", :label => "API Key", :hint => "Your GCM API Key, issued by Google." %>
   
-  <%= f.submit "Save", :class => "btn btn-default" %>    
+  <%= f.submit "Save", :class => "btn btn-default" %>
+  
+  <% if can? :destroy, Notifiable::DeviceToken %>
+    <h1>Delete Devices</h1>
+    <%= delete_device_tokens_button(@app) %>
+    <p class="help-block">Delete all Devices associated with this App</p>
+  <% end %>
 
 <% end %>
 
