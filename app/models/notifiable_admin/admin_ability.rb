@@ -4,6 +4,8 @@ class NotifiableAdmin::AdminAbility
   def initialize(admin) 
     return unless admin
     
+    alias_action :destroy_all, :to => :destroy
+    
     if admin.account_owner?
       can :read, NotifiableAdmin::Account, :id => admin.account_id    
       can :create, Notifiable::App      
@@ -20,7 +22,7 @@ class NotifiableAdmin::AdminAbility
       
       can :read, Notifiable::Notification, :app => {:account => {:id => admin.account_id}}
       can :read, Notifiable::NotificationStatus, :notification => {:app => {:account => {:id => admin.account_id}}}
-      can :read, Notifiable::DeviceToken, :app => {:account => {:id => admin.account_id}}
+      can [:read, :destroy], Notifiable::DeviceToken, :app => {:account => {:id => admin.account_id}}
       can :read, NotifiableAdmin::User, :device_tokens => {:app => {:account => {:id => admin.account_id}}}
     else
       can :read, NotifiableAdmin::Account, :id => admin.account_id    
