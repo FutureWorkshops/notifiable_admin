@@ -18,8 +18,8 @@ module NotifiableAdmin::ApplicationHelper
     button path, "Add", "plus", :get, nil    
   end
   
-  def delete_button(path, text = "Delete")
-    button path, text, "trash", :delete, :sm, { confirm: "Are you sure?" }
+  def delete_button(path, text = "Delete", confirmation_text = "Are you sure?")
+    button path, text, "trash", :delete, :sm, { confirm: confirmation_text }
   end
   
   def danger_label(text, options = {})
@@ -61,6 +61,10 @@ module NotifiableAdmin::ApplicationHelper
   
   def edit_app_button(app)
     button edit_admin_account_app_path(@account, app), "Edit", "pencil"
+  end
+  
+  def delete_device_tokens_button(app)
+    delete_button(destroy_all_admin_account_app_device_tokens_path(app.account, app), "Delete Devices", "Are you sure? This will delete #{app.device_tokens.count} devices.")
   end
   
   # Navbar items
