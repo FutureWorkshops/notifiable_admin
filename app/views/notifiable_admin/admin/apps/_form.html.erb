@@ -22,7 +22,7 @@
   
   <%= f.submit "Save", :class => "btn btn-default" %>
   
-  <% if can? :destroy, Notifiable::DeviceToken %>
+  <% if can?(:destroy, Notifiable::DeviceToken) && !@app.new_record? %>
     <h1>Delete Devices</h1>
     <%= delete_device_tokens_button(@app) %>
     <p class="help-block">Delete all Devices associated with this App</p>
