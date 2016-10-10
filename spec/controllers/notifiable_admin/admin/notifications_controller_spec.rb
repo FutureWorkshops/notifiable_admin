@@ -20,8 +20,8 @@ describe NotifiableAdmin::Admin::NotificationsController do
         end
       
         it { expect(assigns(:user_id)).to be_nil }
-        it { expect(assigns(:notification).localized_notifications[0].locale).to eq :en }
-        it { expect(assigns(:notification).localized_notifications[1].locale).to eq :ar }
+        it { expect(assigns(:notification).localized_notifications[0].locale).to eq 'en' }
+        it { expect(assigns(:notification).localized_notifications[1].locale).to eq 'ar' }
       end
     end
     

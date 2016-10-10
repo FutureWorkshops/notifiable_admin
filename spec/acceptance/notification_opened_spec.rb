@@ -3,16 +3,15 @@ require 'rspec_api_documentation/dsl'
 
 resource "NotificationStatus" do
   header "Content-Accept", "application/json"
-  header "X-Auth-Token", :auth_token
   
   let(:account) { create(:account) }
-  let(:user) { create(:user) }
-  let(:n_app) { FactoryGirl.create(:app) }
-  let(:api_user) { FactoryGirl.create(:user_api_user, :app => n_app) }
+  let(:n_app) { create(:app) }
+  let(:user) { create(:user, app: n_app) }
+  let(:api_user) { create(:user_api_user, :app => n_app) }
   let(:device_token) { create(:apns_token, :app => n_app, :user_id => user.id, :locale => :en)}
   let(:notification) { create(:notification, :app => n_app)}
   let(:localized_notification) { create(:localized_notification)}
-  let(:status) {  }
+  let!(:ln_status) { create(:notification_status, :localized_notification => localized_notification, :device_token => device_token) }
   
   before(:each) { ApiAuthHelpers.set_credentials(api_user.access_id, api_user.secret_key) } 
   
@@ -26,8 +25,6 @@ resource "NotificationStatus" do
     let(:device_token_id) { device_token.id }
     
     example "Mark a notification as opened", :document => :user_api do
-      create(:notification_status, :localized_notification => localized_notification, :device_token => device_token)
-      
       do_request
       
       expect(status).to eq 200

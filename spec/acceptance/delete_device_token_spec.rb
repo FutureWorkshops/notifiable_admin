@@ -7,7 +7,7 @@ resource "DeviceToken" do
   header "X-Auth-Token", :auth_token
   
   let(:account) { create(:account) }
-  let(:user) { create(:user, :alias => "broomba") }
+  let(:user) { create(:user, :alias => "broomba", app: n_app) }
   let(:n_app) { FactoryGirl.create(:app) }
   let(:api_user) { FactoryGirl.create(:user_api_user, :app => n_app) }
   let(:device_token) { create(:apns_token, :app => n_app, :user_id => user.id)}
@@ -17,7 +17,7 @@ resource "DeviceToken" do
   delete "/user_api/v1/device_tokens/:device_token_id" do
     parameter :alias, "Username/Alias", :required => true, :scope => :user
     
-    let(:alias) { "broomba" }
+    let(:alias) { user.alias }
     let(:device_token_id) { device_token.id }
     
     example_request "Delete a device", :document => :user_api do

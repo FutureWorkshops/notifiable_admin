@@ -22,6 +22,7 @@ module EngineControllerTestMonkeyPatch
 
   def process_action(action, parameters = nil, session = nil, flash = nil, method = "GET")
     parameters ||= {}
-    process(action, method, parameters.merge!(:use_route => :notifiable), session, flash, )
+    @routes = NotifiableAdmin::Engine.routes
+    process(action, method, parameters, session, flash, )
   end
 end
