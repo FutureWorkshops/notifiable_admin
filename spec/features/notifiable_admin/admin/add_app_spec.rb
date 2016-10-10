@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'add app' do
 
-  let(:account_owner) { FactoryGirl.create(:account_owner) }
+  let(:account_owner) { create(:account_owner) }
   
   it "as account owner" do  
     login_as account_owner, :scope => :admin

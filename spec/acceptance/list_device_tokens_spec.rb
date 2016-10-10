@@ -11,7 +11,7 @@ resource "Notification" do
   before(:each) { ApiAuthHelpers.set_credentials(api_user.access_id, api_user.secret_key) }
   
   get "/user_api/v1/device_tokens.json" do
-    let!(:user) { create(:user, :alias => "123456789") }
+    let!(:user) { create(:user, :alias => "123456789", app: n_app) }
     let!(:token) { create(:apns_token, :app => n_app, :user_id => user.id)}
     let(:raw_post) { {:user => {:alias => user.alias}} }
     

@@ -17,14 +17,14 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '~> 2.1.7'
   
   # Core
-  s.add_dependency 'rails', '>= 4.1.14'
-  s.add_dependency 'sass-rails', '>= 4.0.3'
-  s.add_dependency 'uglifier', '>= 1.3.0'
-  s.add_dependency 'coffee-rails', '>= 4.0.0'
+  s.add_dependency 'rails'
+  s.add_dependency 'sass-rails'
+  s.add_dependency 'uglifier'
+  s.add_dependency 'coffee-rails'
   s.add_dependency 'jquery-rails'
-  s.add_dependency 'jbuilder', '~> 2.0'
-  s.add_dependency 'quiet_assets', '~> 1.0.3'
-  s.add_dependency 'iso', '~> 0.2.1'
+  s.add_dependency 'jbuilder'
+  s.add_dependency 'quiet_assets'
+  s.add_dependency 'iso'
 
   # UI
   s.add_dependency 'rails-assets-bootstrap', '~> 3.3.2'
@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'api-auth', '~> 1.1.0'
 
   # Push Notifications
-  s.add_dependency 'notifiable-rails', '>= 0.24.1'
+  s.add_dependency 'notifiable-rails', '>= 0.24.2'
 
   # Background processing
   s.add_dependency 'delayed_job_active_record', '~> 4.0.3'
