@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib,doc}/**/*", "LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
-  s.required_ruby_version = '~> 2.1.7'
+  s.required_ruby_version = '>= 2.3.1'
   
   # Core
   s.add_dependency 'rails'
@@ -35,11 +35,12 @@ Gem::Specification.new do |s|
 
   # Authentication
   s.add_dependency 'devise', '~> 3.4.1'
+  s.add_dependency 'devise_invitable'
   s.add_dependency 'cancancan', '~> 1.13.1'
   s.add_dependency 'api-auth', '~> 1.1.0'
 
   # Push Notifications
-  s.add_dependency 'notifiable-rails', '>= 0.24.2'
+  s.add_dependency 'notifiable-rails', '>= 0.24.3'
 
   # Background processing
   s.add_dependency 'delayed_job_active_record', '~> 4.0.3'

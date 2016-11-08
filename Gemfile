@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
-ruby "2.1.7"
+ruby "2.3.1"
 
 gemspec
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-eonasdan-bootstrap-datetimepicker'
-  gem 'cocoon'
 end
+
+gem 'cocoon'
