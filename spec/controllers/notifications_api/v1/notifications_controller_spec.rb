@@ -22,6 +22,8 @@ describe NotifiableAdmin::NotificationsApi::V1::NotificationsController do
         it { expect(response.status).to eq 200 }
         it { expect(Notifiable::Notification.count).to eq 1 }
         it { expect(Notifiable::Notification.first.localized_notifications.count).to eq 1 }
+        it { expect(Notifiable::Notification.first.localized_notifications.first.message).to eq "Hello" }
+        it { expect(Notifiable::Notification.first.localized_notifications.first.locale).to eq "en" }
       end
     
     
