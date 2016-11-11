@@ -8,6 +8,10 @@ class NotifiableAdmin::SuperAdmin::AccountsController < NotifiableAdmin::SuperAd
   
   def create
     if @account.save
+      NotifiableAdmin::Admin.invite!(invite_params, current_admin) do |invitable|
+        invitable.account = @account
+        invitable.role = "account_owner"
+      end
       redirect_to super_admin_accounts_path, notice: "Account created."
     else
       redirect_to new_super_admin_account_path(@account), alert: @account.errors.full_messages.to_sentence
@@ -17,5 +21,9 @@ class NotifiableAdmin::SuperAdmin::AccountsController < NotifiableAdmin::SuperAd
   private
     def create_params
       params.require(:account).permit(:name)
+    end
+    
+    def invite_params
+      params.require(:account_owner).permit(:email)
     end
 end
