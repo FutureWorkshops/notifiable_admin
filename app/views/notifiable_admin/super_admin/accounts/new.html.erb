@@ -5,6 +5,11 @@
 <%= simple_form_for [:super_admin, @account] do |f| %>
     
   <%= f.input :name %>
+  
+  <div class="form-group string optional account_owner_email">
+    <%= label_tag "Account owner email" %>
+    <%= text_field_tag "account_owner[email]", nil, class: "form-control" %>
+  </div>
 
   <%= f.submit "Create", :class => "btn btn-default" %>    
 
