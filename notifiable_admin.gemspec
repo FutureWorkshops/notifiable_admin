@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
 
   # Authentication
   s.add_dependency 'devise', '~> 3.4.1'
-  s.add_dependency 'devise_invitable'
+  s.add_dependency 'devise_invitable', '~> 1.6.1'
   s.add_dependency 'cancancan', '~> 1.13.1'
   s.add_dependency 'api-auth', '~> 1.1.0'
 
