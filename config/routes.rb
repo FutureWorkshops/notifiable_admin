@@ -1,6 +1,6 @@
 NotifiableAdmin::Engine.routes.draw do
   
-  devise_for :admins, :controllers => { :sessions => "notifiable_admin/admin/sessions" }, class_name: "NotifiableAdmin::Admin"
+  devise_for :admins, :controllers => { sessions: "notifiable_admin/admin/sessions", invitations: "devise/invitations" }, class_name: "NotifiableAdmin::Admin"
   
   namespace :super_admin do
     resources :accounts
@@ -46,5 +46,5 @@ NotifiableAdmin::Engine.routes.draw do
       devise_for :notifications_api_user, class_name: "NotifiableAdmin::NotificationsApiUser"
       resources :notifications, :only => [:create]   
     end
-  end    
+  end 
 end
