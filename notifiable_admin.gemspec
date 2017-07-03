@@ -28,7 +28,7 @@ Gem::Specification.new do |s|
 
   # UI
   s.add_dependency 'rails-assets-bootstrap', '~> 3.3.2'
-  s.add_dependency 'rails-assets-eonasdan-bootstrap-datetimepicker', '~> 4.0.0'
+  s.add_dependency 'rails-assets-eonasdan-bootstrap-datetimepicker', '> 4.0.0'
   s.add_dependency 'simple_form', '~> 3.1.0'
   s.add_dependency "zeroclipboard-rails", '~> 0.0.12'
 
